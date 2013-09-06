@@ -2,6 +2,8 @@
 .svn
 *~
 .*.swp
+Capfile
+config/deploy.rb
 config/database.yml
 tmp/*/*
 img/psd
