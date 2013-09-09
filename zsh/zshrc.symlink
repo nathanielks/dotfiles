@@ -41,3 +41,11 @@ PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 fpath=(/usr/local/share/zsh-completions $fpath)
 
 . `brew --prefix`/etc/profile.d/z.sh
+
+function ff { osascript -e 'tell application "Finder"'\
+ -e "if (${1-1} <= (count Finder windows)) then"\
+ -e "get POSIX path of (target of window ${1-1} as alias)"\
+ -e 'else' -e 'get POSIX path of (desktop as alias)'\
+ -e 'end if' -e 'end tell'; };\
+
+function cdff { cd "`ff $@`"; };
