@@ -39,3 +39,5 @@ PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 
 # ZSH Completions
 fpath=(/usr/local/share/zsh-completions $fpath)
+
+. `brew --prefix`/etc/profile.d/z.sh
