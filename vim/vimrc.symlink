@@ -77,6 +77,8 @@ nmap <leader>c :set cursorline!<cr>
 " CtrlP configs
 map <leader>t :CtrlP<cr>
 map <leader>b :CtrlPBuffer<cr>
+let g:ctrlp_map = '<c-t>'
+
 " Change the files match to the top of the list
 let g:ctrlp_match_window_reversed = 0
 " Open multiple files in no more than 2 vertical splits
@@ -225,3 +227,9 @@ highlight link multiple_cursors_visual Visual
 nnoremap <C-B> :set invpaste paste?<CR>
 set pastetoggle=<C-B>
 set showmode
+
+let g:ctrlp_working_path_mode = 0
+
+map <C-o> :!phpunit<cr>
+let g:pdv_template_dir = $HOME ."/.vim/bundle/pdv/templates_snip"
+nnoremap <buffer> <C-p> :call pdv#DocumentCurrentLine()<CR>

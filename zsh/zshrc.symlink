@@ -49,3 +49,7 @@ function ff { osascript -e 'tell application "Finder"'\
  -e 'end if' -e 'end tell'; };\
 
 function cdff { cd "`ff $@`"; };
+
+alias o='open . && fg';
+
+PATH=$PATH:/Applications/MAMP/bin/php/php5.4.10/bin # Add MAMP PHP to PATH

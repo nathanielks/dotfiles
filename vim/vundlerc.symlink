@@ -22,7 +22,7 @@ Bundle 'msanders/snipmate.vim'
 Bundle 'krisleech/snipmate-snippets'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'scrooloose/nerdtree'
-Bundle 'surround.vim'
+Bundle 'tpope/vim-surround.git'
 Bundle 'Raimondi/delimitMate'
 Bundle 'mileszs/ack.vim'
 Bundle 'epmatsw/ag.vim'
@@ -43,6 +43,11 @@ Bundle 'skalnik/vim-vroom'
 " JavaScript/CoffeeScript
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'digitaltoad/vim-jade'
+
+" PHP
+Bundle 'pedrogimenez/vim-phpunit'
+Bundle 'tobyS/pdv'
+Bundle 'tobyS/vmustache'
 
 " Other
 Bundle 'tpope/vim-haml'
