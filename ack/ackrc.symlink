@@ -3,6 +3,7 @@
 --type-add=js=.js.erb
 --type-add=css=.sass,.less,.scss
 --type-add=jade=.jade
+--type-add=sls=.sls
 --type-set=cucumber=.feature
 --type-set=conf=.ini
 --ignore-dir=vendor

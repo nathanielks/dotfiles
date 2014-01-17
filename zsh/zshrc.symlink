@@ -36,6 +36,7 @@ if [[ -s $HOME/.rvm/scripts/rvm ]] ; then source $HOME/.rvm/scripts/rvm ; fi
 [[ -f $HOME/.zshrc.local ]] && . $HOME/.zshrc.local
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+#PATH=$PATH:/usr/local/share/npm/lib/node_modules # Add Node modules
 
 # ZSH Completions
 fpath=(/usr/local/share/zsh-completions $fpath)

@@ -8,7 +8,7 @@ config/database.yml
 tmp/*/*
 img/psd
 resources/*/*
-.sass-cache
+/.sass-cache
 node_modules
 custom_plan.rb
 zeus.json
