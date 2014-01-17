@@ -47,7 +47,7 @@ Bundle 'digitaltoad/vim-jade'
 " PHP
 Bundle 'pedrogimenez/vim-phpunit'
 Bundle 'SirVer/ultisnips'
-Bundle 'iwyg/pdv'
+Bundle 'tobyS/pdv'
 Bundle 'tobyS/vmustache'
 
 " Other
