@@ -33,12 +33,12 @@ Bundle 'kien/ctrlp.vim'
 Bundle 'terryma/vim-multiple-cursors'
 
 " Ruby
-Bundle 'vim-ruby/vim-ruby'
-Bundle 'tpope/vim-rails'
-Bundle 'tpope/vim-rvm'
-Bundle 'tpope/vim-endwise'
-Bundle 't9md/vim-ruby-xmpfilter'
-Bundle 'skalnik/vim-vroom'
+"Bundle 'vim-ruby/vim-ruby'
+"Bundle 'tpope/vim-rails'
+"Bundle 'tpope/vim-rvm'
+"Bundle 'tpope/vim-endwise'
+"Bundle 't9md/vim-ruby-xmpfilter'
+"Bundle 'skalnik/vim-vroom'
 
 " JavaScript/CoffeeScript
 Bundle 'kchmck/vim-coffee-script'
@@ -46,7 +46,8 @@ Bundle 'digitaltoad/vim-jade'
 
 " PHP
 Bundle 'pedrogimenez/vim-phpunit'
-Bundle 'tobyS/pdv'
+Bundle 'SirVer/ultisnips'
+Bundle 'iwyg/pdv'
 Bundle 'tobyS/vmustache'
 
 " Other

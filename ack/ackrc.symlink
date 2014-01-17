@@ -4,6 +4,7 @@
 --type-add=css=.sass,.less,.scss
 --type-add=jade=.jade
 --type-set=cucumber=.feature
+--type-set=conf=.ini
 --ignore-dir=vendor
 --ignore-dir=log
 --ignore-dir=tmp
