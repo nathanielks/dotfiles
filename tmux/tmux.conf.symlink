@@ -54,6 +54,9 @@ set -g history-limit 1000
 # start windows numbers from 1 rather than 0, to reduce keyboard walk
 set -g base-index 1
 
+# get rid of escape delay time in vim
+set -sg escape-time 0
+
 # Status Bar
 set-option -g status on
 set-option -g status-interval 2
