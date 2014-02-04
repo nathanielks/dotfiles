@@ -7,7 +7,7 @@ bind C-a send-prefix
 
 set -g terminal-overrides 'xterm*:smcup@:rmcup@'
 
-bind r source-file ~/.tmux.conf; display-message " The Matrix has been reloaded"
+bind r source-file ~/.tmux.conf
 bind R refresh-client
 
 # Use Vi mode
