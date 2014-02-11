@@ -237,3 +237,9 @@ nnoremap <C-p> :call pdv#DocumentWithSnip()<CR>
 " SaltStack
 set nocompatible
 filetype plugin indent on
+
+" Remove trailing whitespace on save
+autocmd BufWritePre * :%s/\s\+$//e
+
+" Allow NERDTree to see hidden files
+let NERDTreeShowHidden=1
