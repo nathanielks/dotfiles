@@ -7,7 +7,7 @@ bind C-a send-prefix
 
 set -g terminal-overrides 'xterm*:smcup@:rmcup@'
 
-bind r source-file ~/.tmux.conf; display-message " The Matrix has been reloaded"
+bind r source-file ~/.tmux.conf
 bind R refresh-client
 
 # Use Vi mode
@@ -53,6 +53,9 @@ set -g history-limit 1000
 
 # start windows numbers from 1 rather than 0, to reduce keyboard walk
 set -g base-index 1
+
+# get rid of escape delay time in vim
+set -sg escape-time 0
 
 # Status Bar
 set-option -g status on

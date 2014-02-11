@@ -30,7 +30,7 @@ export EDITOR=vim
 if [[ -s $HOME/.rvm/scripts/rvm ]] ; then source $HOME/.rvm/scripts/rvm ; fi
 
 # Tmuxinator
-[[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
+#[[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
 
 # use .zshrc.local for settings specific to one system
 [[ -f $HOME/.zshrc.local ]] && . $HOME/.zshrc.local
