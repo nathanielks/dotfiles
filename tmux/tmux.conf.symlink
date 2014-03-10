@@ -53,6 +53,7 @@ set -g history-limit 1000
 
 # start windows numbers from 1 rather than 0, to reduce keyboard walk
 set -g base-index 1
+set-window-option -g pane-base-index 1
 
 # get rid of escape delay time in vim
 set -sg escape-time 0
@@ -107,7 +108,7 @@ set-option -g default-command "reattach-to-user-namespace -l zsh"
 
 # Clock
 setw -g clock-mode-colour green
-setw -g clock-mode-style 24 
+setw -g clock-mode-style 24
 set -g default-command /bin/zsh
 set -g default-shell /bin/zsh
 
