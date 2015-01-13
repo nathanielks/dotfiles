@@ -1,4 +1,5 @@
 # Dotfiles
+
 ### On Fresh Install
 - Install `homebrew`
 - `brew install zsh`
@@ -9,3 +10,4 @@
 - Install RVM
 - Install `bundler` and `vundler` gem
 - Install Vundle.vim
+- `brew install ansible`
