@@ -8,3 +8,4 @@
 - `brew install xz`
 - Install RVM
 - Install `bundler` and `vundler` gem
+- Install Vundle.vim
