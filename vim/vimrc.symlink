@@ -8,7 +8,8 @@ syntax on
 syntax enable
 set t_Co=256
 colorscheme solarized
-set background=light
+set background=dark
+"set background=light
 
 " Basic
 let mapleader = ","
@@ -144,10 +145,10 @@ nnoremap <leader>ev <C-w><C-v><C-l>:e $MYVIMRC<cr>
 cmap w!! w !sudo tee % >/dev/null
 
 autocmd FocusLost * :wa
-autocmd FileType php setlocal ts=4 sts=4 sw=4 noexpandtab
+autocmd FileType php,twig setlocal ts=4 sts=4 sw=4 noexpandtab
 autocmd FileType python setlocal ts=4 sts=4 sw=4 expandtab
 autocmd FileType javascript,html,css,sass,less setlocal ts=2 sts=2 sw=2 expandtab
-autocmd FileType jade setlocal ts=2 sts=2 sw=2 expandtab
+autocmd FileType jade,html.handlebars setlocal ts=2 sts=2 sw=2 expandtab
 autocmd FileType ruby,pml,eruby,haml setlocal ts=2 sts=2 sw=2 expandtab
 autocmd FileType markdown setlocal wrap linebreak nolist
 autocmd BufNewFile,BufRead *.rss setfiletype xml
@@ -230,16 +231,34 @@ set showmode
 
 let g:ctrlp_working_path_mode = 0
 
-map <C-o> :!phpunit<cr>
+" PHP Specific
+map <C-o> :!phpunit --debug<cr>
 let g:pdv_template_dir = $HOME ."/.vim/bundle/pdv/templates_snip"
 nnoremap <C-p> :call pdv#DocumentWithSnip()<CR>
+let PHP_removeCRwhenUnix=1
+let g:PHP_vintage_case_default_indent = 1
 
-" SaltStack
-set nocompatible
-filetype plugin indent on
+" Handlebars
+let g:mustache_abbreviations = 1
 
 " Remove trailing whitespace on save
 autocmd BufWritePre * :%s/\s\+$//e
 
 " Allow NERDTree to see hidden files
 let NERDTreeShowHidden=1
+let g:NERDTreeWinSize = 26
+
+" Teach vim to syntax highlight Vagrantfile as ruby
+augroup vagrant
+  au!
+  au BufRead,BufNewFile Vagrantfile set filetype=ruby
+augroup END
+
+" Fix indentation
+map <F7> mzgg=G`z<CR>
+
+" Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
+vmap <Enter> <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. <Leader>aip)
+nmap <Leader>a <Plug>(EasyAlign)

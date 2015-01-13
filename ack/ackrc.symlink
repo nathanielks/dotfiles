@@ -11,6 +11,8 @@
 --ignore-dir=tmp
 --ignore-dir=doc
 --ignore-dir=coverage
+--ignore-dir=.sass-cache
+--ignore-dir=.vagrant
 --sort-files
 --color
 --follow
