@@ -19,7 +19,6 @@ set backspace=indent,eol,start
 set hidden 		" Allows :q of buffers without writing to them, prompts for write before closing all open buffers
 set termencoding=utf-8
 set encoding=utf-8
-set lazyredraw      " don't update the display while executing macros
 set history=1000	" remember N : commands
 set undolevels=1000
 set visualbell		" Use visual bell instead of beeping
@@ -32,32 +31,40 @@ set clipboard=unnamed " Enable yanking to system keyboard
 " }}}
 
 " Spaces & Tabs {{{
-set tabstop=4       " 4 space tab
-set softtabstop=4   " 4 space tab
-set shiftwidth=4	" Number of spaces to use for each step of (auto)indent
-set shiftround    " use multiple of shiftwidth when indenting with '<' and '>'"
-set expandtab       " use spaces for tabs
 set modelines=0		" Prevent reading the last line of a buffer to prevent undesired behavior http://lists.alioth.debian.org/pipermail/pkg-vim-maintainers/2007-June/004020.html
 filetype indent on	" enables filetype specific indentation behavior
 filetype plugin on	" enables filetype specific plugins
-set autoindent		" Copy indent from current line when starting a new line
-set smartindent		" indent again when going to nested scope
+
+set autoindent       " indent next line to same level as current line
+set smartindent      "   ↑ but do it smartly
+set smarttab         " <Tab> in front of a line inserts 'shiftwidth' blanks
+set shiftwidth=4     "   ↑ use 4 blanks for above
+set tabstop=4        " display a <Tab> as 4 spaces
+set softtabstop=4    " use 4 spaces for a <Tab>
+set expandtab        " expand tabs to spaces
+set shiftround       " use multiple of shiftwidth when indenting with '<' and '>'"
+
+" for html
+autocmd FileType html setlocal indentkeys-=*<Return>
+autocmd FileType html.handlebars setlocal indentkeys-=*<Return>
+autocmd FileType eruby setlocal indentkeys-=*<Return>
 " }}}
 
 " UI Layout {{{
 set number              " show line numbers
 set showcmd             " show command in bottom bar
 set nocursorline        " highlight current line
-
+set synmaxcol=200       " no syntax highlighting for lines longer than 200 cols"
+au VimResized * :wincmd = " resize splits when window is resized
 " Make tab completion for files/buffers act like bash
 set wildmenu "command-line completion operates in an enhanced way
 set wildmode=list:longest
 set wildignore=*.swp,tmp,.git,*.png,*.jpg,*.gif,node_modules
-
-"set lazyredraw
+set lazyredraw      " don't update the display while executing macros
 set showmatch           " Highlight closing ), >, }, ], etc...
 set showmode		    " Show current mode on last line
 set scrolloff=3		    " keep # of lines visible when scrolling
+set sidescrolloff=6     " start scrolling 6 lines from right"
 set ruler	    	    " Show the line and column number of the cursor position
 set nowrap              " disable wrapping long lines
 set cmdheight=2         " Number of screen lines to use for the command-line.  Helps avoiding |hit-enter| prompts.
@@ -134,8 +141,10 @@ nnoremap <leader>ft Vatzf
 nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
 " Fix those pesky situations where you edit & need sudo to save
 cmap w!! w !sudo tee % >/dev/null
-" Open split and switch to it
+" Open verticle split and switch to it
 nnoremap <leader>w <C-w>v<C-w>l
+" Open horizontal split and switch to it
+nnoremap <leader>h <C-w>s<C-w>j
 " }}}
 
 " Helpful mappings {{{
