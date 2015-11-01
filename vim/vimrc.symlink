@@ -17,23 +17,28 @@ colorscheme flatlandia
 set ttyfast                     " faster redraw
 set backspace=indent,eol,start
 set hidden 		" Allows :q of buffers without writing to them, prompts for write before closing all open buffers
+set termencoding=utf-8
+set encoding=utf-8
+set lazyredraw      " don't update the display while executing macros
 set history=1000	" remember N : commands
 set undolevels=1000
 set visualbell		" Use visual bell instead of beeping
 set noerrorbells 	" shut up
 
 " Toggle paste mode
-nnoremap <C-B> :set invpaste paste?<CR>
-set pastetoggle=<C-B>
+" nnoremap <C-B> :set invpaste paste?<CR>
+set pastetoggle=<F2>
+set clipboard=unnamed " Enable yanking to system keyboard
 " }}}
 
 " Spaces & Tabs {{{
-set tabstop=4           " 4 space tab
-set expandtab           " use spaces for tabs
-set softtabstop=4       " 4 space tab
-set shiftwidth=4	" Number of spaces to use for each step of (auto)indent)
-set modelines=1		" number of lines that is checked for set commands.
-filetype indent on	" enables filetype specific indentation
+set tabstop=4       " 4 space tab
+set softtabstop=4   " 4 space tab
+set shiftwidth=4	" Number of spaces to use for each step of (auto)indent
+set shiftround    " use multiple of shiftwidth when indenting with '<' and '>'"
+set expandtab       " use spaces for tabs
+set modelines=0		" Prevent reading the last line of a buffer to prevent undesired behavior http://lists.alioth.debian.org/pipermail/pkg-vim-maintainers/2007-June/004020.html
+filetype indent on	" enables filetype specific indentation behavior
 filetype plugin on	" enables filetype specific plugins
 set autoindent		" Copy indent from current line when starting a new line
 set smartindent		" indent again when going to nested scope
@@ -62,7 +67,7 @@ set listchars=tab:▸\  " Display a place holder character for tabs and trailing
 set formatoptions+=1    " When wrapping paragraphs, don't end lines with 1-letter words (looks stupid))"
 " }}}
 
-" Searching {{{"{{{
+" Searching {{{
 set ignorecase          " ignore case when searching
 set incsearch           " search as characters are entered
 set hlsearch            " highlight all matches
@@ -74,18 +79,18 @@ vnoremap / /\v
 " Make the tab key match bracket pairs
 nnoremap <tab> %
 vnoremap <tab> %
-" }}}"}}}
+" }}}
 
 " Folding {{{
-set foldmethod=indent   " fold based on indent level
-set foldnestmax=10      " max 10 depth
-set foldenable          " don't fold files by default on open
+set foldenable          " enable folding
+set foldcolumn=2        " add a fold column"
+set foldmethod=indent
+set foldlevelstart=99   " start with everything unfolded
 nnoremap <space> za
-set foldlevelstart=10    " start with fold level of 10
 " }}}
 
 " Line Shortcuts {{{
-" move vertically by visual line
+" move by screen lines instead of file lines (useful when lines wrap)
 nnoremap j gj
 nnoremap k gk
 " move to beginning/end of line
@@ -109,7 +114,7 @@ map <C-l> <C-w>l
 
 " Leader Shortcuts {{{
 let mapleader=","
-nnoremap <leader>w :NERDTreeToggle<CR>
+nnoremap <leader>N :NERDTreeToggle<CR>
 nnoremap <leader>ev :vsp $MYVIMRC<CR>
 nnoremap <leader>ez :vsp ~/.zshrc<CR>
 nnoremap <leader>sv :source $MYVIMRC<CR>
@@ -123,15 +128,14 @@ nnoremap <leader>a :Ag
 nnoremap <leader>c :SyntasticCheck<CR>:Errors<CR>
 nnoremap <leader>1 :set number!<CR>
 inoremap jk <esc>
-
 " fold tags
 nnoremap <leader>ft Vatzf
-
 " strip all trailing whitespace in the current file
 nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
-
 " Fix those pesky situations where you edit & need sudo to save
 cmap w!! w !sudo tee % >/dev/null
+" Open split and switch to it
+nnoremap <leader>w <C-w>v<C-w>l
 " }}}
 
 " Helpful mappings {{{
@@ -163,26 +167,59 @@ augroup vagrant
   au!
   au BufRead,BufNewFile Vagrantfile set filetype=ruby
 augroup END
+
+augroup rspec
+    au!
+    au FileType ruby map <Leader>R :call RunCurrentSpecFile()<cr>
+    au FileType ruby map <Leader>r :call RunNearestSpec()<cr>
+    au FileType ruby map <Leader>l :call RunLastSpec()<cr>
+    au FileType ruby map <Leader>a :call RunAllSpecs()<cr>
+augroup END
 " }}}
 
 " Rails {{{
-map <leader>gs :CtrlP app/assets/stylesheets<cr>
-map <leader>gj :CtrlP app/assets/javascripts<cr>
-map <leader>gv :CtrlP app/views<cr>
-map <leader>gc :CtrlP app/controllers<cr>
-map <leader>gm :CtrlP app/models<cr>
-map <leader>gh :CtrlP app/helpers<cr>
-map <leader>gt :CtrlP spec<cr>
+map <leader>rs :CtrlP app/assets/stylesheets<cr>
+map <leader>rj :CtrlP app/assets/javascripts<cr>
+map <leader>rv :CtrlP app/views<cr>
+map <leader>rc :CtrlP app/controllers<cr>
+map <leader>rm :CtrlP app/models<cr>
+map <leader>rh :CtrlP app/helpers<cr>
+map <leader>rt :CtrlP spec<cr>
 
-map <leader>gr :topleft :split config/routes.rb<cr>
-map <leader>gg :topleft 100 :split Gemfile<cr>
+map <leader>rr :topleft :split config/routes.rb<cr>
+map <leader>rg :topleft 100 :split Gemfile<cr>
 " }}}
 
 " Go {{{
-au FileType go nmap <leader>R <Plug>(go-run)
-au FileType go nmap <leader>B <Plug>(go-build)
-au FileType go nmap <leader>T <Plug>(go-test)
-au FileType go nmap <leader>C <Plug>(go-coverage)
+augroup go
+    au!
+    au FileType go nmap <leader>R <Plug>(go-run)
+    au FileType go nmap <leader>B <Plug>(go-build)
+    au FileType go nmap <leader>T <Plug>(go-test)
+    au FileType go nmap <leader>C <Plug>(go-coverage)
+augroup END
+" }}}
+
+" Elixir {{{
+augroup elixir
+    au!
+    au BufNewFile,BufRead *.ex,*.exs noremap <buffer> <leader>r :!mix test<cr>
+    au BufNewFile,BufRead *_test.exs noremap <buffer> <leader>r :exe "!mix test %:" . line(".")<cr>
+    au BufNewFile,BufRead *_test.exs noremap <buffer> <leader>R :!mix test %<cr>
+    au BufNewFile,BufRead *_test.exs noremap <buffer> <leader>a :!mix test<cr>
+augroup END
+" }}}
+
+" Phoenix {{{
+" Phoenix specific CtrlP mappings
+map <leader>ps :CtrlP web/static/css<cr>
+map <leader>pj :CtrlP web/static/js<cr>
+map <leader>pv :CtrlP web/views<cr>
+map <leader>pt :CtrlP web/templates<cr>
+map <leader>pc :CtrlP web/controllers<cr>
+map <leader>pm :CtrlP web/models<cr>
+map <leader>pr :vsp web/router.ex<cr>
+map <leader>px :vsp mix.exs<cr>
 " }}}
 
 " neocomplete {{{
@@ -271,6 +308,7 @@ augroup filetypegroup
     autocmd FileType arduino setlocal ts=2 sts=2 sw=2 expandtab
     autocmd FileType go setlocal ts=2 sts=2 sw=2 noexpandtab
     autocmd FileType markdown setlocal wrap nolist
+    autocmd FileType vim setlocal wrap nolist foldmethod=marker
 augroup END
 
 augroup buffergroups
@@ -279,9 +317,16 @@ augroup buffergroups
     autocmd BufNewFile,BufRead Capfile,Rakefile,Vagrantfile setfiletype ruby
 augroup END
 
-autocmd FocusLost * :wa
 autocmd BufWritePost .vimrc
 	\ so $MYVIMRC | call Pl#Load()
+
+" Restore cursor position upon reopening files {{{
+autocmd BufReadPost *
+    \ if &filetype != "gitcommit" && line("'\"") > 0 && line("'\"") <= line("$") |
+    \   exe "normal! g`\"" |
+    \ endif
+" }}}
+
 " }}}
 
 " Backups {{{
@@ -318,6 +363,10 @@ let g:snipMate.scope_aliases = {}
 let g:snipMate.scope_aliases['eruby'] = 'eruby,eruby-rails'
 " }}}
 
+" Rainbow Parentheses Improved {{{
+let g:rainbow_active = 1
+noremap <leader>R :RainbowToggle<CR>
+" }}}
 
 " Custom Functions {{{
 function! ToggleNumber()
@@ -337,10 +386,7 @@ function! <SID>StripTrailingWhitespaces()
     let l = line(".")
     let c = col(".")
     %s/\s\+$//e
-    let @/=_s
     call cursor(l, c)
 endfunction
 
 " }}}
-
-" vim:foldmethod=marker:foldlevel=0
