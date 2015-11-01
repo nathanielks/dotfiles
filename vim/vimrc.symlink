@@ -2,7 +2,6 @@
 " Inspired by @scrogson, @dougblackio, @thewatts, @nvie
 
 " Launch Config {{{
-set nocompatible " Use vim settings, rather then vi settings (much better!)
 source ~/.vundlerc
 autocmd! bufwritepost .vimrc source %
 " }}}

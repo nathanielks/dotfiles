@@ -12,18 +12,19 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-git'
 Plugin 'taq/vim-git-branch-info'
-Plugin 'mattn/webapi-vim'
 Plugin 'mattn/gist-vim'
 
-" System
+" Snipmate
 Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tomtom/tlib_vim'
 Plugin 'garbas/vim-snipmate'
 Plugin 'yinsigan/snipmate-snippets'
+
+" System
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
 Plugin 'tpope/vim-surround.git'
-Plugin 'Raimondi/delimitMate'
+Plugin 'Raimondi/delimitMate' "automatic closing of quotes, parenthesis, brackets, etc.
 Plugin 'rking/ag.vim'
 Plugin 'Lokaltog/vim-powerline'
 Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
@@ -31,7 +32,7 @@ Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 Plugin 'junegunn/vim-easy-align'
 Plugin 'kien/ctrlp.vim'
 Plugin 'terryma/vim-multiple-cursors'
-Plugin 'tpope/vim-eunuch'
+Plugin 'tpope/vim-eunuch' " Vim sugar for the UNIX shell commands that need it the most
 
 " Ruby
 Plugin 'vim-ruby/vim-ruby'
