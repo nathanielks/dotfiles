@@ -7,9 +7,12 @@ set encoding=utf-8
 syntax on
 syntax enable
 set t_Co=256
-colorscheme solarized
-set background=dark
-"set background=light
+" colorscheme solarized
+colorscheme flatlandia
+" colorscheme flattown
+" colorscheme railscasts
+" set background=dark
+" set background=light
 
 " Basic
 let mapleader = ","
@@ -72,8 +75,6 @@ let g:gist_open_browser_after_post = 1 " Open the gist after posting
 
 " Shortcut to rapidly toggle `set list`
 nmap <leader>l :set list!<CR>
-" Toggle cursorline
-nmap <leader>c :set cursorline!<cr>
 
 " CtrlP configs
 map <leader>t :CtrlP<cr>
@@ -92,7 +93,7 @@ let g:multi_cursor_exit_from_insert_mode = 0
 " Plugins
 let g:ctrlp_extensions = ['funky']
 " Function lookup
-map <leader>gf :CtrlPFunky<cr>
+" map <leader>gf :CtrlPFunky<cr>
 
 " Rails specific CtrlP mappings
 map <leader>gs :CtrlP app/assets/stylesheets<cr>
@@ -102,6 +103,10 @@ map <leader>gc :CtrlP app/controllers<cr>
 map <leader>gm :CtrlP app/models<cr>
 map <leader>gh :CtrlP app/helpers<cr>
 map <leader>gt :CtrlP spec<cr>
+
+let g:ctrlp_custom_ignore = {
+  \ 'dependencies': '\v[\/](node_modules|vendor|bower_components)',
+  \ }
 
 map <leader>gr :topleft :split config/routes.rb<cr>
 map <leader>gg :topleft 100 :split Gemfile<cr>
@@ -127,7 +132,7 @@ vnoremap <F1> <ESC>
 inoremap jj <ESC>
 inoremap II <Esc>I
 inoremap AA <Esc>A
-inoremap OO <Esc>O
+" inoremap OO <Esc>O
 nnoremap / /\v
 vnoremap / /\v
 nnoremap <leader><space> :noh<cr>
@@ -146,15 +151,25 @@ cmap w!! w !sudo tee % >/dev/null
 
 autocmd FocusLost * :wa
 autocmd FileType php,twig setlocal ts=4 sts=4 sw=4 noexpandtab
-autocmd FileType python setlocal ts=4 sts=4 sw=4 expandtab
-autocmd FileType javascript,html,css,sass,less setlocal ts=2 sts=2 sw=2 expandtab
+autocmd FileType python,cfg setlocal ts=4 sts=4 sw=4 expandtab
+autocmd FileType cs setlocal ts=4 sts=4 sw=4 expandtab
+autocmd FileType apiblueprint,terraform setlocal ts=4 sts=4 sw=4 expandtab
+autocmd FileType javascript,json,html,css,sass,less,yaml setlocal ts=2 sts=2 sw=2 expandtab
 autocmd FileType jade,html.handlebars setlocal ts=2 sts=2 sw=2 expandtab
 autocmd FileType ruby,pml,eruby,haml setlocal ts=2 sts=2 sw=2 expandtab
-autocmd FileType markdown setlocal wrap linebreak nolist
+autocmd FileType arduino setlocal ts=2 sts=2 sw=2 expandtab
+autocmd FileType go setlocal ts=2 sts=2 sw=2 noexpandtab
+autocmd FileType markdown setlocal wrap nolist
 autocmd BufNewFile,BufRead *.rss setfiletype xml
 autocmd BufNewFile,BufRead *.scss setfiletype css.scss
+autocmd BufNewFile,BufRead Capfile,Rakefile,Vagrantfile setfiletype ruby
 autocmd BufWritePost .vimrc
 	\ so $MYVIMRC | call Pl#Load()
+
+" SnipMate
+let g:snipMate = {}
+let g:snipMate.scope_aliases = {}
+let g:snipMate.scope_aliases['eruby'] = 'eruby,eruby-rails'
 
 " xmpfilter
 autocmd FileType ruby,erb,haml nmap <buffer> <F3> <Plug>(xmpfilter-mark)
@@ -238,8 +253,24 @@ nnoremap <C-p> :call pdv#DocumentWithSnip()<CR>
 let PHP_removeCRwhenUnix=1
 let g:PHP_vintage_case_default_indent = 1
 
+function! PhpSyntaxOverride()
+  hi! def link phpDocTags  phpDefine
+  hi! def link phpDocParam phpType
+endfunction
+
+augroup phpSyntaxOverride
+  autocmd!
+  autocmd FileType php call PhpSyntaxOverride()
+augroup END
+
 " Handlebars
 let g:mustache_abbreviations = 1
+
+" Go
+au FileType go nmap <leader>R <Plug>(go-run)
+au FileType go nmap <leader>B <Plug>(go-build)
+au FileType go nmap <leader>T <Plug>(go-test)
+au FileType go nmap <leader>C <Plug>(go-coverage)
 
 " Remove trailing whitespace on save
 autocmd BufWritePre * :%s/\s\+$//e
@@ -247,6 +278,8 @@ autocmd BufWritePre * :%s/\s\+$//e
 " Allow NERDTree to see hidden files
 let NERDTreeShowHidden=1
 let g:NERDTreeWinSize = 26
+let NERDSpaceDelims=1
+nmap <silent> <C-k>d :NERDTreeToggle<CR>
 
 " Teach vim to syntax highlight Vagrantfile as ruby
 augroup vagrant
@@ -254,7 +287,7 @@ augroup vagrant
   au BufRead,BufNewFile Vagrantfile set filetype=ruby
 augroup END
 
-" Fix indentation
+" Fix indentation / reindent
 map <F7> mzgg=G`z<CR>
 
 " Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
@@ -262,3 +295,19 @@ vmap <Enter> <Plug>(EasyAlign)
 
 " Start interactive EasyAlign for a motion/text object (e.g. <Leader>aip)
 nmap <Leader>a <Plug>(EasyAlign)
+
+let g:neocomplete#enable_at_startup = 1
+
+" Use ag instead of ack
+let g:ackprg = 'ag --nogroup --nocolor --column'
+
+" vim-textobj-quote
+map <silent> <leader>qc <Plug>ReplaceWithCurly
+map <silent> <leader>qs <Plug>ReplaceWithStraight
+augroup textobj_quote
+  autocmd!
+  autocmd FileType html,javascript call textobj#quote#init({'educate': 0})
+augroup END
+
+" Set cwd to current file's directory
+nnoremap ,cd :cd %:p:h<CR>:pwd<CR>

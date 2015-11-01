@@ -12,13 +12,14 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-git'
 Plugin 'taq/vim-git-branch-info'
-Plugin 'tpope/vim-rvm'
 Plugin 'mattn/webapi-vim'
 Plugin 'mattn/gist-vim'
 
 " System
-Plugin 'msanders/snipmate.vim'
-Plugin 'krisleech/snipmate-snippets'
+Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'tomtom/tlib_vim'
+Plugin 'garbas/vim-snipmate'
+Plugin 'yinsigan/snipmate-snippets'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
 Plugin 'tpope/vim-surround.git'
@@ -31,34 +32,51 @@ Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 Plugin 'junegunn/vim-easy-align'
 Plugin 'kien/ctrlp.vim'
 Plugin 'terryma/vim-multiple-cursors'
+Plugin 'tpope/vim-eunuch'
 
 " Ruby
-"Plugin 'vim-ruby/vim-ruby'
-"Plugin 'tpope/vim-rails'
-"Plugin 'tpope/vim-rvm'
-"Plugin 'tpope/vim-endwise'
-"Plugin 't9md/vim-ruby-xmpfilter'
-"Plugin 'skalnik/vim-vroom'
+Plugin 'vim-ruby/vim-ruby'
+Plugin 'tpope/vim-rails'
+Plugin 'tpope/vim-rvm'
+Plugin 'tpope/vim-endwise'
+Plugin 't9md/vim-ruby-xmpfilter'
+Plugin 'skalnik/vim-vroom'
 
 " JavaScript/CoffeeScript
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'digitaltoad/vim-jade'
+Plugin 'elzr/vim-json'
+Plugin 'XadillaX/json-formatter.vim'
 
 " PHP
+Plugin 'StanAngeloff/php.vim'
 Plugin 'pedrogimenez/vim-phpunit'
-Plugin 'SirVer/ultisnips'
+"Plugin 'SirVer/ultisnips'
 Plugin 'iwyg/pdv'
 "Plugin 'mikehaertl/pdv-standalone'
 Plugin 'tobyS/vmustache'
 Plugin 'shawncplus/phpcomplete.vim'
 Plugin 'evidens/vim-twig'
-Plugin '2072/vim-syntax-for-PHP.git'
+"Plugin '2072/vim-syntax-for-PHP.git'
 Plugin '2072/PHP-Indenting-for-VIm'
 
 " WordPress
 Plugin 'dsawardekar/wordpress.vim'
 
+" Go
+Plugin 'fatih/vim-go'
+
+" Elixir
+Plugin 'elixir-lang/vim-elixir'
+Plugin 'vim-erlang/vim-erlang-runtime'
+
+" CSharp
+Plugin 'OmniSharp/omnisharp-vim'
+Plugin 'tpope/vim-dispatch'
+
 " Other
+Plugin 'sudar/vim-arduino-syntax'
+Plugin 'Shougo/neocomplete.vim'
 Plugin 'tpope/vim-haml'
 Plugin 'slim-template/vim-slim'
 Plugin 'tpope/vim-markdown'
@@ -71,9 +89,20 @@ Plugin 'markcornick/vim-vagrant'
 Plugin 'chase/vim-ansible-yaml'
 Plugin 'esneider/YUNOcommit.vim'
 Plugin 'mustache/vim-mustache-handlebars'
+Plugin 'kylef/apiblueprint.vim'
+Plugin 'tpope/vim-abolish'
+Plugin 'tpope/vim-repeat'
+Plugin 'markcornick/vim-terraform'
+Plugin 'kana/vim-textobj-user'
+Plugin 'reedes/vim-textobj-quote'
 
 " Colorscheme
 Plugin 'altercation/vim-colors-solarized'
+Plugin 'jordwalke/flatlandia'
+Plugin 'blerins/flattown'
+"Plugin 'chankaward/vim-railscasts-theme'
+Plugin 'jpo/vim-railscasts-theme'
+Plugin 'duythinht/inori'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required

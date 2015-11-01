@@ -1,0 +1,53 @@
+---
+- name: Tap homebrew repos
+  homebrew_tap: tap={{ item }} state=present
+  with_items:
+    - josegonzalez/php
+    - homebrew/dupes
+  tags:
+    - homebrew
+
+- name: Install command line tools
+  homebrew: name={{ item }} state=present
+  with_items:
+    - openssl
+    - ack
+    - git
+    - vim
+    - z
+    - curl
+    - jq
+    - cowsay
+    - optipng
+    - php55-mcrypt
+    - composer
+    - node
+    - npm
+    - tmux
+    - git-flow-avh
+    - git-extras
+    - heroku-toolbelt
+    - terraform
+    - coreutils
+  tags:
+    - homebrew
+
+- name: Install Ruby Gems
+  shell: "{{ rvm }} all do gem install {{ item }}"
+  #gem: name={{ item }} state=present
+  sudo: false
+  with_items:
+    - rake
+    - bundler
+    - tmuxinator
+    - sass
+  tags:
+    - ruby
+
+- name: Install Node modules
+  npm: name={{ item }} state=present global=yes
+  with_items:
+    - grunt-cli
+    - bower
+  tags:
+    - node

@@ -12,7 +12,11 @@
 --ignore-dir=doc
 --ignore-dir=coverage
 --ignore-dir=.sass-cache
+--ignore-dir=bower_components
 --ignore-dir=.vagrant
+--ignore-dir=cachegrind
+--ignore-dir=webgrind
+--ignore-dir=.terraform
 --sort-files
 --color
 --follow

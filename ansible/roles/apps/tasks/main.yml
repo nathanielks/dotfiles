@@ -1,0 +1,48 @@
+---
+- name: Install applications
+  homebrew_cask: name={{ item }} state=present
+  with_items:
+    - 1password
+    - adium
+    - alfred
+    - appzapper
+    - a-better-finder-rename
+    - bettertouchtool
+    - boom
+    - cleanmymac
+    - carbon-copy-cloner
+    - codekit
+    - dash
+    - duet
+    - evernote
+    - firefox
+    - forklift
+    - github
+    - google-chrome
+    - google-drive
+    - gpgtools
+    - istat-menus
+    - kaleidoscope
+    - mamp
+    - mailbox
+    - marked
+    - mindnode-pro
+    - parallels-desktop
+    - private-internet-access
+    - rdio
+    - rescuetime
+    - sketch
+    - skype
+    #- slack
+    - slicy
+    - sourcetree
+    - steam
+    - sublime-text
+    - the-hit-list
+    - torpedo
+    #- unity
+    - unity-web-player
+    - virtualbox
+    - vagrant
+    - virtualhostx
+    - vlc
