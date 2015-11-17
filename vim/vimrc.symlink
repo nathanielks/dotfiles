@@ -38,9 +38,9 @@ filetype plugin on	" enables filetype specific plugins
 set autoindent       " indent next line to same level as current line
 set smartindent      "   ↑ but do it smartly
 set smarttab         " <Tab> in front of a line inserts 'shiftwidth' blanks
-set shiftwidth=2     "   ↑ use 4 blanks for above
-set tabstop=2        " display a <Tab> as 4 spaces
-set softtabstop=2    " use 4 spaces for a <Tab>
+set shiftwidth=2     "   ↑ use 2 blanks for above
+set tabstop=2        " display a <Tab> as 2 spaces
+set softtabstop=2    " use 2 spaces for a <Tab>
 set expandtab        " expand tabs to spaces
 set shiftround       " use multiple of shiftwidth when indenting with '<' and '>'"
 
