@@ -24,6 +24,7 @@ Plugin 'yinsigan/snipmate-snippets'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
 Plugin 'tpope/vim-surround.git'
+Plugin 'tpope/vim-repeat'
 Plugin 'Raimondi/delimitMate' "automatic closing of quotes, parenthesis, brackets, etc.
 Plugin 'rking/ag.vim'
 Plugin 'Lokaltog/vim-powerline'
@@ -91,10 +92,10 @@ Plugin 'esneider/YUNOcommit.vim'
 Plugin 'mustache/vim-mustache-handlebars'
 Plugin 'kylef/apiblueprint.vim'
 Plugin 'tpope/vim-abolish'
-Plugin 'tpope/vim-repeat'
 Plugin 'markcornick/vim-terraform'
 Plugin 'kana/vim-textobj-user'
 Plugin 'reedes/vim-textobj-quote'
+Plugin 'luochen1990/rainbow' " Color codes matching tags, parens, brackets, etc
 
 " Colorscheme
 Plugin 'altercation/vim-colors-solarized'
