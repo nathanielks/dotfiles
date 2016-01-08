@@ -96,6 +96,7 @@ Plugin 'markcornick/vim-terraform'
 Plugin 'kana/vim-textobj-user'
 Plugin 'reedes/vim-textobj-quote'
 Plugin 'luochen1990/rainbow' " Color codes matching tags, parens, brackets, etc
+Plugin 'joonty/vdebug.git' " Remote DBGP debugging
 
 " Colorscheme
 Plugin 'altercation/vim-colors-solarized'
