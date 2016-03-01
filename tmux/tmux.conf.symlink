@@ -58,10 +58,61 @@ set-window-option -g pane-base-index 1
 # get rid of escape delay time in vim
 set -sg escape-time 0
 
+# # Window Switching (Vim Tmux Navigator) ----------------------------------------
+# bind -n C-h run "(tmux display-message -p '#{pane_current_command}' | grep -iqE '(^|\/)vim(diff)?$' && tmux send-keys C-h) || tmux select-pane -L"
+# bind -n C-j run "(tmux display-message -p '#{pane_current_command}' | grep -iqE '(^|\/)vim(diff)?$' && tmux send-keys C-j) || tmux select-pane -D"
+# bind -n C-k run "(tmux display-message -p '#{pane_current_command}' | grep -iqE '(^|\/)vim(diff)?$' && tmux send-keys C-k) || tmux select-pane -U"
+# bind -n C-l run "(tmux display-message -p '#{pane_current_command}' | grep -iqE '(^|\/)vim(diff)?$' && tmux send-keys C-l) || tmux select-pane -R"
+# bind -n C-\ run "(tmux display-message -p '#{pane_current_command}' | grep -iqE '(^|\/)vim(diff)?$' && tmux send-keys 'C-\\') || tmux select-pane -l"
+
+# Smart pane switching with awareness of vim splits
+# See: https://github.com/christoomey/vim-tmux-navigator
+is_vim='echo "#{pane_current_command}" | grep -iqE "(^|\/)g?(view|n?vim?x?)(diff)?$"'
+bind -n C-h if-shell "$is_vim" "send-keys C-h" "select-pane -L"
+bind -n C-j if-shell "$is_vim" "send-keys C-j" "select-pane -D"
+bind -n C-k if-shell "$is_vim" "send-keys C-k" "select-pane -U"
+bind -n C-l if-shell "$is_vim" "send-keys C-l" "select-pane -R"
+bind -n C-\ if-shell "$is_vim" "send-keys C-\\" "select-pane -l"
+
 # Status Bar
 set-option -g status on
 set-option -g status-interval 2
 set-option -g status-utf8 on
+
+
+# don't let ZSH override the window title
+set-window-option -g allow-rename on
+
+## enable mouse
+# set-option -g mouse-select-pane on
+set-window-option -g mode-keys vi
+# set-window-option -g mode-mouse on
+
+# Ensure pbcopy, pbpaste, and launchctl are available
+set-option -g default-command "reattach-to-user-namespace -l zsh"
+bind C-c run "tmux show-buffer | reattach-to-user-namespace pbcopy"
+bind C-v run "reattach-to-user-namespace pbpaste | tmux load-buffer - && tmux paste-buffer"
+
+# Clock
+setw -g clock-mode-colour green
+setw -g clock-mode-style 24
+set -g default-command /bin/zsh
+set -g default-shell /bin/zsh
+
+# Notifying if other windows has activities
+set -g monitor-activity on
+set -g visual-activity on
+set -g default-terminal "screen-256color"
+
+# Highlighting the active window in status bar
+# setw -g window-status-current-bg green
+setw -g window-status-current-fg white
+
+# except the -active- pane, green on black
+set -g pane-active-border-fg black
+set -g pane-active-border-bg black
+
+#### COLOUR (Solarized dark)
 
 # "I' == current window index
 # 'H' == Hostname
@@ -73,74 +124,32 @@ set-option -g status-utf8 on
 # '#' == a literal "#"
 # Where appropriate, special character sequences may be prefixed with a
 # number to specify the maximum length, in this line "#10W'.
-set-option -g status-left '#[fg=brightblack]#H'
-set-option -g status-right '#[fg=yellow]#S#[fg=default] /// #(battery -o tmux -m default -g default)#[fg=default]%a %d %b %H:%M '
+# set-option -g status-left '#[fg=brightblack]#H'
+# set-option -g status-right '#[fg=yellow]#S#[fg=default] /// #(battery -o tmux -m default -g default)#[fg=default]%a %d %b %H:%M '
 
-set-option -g status-right-length 100
-set-option -g status-left-length 120
+# set-option -g status-right-length 100
+# set-option -g status-left-length 120
 
-set-option -g window-status-format "#[fg=brightcyan,bg=black,nobold] [#I] #W "
-set-option -g window-status-current-format "#[fg=red,bg=black] [#I] #W "
+# set-option -g window-status-format "#[fg=brightcyan,bg=black,nobold] [#I] #W "
+# set-option -g window-status-current-format "#[fg=red,bg=black] [#I] #W "
 
-# don't let ZSH override the window title
-set-window-option -g allow-rename on
+#===============================================================================
+# Status Bar ==================================================================
+bind-key / set status                    # use Prefix-/ to toggle status bar
 
-## enable mouse
-set-option -g mouse-select-pane on
-set-window-option -g mode-keys vi
-set-window-option -g mode-mouse on
+set -g status-left-length 100
+set -g status-right-length 100
+set -g status-utf8 on                    # enable UTF-8 characters in status bar
+set -g status-interval 1                 # update once a second
 
-# Notifying if other windows has activities
-set -g monitor-activity on
-set -g visual-activity on
-set -g default-terminal "screen-256color"
+# Colors -----------------------------------------------------------------------
+setw -g window-status-current-fg green   # current window text color: green
+set -g status-fg white                   # status color: white
+set -g status-bg default                 # status bg color: default
+set -g status-attr default               # status attribute color: default
 
-# Highlighting the active window in status bar
-setw -g window-status-current-bg green
-setw -g window-status-current-fg white
-
-# except the -active- pane, green on black
-set -g pane-active-border-fg black
-set -g pane-active-border-bg black
-
-# Ensure pbcopy, pbpaste, and launchctl are available
-set-option -g default-command "reattach-to-user-namespace -l zsh"
-
-# Clock
-setw -g clock-mode-colour green
-setw -g clock-mode-style 24
-set -g default-command /bin/zsh
-set -g default-shell /bin/zsh
-
-#### COLOUR (Solarized dark)
-
-## default statusbar colors
-set-option -g status-bg brightblack #base02
-set-option -g status-fg brightgreen #yellow
-set-option -g status-attr default
-
-# default window title colors
-set-window-option -g window-status-fg brightblue #base0
-set-window-option -g window-status-bg default
-#set-window-option -g window-status-attr dim
-
-# active window title colors
-set-window-option -g window-status-current-fg brightred #orange
-set-window-option -g window-status-current-bg default
-set-window-option -g window-status-current-attr bright
-
-# pane border
-set-option -g pane-border-fg black #base02
-set-option -g pane-active-border-fg green #base01
-
-# message text
-set-option -g message-bg black #base02
-set-option -g message-fg brightred #orange
-
-# pane number display
-set-option -g display-panes-active-colour blue #blue
-set-option -g display-panes-colour brightred #orange
-
-set-option -g default-command "reattach-to-user-namespace -l zsh" # or bash
-bind C-c run "tmux show-buffer | reattach-to-user-namespace pbcopy"
-bind C-v run "reattach-to-user-namespace pbpaste | tmux load-buffer - && tmux paste-buffer"
+# Content ----------------------------------------------------------------------
+set -g status-left " ⨠  #(whoami) {{#S}} "            # ⨠ thewatts
+set -g status-right "#(cat ~/.thyme-tmux) #[fg=brightcyan][%H:%M]#[fg=default]#(battery -pt) " # thyme time battery
+setw -g window-status-current-format " ⚫︎ #W {#I} " # current:      ⚫︎ { window name }
+setw -g window-status-format " ⚪︎ #W {#I} "         # non-current : ⚪︎ { window name }

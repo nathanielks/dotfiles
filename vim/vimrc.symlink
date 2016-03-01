@@ -10,15 +10,16 @@ autocmd! bufwritepost .vimrc source %
 syntax on
 syntax enable
 set t_Co=256
-colorscheme flatlandia
+colorscheme wattslandia
+" colorscheme solarized
 " }}}
 
 " Misc {{{
 set ttyfast                     " faster redraw
 set backspace=indent,eol,start
 set hidden 		" Allows :q of buffers without writing to them, prompts for write before closing all open buffers
-set termencoding=utf-8
-set encoding=utf-8
+" set termencoding=utf-8
+" set encoding=utf-8
 set history=1000	" remember N : commands
 set undolevels=1000
 set visualbell		" Use visual bell instead of beeping
@@ -79,6 +80,7 @@ set ignorecase          " ignore case when searching
 set incsearch           " search as characters are entered
 set hlsearch            " highlight all matches
 set smartcase		" ignore case if all lower case, otherwise adhere to case
+set gdefault            " all searches default to global
 
 " Use sane regex searching
 nnoremap / /\v
@@ -89,11 +91,11 @@ vnoremap <tab> %
 " }}}
 
 " Folding {{{
-set foldenable          " enable folding
-set foldcolumn=2        " add a fold column"
-set foldmethod=indent
+" set foldenable          " enable folding
+" set foldcolumn=2        " add a fold column
+" set foldmethod=indent
 set foldlevelstart=99   " start with everything unfolded
-nnoremap <space> za
+" nnoremap <space> za
 " }}}
 
 " Line Shortcuts {{{
@@ -113,10 +115,19 @@ nnoremap gV `[v`]
 command! W :w
 
 " Move around window splits easier
-map <C-h> <C-w>h
-map <C-j> <C-w>j
-map <C-k> <C-w>k
-map <C-l> <C-w>l
+" https://github.com/neovim/neovim/issues/2048#issuecomment-78045837
+" nnoremap <C-h> <C-w>h
+" nnoremap <C-j> <C-w>j
+" nnoremap <C-k> <C-w>k
+" nnoremap <C-l> <C-w>l
+
+let g:tmux_navigator_no_mappings = 1
+nnoremap <silent> <C-j> :TmuxNavigateDown<cr>
+nnoremap <silent> <C-k> :TmuxNavigateUp<cr>
+nnoremap <silent> <C-l> :TmuxNavigateRight<cr>
+nnoremap <silent> <C-h> :TmuxNavigateLeft<CR>
+nnoremap <silent> <C-;> :TmuxNavigatePrevious<cr>
+
 " }}}
 
 " Leader Shortcuts {{{
@@ -146,6 +157,9 @@ cmap w!! w !sudo tee % >/dev/null
 nnoremap <leader>w <C-w>v<C-w>l
 " Open horizontal split and switch to it
 nnoremap <leader>h <C-w>s<C-w>j
+
+" BlackBox
+nnoremap <leader>bu :!blackbox_update % <CR>
 " }}}
 
 " Helpful mappings {{{
@@ -169,6 +183,22 @@ augroup phpSyntaxOverride
   autocmd!
   autocmd FileType php call PhpSyntaxOverride()
 augroup END
+
+let g:php_cs_fixer_level = "psr2"
+nnoremap <silent><leader>pcf :call PhpCsFixerFixFile()<CR>
+" }}}
+
+" Javascript {{{
+let g:neomake_javascript_enabled_makers = ['eslint']
+let g:fixmyjs_rc_path = './.eslintrc'
+let g:jsx_ext_required = 0
+
+" let g:neomake_verbose=3
+" let g:neomake_logfile='/tmp/error.log'
+
+autocmd! BufWritePost,BufEnter * Neomake
+noremap <Leader><Leader>f :Fixmyjs<CR>
+
 " }}}
 
 " Ruby {{{
@@ -180,10 +210,10 @@ augroup END
 
 augroup rspec
     au!
-    au FileType ruby map <Leader>R :call RunCurrentSpecFile()<cr>
-    au FileType ruby map <Leader>r :call RunNearestSpec()<cr>
-    au FileType ruby map <Leader>l :call RunLastSpec()<cr>
-    au FileType ruby map <Leader>a :call RunAllSpecs()<cr>
+    au FileType ruby map <Leader>rf :call RunCurrentSpecFile()<cr>
+    au FileType ruby map <Leader>rn :call RunNearestSpec()<cr>
+    au FileType ruby map <Leader>rl :call RunLastSpec()<cr>
+    au FileType ruby map <Leader>ra :call RunAllSpecs()<cr>
 augroup END
 " }}}
 
@@ -232,12 +262,16 @@ map <leader>pr :vsp web/router.ex<cr>
 map <leader>px :vsp mix.exs<cr>
 " }}}
 
-" neocomplete {{{
-let g:neocomplete#enable_at_startup = 1
-" }}}
-
 " Handlebars {{{
 let g:mustache_abbreviations = 1
+" }}}
+
+" neomake {{{
+nmap <Leader><Space>o :lopen<CR>      " open location window
+nmap <Leader><Space>c :lclose<CR>     " close location window
+nmap <Leader><Space>, :ll<CR>         " go to current error/warning
+nmap <Leader><Space>n :lnext<CR>      " next error/warning
+nmap <Leader><Space>p :lprev<CR>      " previous error/warning
 " }}}
 
 " Powerline {{{
@@ -308,7 +342,7 @@ augroup configgroup
 augroup END
 
 augroup filetypegroup
-    autocmd FileType php,twig setlocal ts=4 sts=4 sw=4 noexpandtab
+    autocmd FileType php,twig setlocal ts=4 sts=4 sw=4 expandtab
     autocmd FileType python,cfg setlocal ts=4 sts=4 sw=4 expandtab
     autocmd FileType cs setlocal ts=4 sts=4 sw=4 expandtab
     autocmd FileType apiblueprint,terraform setlocal ts=4 sts=4 sw=4 expandtab
@@ -317,7 +351,7 @@ augroup filetypegroup
     autocmd FileType ruby,pml,eruby,haml setlocal ts=2 sts=2 sw=2 expandtab
     autocmd FileType arduino setlocal ts=2 sts=2 sw=2 expandtab
     autocmd FileType go setlocal ts=2 sts=2 sw=2 noexpandtab
-    autocmd FileType markdown setlocal wrap nolist
+    autocmd FileType markdown setlocal wrap nolist textwidth=0
     autocmd FileType vim setlocal wrap nolist foldmethod=marker
 augroup END
 

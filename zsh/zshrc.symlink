@@ -1,7 +1,5 @@
 # Set the PATH
-PATH="$PATH:/usr/local/sbin:/usr/sbin:/sbin"
 PATH="/usr/local/bin:$PATH"
-PATH="/usr/local/share/python:$PATH"
 PATH="./node_modules/.bin:$PATH"
 
 # Path to your oh-my-zsh configuration.
@@ -45,3 +43,8 @@ alias gs="git status"
 alias grc="git rebase --continue"
 # RVM
 if [[ -s $HOME/.rvm/scripts/rvm ]] ; then source $HOME/.rvm/scripts/rvm ; fi
+
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
+eval $(thefuck --alias)

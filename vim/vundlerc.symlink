@@ -14,12 +14,6 @@ Plugin 'tpope/vim-git'
 Plugin 'taq/vim-git-branch-info'
 Plugin 'mattn/gist-vim'
 
-" Snipmate
-Plugin 'MarcWeber/vim-addon-mw-utils'
-Plugin 'tomtom/tlib_vim'
-Plugin 'garbas/vim-snipmate'
-Plugin 'yinsigan/snipmate-snippets'
-
 " System
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
@@ -29,11 +23,12 @@ Plugin 'Raimondi/delimitMate' "automatic closing of quotes, parenthesis, bracket
 Plugin 'rking/ag.vim'
 Plugin 'Lokaltog/vim-powerline'
 Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-"Plugin 'godlygeek/tabular'
 Plugin 'junegunn/vim-easy-align'
 Plugin 'kien/ctrlp.vim'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'tpope/vim-eunuch' " Vim sugar for the UNIX shell commands that need it the most
+Plugin 'Chiel92/vim-autoformat'
+Plugin 'christoomey/vim-tmux-navigator'
 
 " Ruby
 Plugin 'vim-ruby/vim-ruby'
@@ -43,23 +38,25 @@ Plugin 'tpope/vim-endwise'
 Plugin 't9md/vim-ruby-xmpfilter'
 Plugin 'skalnik/vim-vroom'
 
-" JavaScript/CoffeeScript
+" JavaScript
+Plugin 'pangloss/vim-javascript'
+Plugin 'moll/vim-node'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'digitaltoad/vim-jade'
 Plugin 'elzr/vim-json'
 Plugin 'XadillaX/json-formatter.vim'
+Plugin 'mxw/vim-jsx'
+Plugin 'ruanyl/vim-fixmyjs'
 
 " PHP
 Plugin 'StanAngeloff/php.vim'
 Plugin 'pedrogimenez/vim-phpunit'
-"Plugin 'SirVer/ultisnips'
 Plugin 'iwyg/pdv'
-"Plugin 'mikehaertl/pdv-standalone'
 Plugin 'tobyS/vmustache'
 Plugin 'shawncplus/phpcomplete.vim'
 Plugin 'evidens/vim-twig'
-"Plugin '2072/vim-syntax-for-PHP.git'
 Plugin '2072/PHP-Indenting-for-VIm'
+Plugin 'stephpy/vim-php-cs-fixer'
 
 " WordPress
 Plugin 'dsawardekar/wordpress.vim'
@@ -71,19 +68,22 @@ Plugin 'fatih/vim-go'
 Plugin 'elixir-lang/vim-elixir'
 Plugin 'vim-erlang/vim-erlang-runtime'
 
-" CSharp
-Plugin 'OmniSharp/omnisharp-vim'
-Plugin 'tpope/vim-dispatch'
+" Snippets
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
+Plugin 'nathanielks/vim-react-snippets'
+
+" Linting
+" Plugin 'scrooloose/syntastic'
+Plugin 'benekastah/neomake'
+
 
 " Other
-Plugin 'sudar/vim-arduino-syntax'
-Plugin 'Shougo/neocomplete.vim'
 Plugin 'tpope/vim-haml'
 Plugin 'slim-template/vim-slim'
 Plugin 'tpope/vim-markdown'
 Plugin 'tpope/vim-pastie'
 Plugin 'othree/html5.vim'
-Plugin 'saltstack/salt-vim'
 Plugin 'groenewege/vim-less'
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'markcornick/vim-vagrant'
@@ -100,9 +100,9 @@ Plugin 'joonty/vdebug.git' " Remote DBGP debugging
 
 " Colorscheme
 Plugin 'altercation/vim-colors-solarized'
+Plugin 'thewatts/wattslandia'
 Plugin 'jordwalke/flatlandia'
 Plugin 'blerins/flattown'
-"Plugin 'chankaward/vim-railscasts-theme'
 Plugin 'jpo/vim-railscasts-theme'
 Plugin 'duythinht/inori'
 

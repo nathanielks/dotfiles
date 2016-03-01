@@ -2,7 +2,6 @@
 - name: Tap homebrew repos
   homebrew_tap: tap={{ item }} state=present
   with_items:
-    - josegonzalez/php
     - homebrew/dupes
   tags:
     - homebrew
@@ -11,24 +10,26 @@
   homebrew: name={{ item }} state=present
   with_items:
     - openssl
-    - ack
+    - ag
     - git
     - vim
     - z
     - curl
+    - wget
     - jq
     - cowsay
     - optipng
-    - php55-mcrypt
     - composer
-    - node
-    - npm
     - tmux
     - git-flow-avh
     - git-extras
     - heroku-toolbelt
     - terraform
+    - packer
+    - otto
     - coreutils
+    - mongodb
+    - brew install reattach-to-user-namespace
   tags:
     - homebrew
 
@@ -37,10 +38,7 @@
   #gem: name={{ item }} state=present
   sudo: false
   with_items:
-    - rake
-    - bundler
     - tmuxinator
-    - sass
   tags:
     - ruby
 
@@ -49,5 +47,12 @@
   with_items:
     - grunt-cli
     - bower
+    - babel
+    - babel-core
+    - webpack
+    - webpack-dev-server
+    - redux-cli
+    - standard
+    - standard-format
   tags:
     - node
