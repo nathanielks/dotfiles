@@ -72,6 +72,9 @@ bind -n C-k if-shell "$is_vim" "send-keys C-k" "select-pane -U"
 bind -n C-l if-shell "$is_vim" "send-keys C-l" "select-pane -R"
 bind -n C-\ if-shell "$is_vim" "send-keys C-\\" "select-pane -l"
 
+# restore 'clear screen' to ctrl + l
+bind-key -n C-l send-keys 'C-l'
+
 # Status Bar
 set-option -g status on
 set-option -g status-interval 2
