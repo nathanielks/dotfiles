@@ -10,6 +10,10 @@ autocmd! bufwritepost .vimrc source %
 syntax on
 syntax enable
 set t_Co=256
+" colorscheme base16-default
+let base16colorspace=256
+set background=dark
+
 colorscheme wattslandia
 " colorscheme solarized
 " }}}
@@ -190,11 +194,11 @@ nnoremap <silent><leader>pcf :call PhpCsFixerFixFile()<CR>
 
 " Javascript {{{
 let g:neomake_javascript_enabled_makers = ['eslint']
-let g:fixmyjs_rc_path = './.eslintrc'
-let g:jsx_ext_required = 0
-
+let g:neomake_jsx_enabled_makers = ['eslint']
 " let g:neomake_verbose=3
-" let g:neomake_logfile='/tmp/error.log'
+
+let g:fixmyjs_rc_path = './.eslintrc'
+" let g:jsx_ext_required = 0
 
 autocmd! BufWritePost,BufEnter * Neomake
 noremap <Leader><Leader>f :Fixmyjs<CR>

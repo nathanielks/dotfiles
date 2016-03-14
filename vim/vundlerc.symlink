@@ -102,6 +102,7 @@ Plugin 'joonty/vdebug.git' " Remote DBGP debugging
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'thewatts/wattslandia'
 Plugin 'jordwalke/flatlandia'
+Plugin 'chriskempson/base16-vim'
 Plugin 'blerins/flattown'
 Plugin 'jpo/vim-railscasts-theme'
 Plugin 'duythinht/inori'

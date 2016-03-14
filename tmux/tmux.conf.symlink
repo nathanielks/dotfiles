@@ -33,18 +33,18 @@ bind s split-window -v
 bind v split-window -h
 
 # Use the Vim motion keys to move between panes
-bind -n M-h select-pane -L
-bind -n M-j select-pane -D
-bind -n M-k select-pane -U
-bind -n M-l select-pane -R
+# bind -n M-h select-pane -L
+# bind -n M-j select-pane -D
+# bind -n M-k select-pane -U
+# bind -n M-l select-pane -R
 
 # Use Vim resize keys
-bind -n M-< resize-pane -L
-bind -n M-> resize-pane -R
-bind -n M-- resize-pane -D
-bind -n M-+ resize-pane -U
-bind -n M-= select-layout even-horizontal
-bind -n M-_ select-layout even-vertical
+# bind -n M-< resize-pane -L
+# bind -n M-> resize-pane -R
+# bind -n M-- resize-pane -D
+# bind -n M-+ resize-pane -U
+# bind -n M-= select-layout even-horizontal
+# bind -n M-_ select-layout even-vertical
 
 # History
 set -g history-limit 10000
@@ -55,13 +55,6 @@ set-window-option -g pane-base-index 1
 
 # get rid of escape delay time in vim
 set -sg escape-time 0
-
-# # Window Switching (Vim Tmux Navigator) ----------------------------------------
-# bind -n C-h run "(tmux display-message -p '#{pane_current_command}' | grep -iqE '(^|\/)vim(diff)?$' && tmux send-keys C-h) || tmux select-pane -L"
-# bind -n C-j run "(tmux display-message -p '#{pane_current_command}' | grep -iqE '(^|\/)vim(diff)?$' && tmux send-keys C-j) || tmux select-pane -D"
-# bind -n C-k run "(tmux display-message -p '#{pane_current_command}' | grep -iqE '(^|\/)vim(diff)?$' && tmux send-keys C-k) || tmux select-pane -U"
-# bind -n C-l run "(tmux display-message -p '#{pane_current_command}' | grep -iqE '(^|\/)vim(diff)?$' && tmux send-keys C-l) || tmux select-pane -R"
-# bind -n C-\ run "(tmux display-message -p '#{pane_current_command}' | grep -iqE '(^|\/)vim(diff)?$' && tmux send-keys 'C-\\') || tmux select-pane -l"
 
 # Smart pane switching with awareness of vim splits
 # See: https://github.com/christoomey/vim-tmux-navigator
@@ -74,6 +67,12 @@ bind -n C-\ if-shell "$is_vim" "send-keys C-\\" "select-pane -l"
 
 # restore 'clear screen' to ctrl + l
 bind-key -n C-l send-keys 'C-l'
+
+# Window Resizing --------------------------------------------------------------
+bind -r H resize-pane -L 5 # prefix + H => Move Left
+bind -r J resize-pane -D 5 # prefix + J => Move Down
+bind -r K resize-pane -U 5 # prefix + K => Move Up
+bind -r L resize-pane -R 5 # prefix + L => Move Right
 
 # Status Bar
 set-option -g status on

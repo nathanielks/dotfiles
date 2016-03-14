@@ -29,7 +29,8 @@
     - otto
     - coreutils
     - mongodb
-    - brew install reattach-to-user-namespace
+    - reattach-to-user-namespace
+    - rename
   tags:
     - homebrew
 
