@@ -1,5 +1,10 @@
 # Dotfiles
 
+To get vim set up quickly:
+```
+curl -fsSL https://raw.githubusercontent.com/nathanielks/dotfiles/master/install.sh | bash
+```
+
 ### On Fresh Install
 - Install `homebrew`
 - `brew install zsh`
