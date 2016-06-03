@@ -9,3 +9,4 @@ resources/*/*
 node_modules
 custom_plan.rb
 zeus.json
+*.log

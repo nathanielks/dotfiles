@@ -47,6 +47,7 @@ Plugin 'elzr/vim-json'
 Plugin 'XadillaX/json-formatter.vim'
 Plugin 'mxw/vim-jsx'
 Plugin 'ruanyl/vim-fixmyjs'
+Plugin 'isRuslan/vim-es6'
 
 " PHP
 Plugin 'StanAngeloff/php.vim'

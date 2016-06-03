@@ -3,7 +3,7 @@
 require 'irb/completion'
 require 'irb/ext/save-history'
 
-%w[rubygems interactive_editor map_by_method what_methods ap looksee/shortcuts wirble].each do |gem|
+%w[rubygems interactive_editor map_by_method what_methods ap looksee/shortcuts].each do |gem|
   begin
     require gem
   rescue LoadError
@@ -22,15 +22,12 @@ IRB.conf[:PROMPT][:CUSTOM] = {
 }
 IRB.conf[:PROMPT_MODE] = :CUSTOM
 
-Wirble.init
-Wirble.colorize unless RbConfig::CONFIG['host_os'] == 'mswin32'
-
 class Object
   # list methods which aren't in superclass
   def local_methods(obj = self)
     (obj.methods - obj.class.superclass.instance_methods).sort
   end
-  
+
   # print documentation
   #
   #   ri 'Array#pop'

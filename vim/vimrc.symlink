@@ -58,7 +58,7 @@ autocmd FileType eruby setlocal indentkeys-=*<Return>
 " UI Layout {{{
 set number              " show line numbers
 set showcmd             " show command in bottom bar
-set nocursorline        " highlight current line
+set cursorline          " highlight current line
 set synmaxcol=200       " no syntax highlighting for lines longer than 200 cols"
 au VimResized * :wincmd = " resize splits when window is resized
 " Make tab completion for files/buffers act like bash
@@ -92,6 +92,7 @@ vnoremap / /\v
 " Make the tab key match bracket pairs
 nnoremap <tab> %
 vnoremap <tab> %
+inoremap jj <ESC>
 " }}}
 
 " Folding {{{
@@ -99,7 +100,7 @@ vnoremap <tab> %
 " set foldcolumn=2        " add a fold column
 " set foldmethod=indent
 set foldlevelstart=99   " start with everything unfolded
-" nnoremap <space> za
+nnoremap <space> za
 " }}}
 
 " Line Shortcuts {{{
@@ -198,10 +199,12 @@ let g:neomake_jsx_enabled_makers = ['eslint']
 " let g:neomake_verbose=3
 
 let g:fixmyjs_rc_path = './.eslintrc'
-" let g:jsx_ext_required = 0
+let g:jsx_ext_required = 0
 
 autocmd! BufWritePost,BufEnter * Neomake
 noremap <Leader><Leader>f :Fixmyjs<CR>
+
+autocmd FileType javascript.jsx runtime! ftplugin/html/sparkup.vim
 
 " }}}
 
@@ -307,7 +310,6 @@ highlight link multiple_cursors_visual Visual
 " }}}
 
 " NERDTree {{{
-let NERDTreeIgnore = ['\.pyc$', 'build', 'venv', 'egg', 'egg-info/', 'dist', 'docs']
 let NERDTreeShowHidden=1
 let g:NERDTreeWinSize = 26
 let NERDSpaceDelims=1
@@ -355,8 +357,9 @@ augroup filetypegroup
     autocmd FileType ruby,pml,eruby,haml setlocal ts=2 sts=2 sw=2 expandtab
     autocmd FileType arduino setlocal ts=2 sts=2 sw=2 expandtab
     autocmd FileType go setlocal ts=2 sts=2 sw=2 noexpandtab
-    autocmd FileType markdown setlocal wrap nolist textwidth=0
+    autocmd FileType markdown setlocal wrap nolist textwidth=0 ts=4 sts=4 sw=4
     autocmd FileType vim setlocal wrap nolist foldmethod=marker
+    autocmd FileType json setlocal foldmethod=syntax
 augroup END
 
 augroup buffergroups
