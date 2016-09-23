@@ -20,7 +20,7 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'tpope/vim-surround.git'
 Plugin 'tpope/vim-repeat'
 Plugin 'Raimondi/delimitMate' "automatic closing of quotes, parenthesis, brackets, etc.
-Plugin 'rking/ag.vim'
+Plugin 'mileszs/ack.vim'
 Plugin 'Lokaltog/vim-powerline'
 Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 Plugin 'junegunn/vim-easy-align'
@@ -57,7 +57,8 @@ Plugin 'tobyS/vmustache'
 Plugin 'shawncplus/phpcomplete.vim'
 Plugin 'evidens/vim-twig'
 Plugin '2072/PHP-Indenting-for-VIm'
-Plugin 'stephpy/vim-php-cs-fixer'
+" Plugin 'stephpy/vim-php-cs-fixer'
+Plugin 'jwalton512/vim-blade'
 
 " WordPress
 Plugin 'dsawardekar/wordpress.vim'
@@ -98,6 +99,7 @@ Plugin 'kana/vim-textobj-user'
 Plugin 'reedes/vim-textobj-quote'
 Plugin 'luochen1990/rainbow' " Color codes matching tags, parens, brackets, etc
 Plugin 'joonty/vdebug.git' " Remote DBGP debugging
+Plugin 'tpope/vim-obsession' " Automatically save vim sessions
 
 " Colorscheme
 Plugin 'altercation/vim-colors-solarized'

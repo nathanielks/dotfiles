@@ -147,7 +147,7 @@ nmap <leader>l :set list!<CR>
 nnoremap <leader><space> :noh<CR>
 " save session. reopen session using vim -S
 nnoremap <leader>s :mksession<CR>
-nnoremap <leader>a :Ag<space>
+nnoremap <leader>a :Ack<space>
 nnoremap <leader>c :SyntasticCheck<CR>:Errors<CR>
 nnoremap <leader>1 :set number!<CR>
 
@@ -163,6 +163,14 @@ nnoremap <leader>w <C-w>v<C-w>l
 " Open horizontal split and switch to it
 nnoremap <leader>h <C-w>s<C-w>j
 
+" ack.vim {{{
+let g:ackprg = 'ag --vimgrep --smart-case'
+cnoreabbrev ag Ack
+cnoreabbrev aG Ack
+cnoreabbrev Ag Ack
+cnoreabbrev AG Ack
+" }}}
+
 " BlackBox
 nnoremap <leader>bu :!blackbox_update % <CR>
 " }}}
@@ -172,6 +180,11 @@ nnoremap <leader>bu :!blackbox_update % <CR>
 map <F7> mzgg=G`z<CR>
 " Set cwd to current file's directory
 nnoremap <leader>cd :cd %:p:h<CR>:pwd<CR>
+
+" Update syntax highlighting
+noremap <F12> <Esc>:syntax sync fromstart<CR>
+inoremap <F12> <C-o>:syntax sync fromstart<CR>
+
 " }}}
 
 " PHP {{{
@@ -189,13 +202,16 @@ augroup phpSyntaxOverride
   autocmd FileType php call PhpSyntaxOverride()
 augroup END
 
-let g:php_cs_fixer_level = "psr2"
-nnoremap <silent><leader>pcf :call PhpCsFixerFixFile()<CR>
+" let g:php_cs_fixer_level = "psr2"
+" nnoremap <silent><leader>pcf :call PhpCsFixerFixFile()<CR>
+
+
+
 " }}}
 
 " Javascript {{{
-let g:neomake_javascript_enabled_makers = ['eslint']
-let g:neomake_jsx_enabled_makers = ['eslint']
+let g:neomake_javascript_enabled_makers = ['standard']
+let g:neomake_jsx_enabled_makers = ['standard']
 " let g:neomake_verbose=3
 
 let g:fixmyjs_rc_path = './.eslintrc'
@@ -299,6 +315,7 @@ set laststatus=2 " the last window will have a status line
 let g:ctrlp_match_window = 'bottom,order:ttb'
 let g:ctrlp_switch_buffer = 0
 let g:ctrlp_working_path_mode = 0
+let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)|vendor|node_modules|public$'
 map <leader>b :CtrlPBuffer<cr>
 " }}}
 
@@ -353,7 +370,7 @@ augroup filetypegroup
     autocmd FileType cs setlocal ts=4 sts=4 sw=4 expandtab
     autocmd FileType apiblueprint,terraform setlocal ts=4 sts=4 sw=4 expandtab
     autocmd FileType javascript,json,html,css,sass,less,yaml,coffee setlocal ts=2 sts=2 sw=2 expandtab
-    autocmd FileType jade,html.handlebars setlocal ts=2 sts=2 sw=2 expandtab
+    autocmd FileType jade,html.handlebars,blade setlocal ts=2 sts=2 sw=2 expandtab
     autocmd FileType ruby,pml,eruby,haml setlocal ts=2 sts=2 sw=2 expandtab
     autocmd FileType arduino setlocal ts=2 sts=2 sw=2 expandtab
     autocmd FileType go setlocal ts=2 sts=2 sw=2 noexpandtab
