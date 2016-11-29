@@ -19,18 +19,21 @@
     - jq
     - cowsay
     - optipng
-    - composer
     - tmux
     - git-flow-avh
     - git-extras
     - heroku-toolbelt
     - terraform
     - packer
-    - otto
     - coreutils
     - mongodb
     - reattach-to-user-namespace
     - rename
+    - thefuck
+    - neovim/neovim/neovim
+    - hub
+    - ngrok
+    - mas
   tags:
     - homebrew
 
@@ -46,14 +49,16 @@
 - name: Install Node modules
   npm: name={{ item }} state=present global=yes
   with_items:
-    - grunt-cli
-    - bower
-    - babel
-    - babel-core
     - webpack
     - webpack-dev-server
-    - redux-cli
     - standard
     - standard-format
+    - eslint
+    - yarn
   tags:
     - node
+
+- name: Install pip dependencies
+  pip: name={{ item }} state=present global=yes
+  with_items:
+    - neovim

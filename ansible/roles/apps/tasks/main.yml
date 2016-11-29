@@ -7,7 +7,6 @@
     - a-better-finder-rename
     - bettertouchtool
     - bartender
-    - carbon-copy-cloner
     - codekit
     - dash
     - dropbox
@@ -19,13 +18,10 @@
     - google-drive
     - gpgtools
     - istat-menus
-    - kaleidoscope
     - mindnode-pro
-    - private-internet-access
     - rescuetime
     - sketch
     - skype
-    - slack
     - slicy
     - steam
     - sublime-text
@@ -35,3 +31,14 @@
     - virtualbox
     - vagrant
     - vlc
+    - qlcolorcode
+    - qlstephen
+    - qlmarkdown
+    - quicklook-json
+    - qlprettypatch
+    - quicklook-csv
+    - betterzipql
+    - qlimagesize
+    - webpquicklook
+    - suspicious-package
+    - sequel-pro

@@ -2,7 +2,7 @@
 " Inspired by @scrogson, @dougblackio, @thewatts, @nvie
 
 " Launch Config {{{
-source ~/.vundlerc
+source ~/.vplugrc
 autocmd! bufwritepost .vimrc source %
 " }}}
 
@@ -93,6 +93,7 @@ vnoremap / /\v
 nnoremap <tab> %
 vnoremap <tab> %
 inoremap jj <ESC>
+inoremap hh <ESC>
 " }}}
 
 " Folding {{{
@@ -210,10 +211,6 @@ augroup END
 " }}}
 
 " Javascript {{{
-let g:neomake_javascript_enabled_makers = ['standard']
-let g:neomake_jsx_enabled_makers = ['standard']
-" let g:neomake_verbose=3
-
 let g:fixmyjs_rc_path = './.eslintrc'
 let g:jsx_ext_required = 0
 
@@ -251,6 +248,7 @@ map <leader>rt :CtrlP spec<cr>
 
 map <leader>rr :topleft :split config/routes.rb<cr>
 map <leader>rg :topleft 100 :split Gemfile<cr>
+map <leader>av :AV<cr>
 " }}}
 
 " Go {{{
@@ -432,6 +430,16 @@ let g:snipMate.scope_aliases['eruby'] = 'eruby,eruby-rails'
 let g:rainbow_active = 1
 noremap <leader>R :RainbowToggle<CR>
 " }}}
+
+" .lvimrc {{{
+let g:localvimrc_whitelist=[
+\'/Users/aang/Code/roots/screencasts/xdebug/example.com/',
+\'/Users/aang/Code/roots/screencasts/xdebug/xdebug-trellis.com/',
+\'/Users/aang/Code/pressbooks/prince-queue/main/site/',
+\'/Users/aang/Code/hu/hope-institute/hopeforovc.org/'
+\]
+" }}}
+
 
 " Custom Functions {{{
 function! ToggleNumber()
