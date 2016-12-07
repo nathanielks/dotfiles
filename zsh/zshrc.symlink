@@ -45,6 +45,7 @@ alias gfhs="git flow hotfix start"
 alias gfhf="git flow hotfix finish"
 alias gs="git status"
 alias grc="git rebase --continue"
+alias mm="middleman"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm

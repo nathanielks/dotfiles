@@ -42,6 +42,7 @@ Plug 'mxw/vim-jsx'
 Plug 'ruanyl/vim-fixmyjs'
 Plug 'isRuslan/vim-es6'
 Plug 'posva/vim-vue'
+Plug 'nikvdp/ejs-syntax'
 
 " PHP
 Plug 'StanAngeloff/php.vim'
