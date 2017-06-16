@@ -37,16 +37,6 @@ PATH=$PATH:/usr/local/share/npm/lib/node_modules # Add Node modules
 # ZSH Completions
 fpath=(/usr/local/share/zsh-completions $fpath)
 
-alias gff="git flow finish"
-alias gffs="git flow feature start"
-alias gfrs="git flow release start"
-alias gfrf="git flow release finish"
-alias gfhs="git flow hotfix start"
-alias gfhf="git flow hotfix finish"
-alias gs="git status"
-alias grc="git rebase --continue"
-alias mm="middleman"
-
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
 
