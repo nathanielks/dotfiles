@@ -9,31 +9,56 @@
 - name: Install command line tools
   homebrew: name={{ item }} state=present
   with_items:
-    - openssl
-    - ag
-    - git
-    - vim
-    - z
-    - curl
-    - wget
-    - jq
-    - cowsay
-    - optipng
-    - tmux
-    - git-flow-avh
-    - git-extras
-    - heroku-toolbelt
-    - terraform
-    - packer
+    - ack
+    - asciinema
+    - awscli
+    - cask
+    - cli53
+    - homebrew/php/composer
     - coreutils
-    - mongodb
+    - cowsay
+    - curl
+    - diff-so-fancy
+    - dnsmasq
+    - ffmpeg
+    - gcc@4.9
+    - git
+    - git-crypt
+    - git-extras
+    - git-flow-avh
+    - gnu-sed
+    - graphviz
+    - heroku
+    - highlight
+    - htop
+    - hub
+    - imagemagick
+    - jq
+    - mas
+    - neovim/neovim/neovim
+    - openssl
+    - packer
+    - parallel
     - reattach-to-user-namespace
     - rename
+    - ripgrep
+    - s3cmd
+    - saltstack
+    - shellcheck
+    - siege
+    - snappy
+    - terminal-notifier
+    - terraform
+    - the_silver_searcher
     - thefuck
-    - neovim/neovim/neovim
-    - hub
-    - ngrok
-    - mas
+    - tmux
+    - watch
+    - wget
+    - yarn
+    - z
+    - zsh
+
+
   tags:
     - homebrew
 
@@ -45,18 +70,6 @@
     - tmuxinator
   tags:
     - ruby
-
-- name: Install Node modules
-  npm: name={{ item }} state=present global=yes
-  with_items:
-    - webpack
-    - webpack-dev-server
-    - standard
-    - standard-format
-    - eslint
-    - yarn
-  tags:
-    - node
 
 - name: Install pip dependencies
   pip: name={{ item }} state=present global=yes
