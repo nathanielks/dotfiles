@@ -3,42 +3,50 @@
   homebrew_cask: name={{ item }} state=present
   with_items:
     - 1password
-    - alfred
     - a-better-finder-rename
-    - bettertouchtool
+    - adobe-reader
+    - alfred
+    - audacity
     - bartender
-    - codekit
+    - bettertouchtool
+    - betterzipql
+    - calibre
+    - colloquy
     - dash
+    - docker
     - dropbox
     - dropbox-encore
     - evernote
-    - forklift
-    - github-desktop
+    - firefox
+    - franz
     - google-chrome
     - google-drive
     - gpgtools
+    - hammerspoon
     - istat-menus
+    - karabiner-elements
+    - keybase
     - mindnode-pro
+    - ngrok
+    - postico
+    - qlcolorcode
+    - qlimagesize
+    - qlmarkdown
+    - qlprettypatch
+    - qlstephen
+    - quicklook-csv
+    - quicklook-json
     - rescuetime
+    - sequel-pro
     - sketch
     - skype
-    - slicy
+    - slack
     - steam
     - sublime-text
-    - the-unarchiver
-    #- unity
-    - unity-web-player
-    - virtualbox
-    - vagrant
-    - vlc
-    - qlcolorcode
-    - qlstephen
-    - qlmarkdown
-    - quicklook-json
-    - qlprettypatch
-    - quicklook-csv
-    - betterzipql
-    - qlimagesize
-    - webpquicklook
     - suspicious-package
-    - sequel-pro
+    - the-unarchiver
+    - unity-web-player
+    - vagrant
+    - virtualbox
+    - vlc
+    - webpquicklook
