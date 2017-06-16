@@ -9,11 +9,12 @@ Plug 'mattn/gist-vim'
 " System
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
-Plug 'tpope/vim-surround.git'
+Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'Raimondi/delimitMate' "automatic closing of quotes, parenthesis, brackets, etc.
 Plug 'mileszs/ack.vim'
-Plug 'Lokaltog/vim-powerline'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'rstacruz/sparkup', {'rtp': 'vim/'}
 Plug 'junegunn/vim-easy-align'
 Plug 'kien/ctrlp.vim'
@@ -22,6 +23,7 @@ Plug 'tpope/vim-eunuch' " Vim sugar for the UNIX shell commands that need it the
 Plug 'Chiel92/vim-autoformat'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'embear/vim-localvimrc'
+Plug 'mklabs/split-term.vim'
 
 " Ruby
 Plug 'vim-ruby/vim-ruby'
@@ -72,7 +74,8 @@ Plug 'nathanielks/vim-react-snippets'
 
 " Linting
 " Plug 'scrooloose/syntastic'
-Plug 'benekastah/neomake'
+" Plug 'benekastah/neomake'
+Plug 'w0rp/ale'
 
 
 " Other
@@ -90,10 +93,11 @@ Plug 'mustache/vim-mustache-handlebars'
 Plug 'kylef/apiblueprint.vim'
 Plug 'tpope/vim-abolish'
 Plug 'markcornick/vim-terraform'
+Plug 'hposca/ultisnips-terraform-snippets'
 Plug 'kana/vim-textobj-user'
 Plug 'reedes/vim-textobj-quote'
 Plug 'luochen1990/rainbow' " Color codes matching tags, parens, brackets, etc
-Plug 'joonty/vdebug.git' " Remote DBGP debugging
+Plug 'joonty/vdebug' " Remote DBGP debugging
 Plug 'tpope/vim-obsession' " Automatically save vim sessions
 
 " Colorscheme
@@ -104,5 +108,7 @@ Plug 'chriskempson/base16-vim'
 Plug 'blerins/flattown'
 Plug 'jpo/vim-railscasts-theme'
 Plug 'duythinht/inori'
+Plug 'arcticicestudio/nord-vim'
+Plug 'w0ng/vim-hybrid'
 
 call plug#end()

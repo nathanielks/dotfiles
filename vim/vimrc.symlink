@@ -12,22 +12,27 @@ syntax enable
 set t_Co=256
 " colorscheme base16-default
 let base16colorspace=256
-set background=dark
+" set background=dark
+let g:hybrid_custom_term_colors = 1
 
-colorscheme wattslandia
+" colorscheme hybrid
+colorscheme nord
+" colorscheme wattslandia
 " colorscheme solarized
+au ColorScheme * hi Normal ctermbg=none guibg=none
+au ColorScheme * hi NonText ctermbg=none guibg=none
 " }}}
 
 " Misc {{{
 set ttyfast                     " faster redraw
 set backspace=indent,eol,start
-set hidden 		" Allows :q of buffers without writing to them, prompts for write before closing all open buffers
+set hidden    " Allows :q of buffers without writing to them, prompts for write before closing all open buffers
 " set termencoding=utf-8
 " set encoding=utf-8
-set history=1000	" remember N : commands
+set history=1000  " remember N : commands
 set undolevels=1000
-set visualbell		" Use visual bell instead of beeping
-set noerrorbells 	" shut up
+set visualbell    " Use visual bell instead of beeping
+set noerrorbells  " shut up
 
 " Toggle paste mode
 " nnoremap <C-B> :set invpaste paste?<CR>
@@ -36,9 +41,9 @@ set clipboard=unnamed " Enable yanking to system keyboard
 " }}}
 
 " Spaces & Tabs {{{
-set modelines=0		" Prevent reading the last line of a buffer to prevent undesired behavior http://lists.alioth.debian.org/pipermail/pkg-vim-maintainers/2007-June/004020.html
-filetype indent on	" enables filetype specific indentation behavior
-filetype plugin on	" enables filetype specific plugins
+set modelines=0   " Prevent reading the last line of a buffer to prevent undesired behavior http://lists.alioth.debian.org/pipermail/pkg-vim-maintainers/2007-June/004020.html
+filetype indent on  " enables filetype specific indentation behavior
+filetype plugin on  " enables filetype specific plugins
 
 set autoindent       " indent next line to same level as current line
 set smartindent      "   ↑ but do it smartly
@@ -46,7 +51,8 @@ set smarttab         " <Tab> in front of a line inserts 'shiftwidth' blanks
 set shiftwidth=2     "   ↑ use 2 blanks for above
 set tabstop=2        " display a <Tab> as 2 spaces
 set softtabstop=2    " use 2 spaces for a <Tab>
-set expandtab        " expand tabs to spaces
+set expandtab       " expand tabs to spaces
+set list             " show special characters
 set shiftround       " use multiple of shiftwidth when indenting with '<' and '>'"
 
 " for html
@@ -67,10 +73,10 @@ set wildmode=list:longest
 set wildignore=*.swp,tmp,.git,*.png,*.jpg,*.gif,node_modules
 set lazyredraw      " don't update the display while executing macros
 set showmatch           " Highlight closing ), >, }, ], etc...
-set showmode		    " Show current mode on last line
-set scrolloff=3		    " keep # of lines visible when scrolling
+set showmode        " Show current mode on last line
+set scrolloff=3       " keep # of lines visible when scrolling
 set sidescrolloff=6     " start scrolling 6 lines from right"
-set ruler	    	    " Show the line and column number of the cursor position
+set ruler           " Show the line and column number of the cursor position
 set nowrap              " disable wrapping long lines
 set cmdheight=2         " Number of screen lines to use for the command-line.  Helps avoiding |hit-enter| prompts.
 set textwidth=79        " Maximum width of text that is being inserted.  A longer line will be broken after white space to get this width.
@@ -83,7 +89,7 @@ set formatoptions+=1    " When wrapping paragraphs, don't end lines with 1-lette
 set ignorecase          " ignore case when searching
 set incsearch           " search as characters are entered
 set hlsearch            " highlight all matches
-set smartcase		" ignore case if all lower case, otherwise adhere to case
+set smartcase   " ignore case if all lower case, otherwise adhere to case
 set gdefault            " all searches default to global
 
 " Use sane regex searching
@@ -214,7 +220,7 @@ augroup END
 let g:fixmyjs_rc_path = './.eslintrc'
 let g:jsx_ext_required = 0
 
-autocmd! BufWritePost,BufEnter * Neomake
+" autocmd! BufWritePost,BufEnter * Neomake
 noremap <Leader><Leader>f :Fixmyjs<CR>
 
 autocmd FileType javascript.jsx runtime! ftplugin/html/sparkup.vim
@@ -284,16 +290,25 @@ map <leader>pr :vsp web/router.ex<cr>
 map <leader>px :vsp mix.exs<cr>
 " }}}
 
+" Terraform {{{
+let g:terraform_fmt_on_save = 1
+" }}}
+
 " Handlebars {{{
 let g:mustache_abbreviations = 1
 " }}}
 
+" ale {{{
+let g:ale_sign_error = '❌'
+let g:ale_sign_warning = '⚠️'
+" }}}
+
 " neomake {{{
-nmap <Leader><Space>o :lopen<CR>      " open location window
-nmap <Leader><Space>c :lclose<CR>     " close location window
-nmap <Leader><Space>, :ll<CR>         " go to current error/warning
-nmap <Leader><Space>n :lnext<CR>      " next error/warning
-nmap <Leader><Space>p :lprev<CR>      " previous error/warning
+" nmap <Leader><Space>o :lopen<CR>      " open location window
+" nmap <Leader><Space>c :lclose<CR>     " close location window
+" nmap <Leader><Space>, :ll<CR>         " go to current error/warning
+" nmap <Leader><Space>n :lnext<CR>      " next error/warning
+" nmap <Leader><Space>p :lprev<CR>      " previous error/warning
 " }}}
 
 " Powerline {{{
@@ -307,6 +322,7 @@ let g:airline_left_sep = ''
 let g:airline_left_alt_sep = ''
 let g:airline_right_sep = ''
 let g:airline_right_alt_sep = ''
+let g:airline#extensions#ale#enabled = 1
 set laststatus=2 " the last window will have a status line
 " }}}
 
@@ -358,24 +374,24 @@ augroup configgroup
     autocmd BufEnter *.cls setlocal filetype=java
     autocmd BufEnter *.zsh-theme setlocal filetype=zsh
     autocmd BufEnter Makefile setlocal noexpandtab
-    autocmd BufEnter *.sh setlocal tabstop=2
-    autocmd BufEnter *.sh setlocal shiftwidth=2
-    autocmd BufEnter *.sh setlocal softtabstop=2
+    autocmd BufEnter *.sh.tpl setlocal filetype=sh
+    autocmd BufEnter *.sls setlocal filetype=yaml
 augroup END
 
 augroup filetypegroup
-    autocmd FileType php,twig setlocal ts=4 sts=4 sw=4 expandtab
-    autocmd FileType python,cfg setlocal ts=4 sts=4 sw=4 expandtab
-    autocmd FileType cs setlocal ts=4 sts=4 sw=4 expandtab
-    autocmd FileType apiblueprint,terraform setlocal ts=4 sts=4 sw=4 expandtab
-    autocmd FileType javascript,json,html,css,sass,less,yaml,coffee setlocal ts=2 sts=2 sw=2 expandtab
-    autocmd FileType jade,html.handlebars,blade setlocal ts=2 sts=2 sw=2 expandtab
-    autocmd FileType ruby,pml,eruby,haml setlocal ts=2 sts=2 sw=2 expandtab
-    autocmd FileType arduino setlocal ts=2 sts=2 sw=2 expandtab
+    autocmd FileType php,twig setlocal ts=4 sts=4 sw=4
+    autocmd FileType python,cfg setlocal ts=4 sts=4 sw=4
+    autocmd FileType cs setlocal ts=4 sts=4 sw=4
+    autocmd FileType apiblueprint,terraform setlocal ts=2 sts=2 sw=2
+    autocmd FileType javascript,html,css,sass,less,yaml,coffee setlocal ts=2 sts=2 sw=2 expandtab
+    autocmd FileType jade,html.handlebars,blade setlocal ts=2 sts=2 sw=2
+    autocmd FileType ruby,pml,eruby,haml setlocal ts=2 sts=2 sw=2
+    autocmd FileType arduino setlocal ts=2 sts=2 sw=2
     autocmd FileType go setlocal ts=2 sts=2 sw=2 noexpandtab
-    autocmd FileType markdown setlocal wrap nolist textwidth=0 ts=4 sts=4 sw=4
-    autocmd FileType vim setlocal wrap nolist foldmethod=marker
-    autocmd FileType json setlocal foldmethod=syntax
+    autocmd FileType markdown setlocal wrap textwidth=0 ts=4 sts=4 sw=4
+    autocmd FileType vim setlocal wrap foldmethod=marker
+    autocmd filetype json setlocal foldmethod=syntax ts=2 sts=2 sw=2
+    autocmd FileType sh setlocal tabstop=2 shiftwidth=2 softtabstop=2
 augroup END
 
 augroup buffergroups
@@ -385,7 +401,7 @@ augroup buffergroups
 augroup END
 
 autocmd BufWritePost .vimrc
-	\ so $MYVIMRC | call Pl#Load()
+  \ so $MYVIMRC | call Pl#Load()
 
 " Restore cursor position upon reopening files {{{
 autocmd BufReadPost *
@@ -433,11 +449,13 @@ noremap <leader>R :RainbowToggle<CR>
 " }}}
 
 " .lvimrc {{{
+let g:localvimrc_sandbox = 0
 let g:localvimrc_whitelist=[
 \'/Users/aang/Code/roots/screencasts/xdebug/example.com/',
 \'/Users/aang/Code/roots/screencasts/xdebug/xdebug-trellis.com/',
 \'/Users/aang/Code/pressbooks/prince-queue/main/site/',
-\'/Users/aang/Code/hu/hope-institute/hopeforovc.org/'
+\'/Users/aang/Code/hu/hope-institute/hopeforovc.org/',
+\'/Users/aang/Work/'
 \]
 " }}}
 
@@ -482,4 +500,9 @@ function LargeFile()
  autocmd VimEnter *  echo "The file is larger than " . (g:LargeFile / 1024 / 1024) . " MB, so some options are changed (see .vimrc for details)."
 endfunction
 
+" }}}
+
+" Terminal Emulation {{{
+nnoremap <leader>vt :VTerm<CR>
+set splitright
 " }}}
