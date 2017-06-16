@@ -16,3 +16,7 @@ curl -fsSL https://raw.githubusercontent.com/nathanielks/dotfiles/master/install
 - Install `bundler` and `vundler` gem
 - Install Vundle.vim
 - `brew install ansible`
+
+# TODO
+
+- Download Alfred sounds and to library: https://www.alfredapp.com/labs/
