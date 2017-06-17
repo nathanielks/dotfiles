@@ -11,6 +11,8 @@
   with_items:
     - ack
     - asciinema
+    - autoconf
+    - automake
     - awscli
     - cask
     - cli53
@@ -26,6 +28,7 @@
     - git-crypt
     - git-extras
     - git-flow-avh
+    - gpgtools
     - gnu-sed
     - graphviz
     - heroku
@@ -34,11 +37,15 @@
     - hub
     - imagemagick
     - jq
+    - libtool
+    - libxslt
+    - libyaml
     - mas
     - neovim/neovim/neovim
     - openssl
     - packer
     - parallel
+    - readline
     - reattach-to-user-namespace
     - rename
     - ripgrep
@@ -52,24 +59,17 @@
     - the_silver_searcher
     - thefuck
     - tmux
+    - unixodbc
     - watch
     - wget
     - yarn
     - z
     - zsh
+    - zsh-completions
 
 
   tags:
     - homebrew
-
-- name: Install Ruby Gems
-  shell: "{{ rvm }} all do gem install {{ item }}"
-  #gem: name={{ item }} state=present
-  sudo: false
-  with_items:
-    - tmuxinator
-  tags:
-    - ruby
 
 - name: Install pip dependencies
   pip: name={{ item }} state=present global=yes
