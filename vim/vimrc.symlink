@@ -52,7 +52,7 @@ set shiftwidth=2     "   ↑ use 2 blanks for above
 set tabstop=2        " display a <Tab> as 2 spaces
 set softtabstop=2    " use 2 spaces for a <Tab>
 set expandtab       " expand tabs to spaces
-set list             " show special characters
+"set list             " show special characters
 set shiftround       " use multiple of shiftwidth when indenting with '<' and '>'"
 
 " for html
@@ -211,7 +211,7 @@ augroup END
 
 " let g:php_cs_fixer_level = "psr2"
 " nnoremap <silent><leader>pcf :call PhpCsFixerFixFile()<CR>
-
+let g:ale_php_phpcs_standard = "./phpcs.ruleset.xml"
 
 
 " }}}
@@ -301,6 +301,12 @@ let g:mustache_abbreviations = 1
 " ale {{{
 let g:ale_sign_error = '❌'
 let g:ale_sign_warning = '⚠️'
+let g:ale_sign_column_always = 1
+
+let g:ale_fixers = {}
+let g:ale_fixers['javascript'] = ['prettier']
+let g:ale_fix_on_save = 1
+let g:ale_javascript_prettier_options = '--single-quote --trailing-comma es5 --no-semi'
 " }}}
 
 " neomake {{{

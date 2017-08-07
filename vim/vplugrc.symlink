@@ -70,12 +70,15 @@ Plug 'vim-erlang/vim-erlang-runtime'
 " Snippets
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
-Plug 'nathanielks/vim-react-snippets'
+" Plug 'nathanielks/vim-snippets'
+Plug '~/Code/GitHub/nathanielks/vim-snippets'
+
 
 " Linting
 " Plug 'scrooloose/syntastic'
 " Plug 'benekastah/neomake'
 Plug 'w0rp/ale'
+"Plug 'sbdchd/neoformat'
 
 
 " Other
