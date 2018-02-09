@@ -24,6 +24,8 @@ Plug 'Chiel92/vim-autoformat'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'embear/vim-localvimrc'
 Plug 'mklabs/split-term.vim'
+Plug 'bogado/file-line'
+Plug 'chaoren/vim-wordmotion'
 
 " Ruby
 Plug 'vim-ruby/vim-ruby'

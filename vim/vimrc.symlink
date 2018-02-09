@@ -27,6 +27,7 @@ au ColorScheme * hi NonText ctermbg=none guibg=none
 set ttyfast                     " faster redraw
 set backspace=indent,eol,start
 set hidden    " Allows :q of buffers without writing to them, prompts for write before closing all open buffers
+set mouse=a   " enables mouse support
 " set termencoding=utf-8
 " set encoding=utf-8
 set history=1000  " remember N : commands
@@ -396,7 +397,7 @@ augroup filetypegroup
     autocmd FileType go setlocal ts=2 sts=2 sw=2 noexpandtab
     autocmd FileType markdown setlocal wrap textwidth=0 ts=4 sts=4 sw=4
     autocmd FileType vim setlocal wrap foldmethod=marker
-    autocmd filetype json setlocal foldmethod=syntax ts=2 sts=2 sw=2
+    autocmd filetype json setlocal ts=2 sts=2 sw=2
     autocmd FileType sh setlocal tabstop=2 shiftwidth=2 softtabstop=2
 augroup END
 

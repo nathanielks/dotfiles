@@ -22,13 +22,14 @@
     - curl
     - diff-so-fancy
     - dnsmasq
+    - exa
     - ffmpeg
+    - fzf
     - gcc@4.9
     - git
     - git-crypt
     - git-extras
     - git-flow-avh
-    - gpgtools
     - gnu-sed
     - graphviz
     - heroku
@@ -56,6 +57,7 @@
     - snappy
     - terminal-notifier
     - terraform
+    - tldr
     - the_silver_searcher
     - thefuck
     - tmux
@@ -70,8 +72,3 @@
 
   tags:
     - homebrew
-
-- name: Install pip dependencies
-  pip: name={{ item }} state=present global=yes
-  with_items:
-    - neovim

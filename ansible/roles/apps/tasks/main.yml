@@ -1,12 +1,17 @@
 ---
+- name: Tap homebrew repos
+  homebrew_tap: tap={{ item }} state=present
+  with_items:
+    - homebrew/fonts
+  tags:
+    - homebrew
+
 - name: Install applications
   homebrew_cask: name={{ item }} state=present
   with_items:
     - 1password
     - a-better-finder-rename
-    - adobe-reader
     - alfred
-    - audacity
     - bartender
     - bettertouchtool
     - betterzipql
@@ -17,6 +22,7 @@
     - dropbox
     - dropbox-encore
     - evernote
+    - font-fira-code
     - firefox
     - franz
     - google-chrome

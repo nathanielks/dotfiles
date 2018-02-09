@@ -34,3 +34,5 @@ hosts/temp
 group_vars/temp
 
 .dockerinfo
+
+.lvimrc

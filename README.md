@@ -42,6 +42,11 @@ curl -fsSL https://raw.githubusercontent.com/nathanielks/dotfiles/master/install
 		https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     ```
 
+- Install python neovim dependency:
+    ```
+    sudo -H pip install neovim
+    ```
+
 # TODO
 
 - Download Alfred sounds and to library: https://www.alfredapp.com/labs/
