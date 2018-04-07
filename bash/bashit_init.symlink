@@ -51,7 +51,7 @@ source "$BASH_IT"/bash_it.sh
 
 for a in curl git general vagrant
 do
-  source "$HOME/.bash_it/aliases/available/$a.alias.bash"
+  source "$HOME/.bash_it/aliases/available/$a.aliases.bash"
 done
 
 for c in brew composer dirs git ssh system vagrant virtualbox
@@ -61,5 +61,5 @@ done
 
 for p in history
 do
-  source "$HOME/.bash_it/plugin/available/$p.plugin.bash"
+  source "$HOME/.bash_it/plugins/available/$p.plugin.bash"
 done
