@@ -1,5 +1,8 @@
 export PATH="/usr/local/sbin:$PATH"
-alias vim="/usr/local/bin/nvim"
+if [[ -e /usr/local/bin/nvim ]]
+then
+  alias vim="/usr/local/bin/nvim"
+fi
 alias e="exa -la"
 
 source "$HOME/.bashit_init"
