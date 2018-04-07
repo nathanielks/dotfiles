@@ -48,3 +48,18 @@ export BASH_IT_AUTOMATIC_RELOAD_AFTER_CONFIG_CHANGE=1
 
 # Load Bash It
 source "$BASH_IT"/bash_it.sh
+
+for a in curl git general vagrant
+do
+  source "$HOME/.bash_it/aliases/available/$a.alias.bash"
+done
+
+for c in brew composer dirs git ssh system vagrant virtualbox
+do
+  source "$HOME/.bash_it/completion/available/$c.completion.bash"
+done
+
+for p in history
+do
+  source "$HOME/.bash_it/plugin/available/$p.plugin.bash"
+done
