@@ -10,3 +10,8 @@ for c in 'bash-it' brew composer dirs git ssh system vagrant virtualbox
 do
   bash-it enable completion "$c"
 done
+
+for p in history
+do
+  bash-it enable plugin "$p"
+done
