@@ -5,7 +5,7 @@
 [user]
 	name = Nathaniel Schweinberg
 	email = natanielks@gmail.com
-	signingkey = natanielks@gmail.com
+	#signingkey = natanielks@gmail.com
 [push]
   default = simple
 	followTags = true
