@@ -1,0 +1,5 @@
+export PATH="/usr/local/sbin:$PATH"
+alias vim="/usr/local/bin/nvim"
+alias e="exa -la"
+
+source "$HOME/.bashit_init"
