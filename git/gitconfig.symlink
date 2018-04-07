@@ -11,7 +11,7 @@
 	followTags = true
 [core]
   editor = "nvim"
-	excludesfile = /Users/aang/.gitignore
+	excludesfile = ~/.gitignore
   pager = diff-so-fancy | less --tabs=4 -RFX
 [difftool]
 	prompt = false
@@ -20,7 +20,7 @@
 [diff]
   tool = Kaleidoscope
 [commit]
-	gpgsign = true
+	#gpgsign = true
 [mergetool "Kaleidoscope"]
 	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
 	trustexitcode = true
