@@ -53,7 +53,7 @@ set shiftwidth=2     "   ↑ use 2 blanks for above
 set tabstop=2        " display a <Tab> as 2 spaces
 set softtabstop=2    " use 2 spaces for a <Tab>
 set expandtab       " expand tabs to spaces
-"set list             " show special characters
+set list             " show special characters
 set shiftround       " use multiple of shiftwidth when indenting with '<' and '>'"
 
 " for html
