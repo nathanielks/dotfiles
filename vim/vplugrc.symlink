@@ -102,8 +102,9 @@ Plug 'hposca/ultisnips-terraform-snippets'
 Plug 'kana/vim-textobj-user'
 Plug 'reedes/vim-textobj-quote'
 Plug 'luochen1990/rainbow' " Color codes matching tags, parens, brackets, etc
-Plug 'joonty/vdebug' " Remote DBGP debugging
+Plug 'joonty/vdebug', { 'tag': 'v1.5.2' } " Remote DBGP debugging
 Plug 'tpope/vim-obsession' " Automatically save vim sessions
+Plug 'kristijanhusak/vim-carbon-now-sh' " Allows you to make pretty images of code
 
 " Colorscheme
 Plug 'altercation/vim-colors-solarized'
