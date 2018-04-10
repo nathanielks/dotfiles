@@ -45,3 +45,8 @@ eval "$(hub alias -s)"
 gofwd() {
   git checkout `git rev-list --topo-order HEAD.."$*" | tail -1`
 }
+
+function generate_password () {
+	local length="${1:-64}"
+	cat /dev/random | tr -dc 'a-zA-Z0-9' | fold -w "$length" | head -n 1
+}
