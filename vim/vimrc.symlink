@@ -53,7 +53,7 @@ set shiftwidth=2     "   ↑ use 2 blanks for above
 set tabstop=2        " display a <Tab> as 2 spaces
 set softtabstop=2    " use 2 spaces for a <Tab>
 set expandtab       " expand tabs to spaces
-"set list             " show special characters
+set list             " show special characters
 set shiftround       " use multiple of shiftwidth when indenting with '<' and '>'"
 
 " for html
@@ -82,7 +82,8 @@ set nowrap              " disable wrapping long lines
 set cmdheight=2         " Number of screen lines to use for the command-line.  Helps avoiding |hit-enter| prompts.
 set textwidth=79        " Maximum width of text that is being inserted.  A longer line will be broken after white space to get this width.
 set autoread            " Make sure that buffers change if the file changed
-set listchars=tab:▸\  " Display a place holder character for tabs and trailing spaces
+"set listchars="tab:▸\"  " Display a place holder character for tabs and trailing spaces
+" set listchars=tab:»\
 set formatoptions+=1    " When wrapping paragraphs, don't end lines with 1-letter words (looks stupid))"
 " }}}
 

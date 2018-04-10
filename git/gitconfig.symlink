@@ -1,0 +1,47 @@
+[filter "lfs"]
+	required = true
+	clean = git-lfs clean %f
+	smudge = git-lfs smudge %f
+[user]
+	name = Nathaniel Schweinberg
+	email = natanielks@gmail.com
+	#signingkey = natanielks@gmail.com
+[push]
+  default = simple
+	followTags = true
+[core]
+  editor = "nvim"
+	excludesfile = ~/.gitignore
+  pager = diff-so-fancy | less --tabs=4 -RFX
+[difftool]
+	prompt = false
+[mergetool]
+	prompt = false
+[diff]
+  tool = Kaleidoscope
+[commit]
+	#gpgsign = true
+[mergetool "Kaleidoscope"]
+	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
+	trustexitcode = true
+[merge]
+  tool = Kaleidoscope
+  conflictstyle = diff3
+[difftool "Kaleidoscope"]
+  cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
+[status]
+  showUntrackedFiles = all
+  # Sometimes a newly-added folder, since it's only one line in git status, can slip under the radar.
+  # https://git-scm.com/docs/git-config#git-config-statusshowUntrackedFiles
+[alias]
+  prune = fetch --prune
+  # Because I constantly forget how to do this
+  # https://git-scm.com/docs/git-fetch#git-fetch--p
+
+  undo = reset --soft HEAD^
+  # Not quite as common as an amend, but still common
+  # https://git-scm.com/docs/git-reset#git-reset-emgitresetemltmodegtltcommitgt
+
+  stash-all = stash save --include-untracked
+  # We wanna grab those pesky un-added files!
+  # https://git-scm.com/docs/git-stash#

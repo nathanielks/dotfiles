@@ -20,7 +20,6 @@ curl -fsSL https://raw.githubusercontent.com/nathanielks/dotfiles/master/install
     ```
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
     ```
-    ```
 - Install `asdf`
     ```
     git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.3.0
