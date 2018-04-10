@@ -179,10 +179,6 @@ cnoreabbrev Ag Ack
 cnoreabbrev AG Ack
 " }}}
 
-" BlackBox
-nnoremap <leader>bu :!blackbox_update % <CR>
-" }}}
-
 " Helpful mappings {{{
 " Fix indentation / reindent
 map <F7> mzgg=G`z<CR>
@@ -213,7 +209,8 @@ augroup END
 " let g:php_cs_fixer_level = "psr2"
 " nnoremap <silent><leader>pcf :call PhpCsFixerFixFile()<CR>
 let g:ale_php_phpcs_standard = "./phpcs.ruleset.xml"
-
+let g:ale_fixers = {}
+let g:ale_fixers['php'] = ['phpcbf']
 
 " }}}
 
@@ -237,11 +234,11 @@ augroup vagrant
 augroup END
 
 augroup rspec
-    au!
-    au FileType ruby map <Leader>rf :call RunCurrentSpecFile()<cr>
-    au FileType ruby map <Leader>rn :call RunNearestSpec()<cr>
-    au FileType ruby map <Leader>rl :call RunLastSpec()<cr>
-    au FileType ruby map <Leader>ra :call RunAllSpecs()<cr>
+  au!
+  au FileType ruby map <Leader>rf :call RunCurrentSpecFile()<cr>
+  au FileType ruby map <Leader>rn :call RunNearestSpec()<cr>
+  au FileType ruby map <Leader>rl :call RunLastSpec()<cr>
+  au FileType ruby map <Leader>ra :call RunAllSpecs()<cr>
 augroup END
 " }}}
 
@@ -261,21 +258,21 @@ map <leader>av :AV<cr>
 
 " Go {{{
 augroup go
-    au!
-    au FileType go nmap <leader>R <Plug>(go-run)
-    au FileType go nmap <leader>B <Plug>(go-build)
-    au FileType go nmap <leader>T <Plug>(go-test)
-    au FileType go nmap <leader>C <Plug>(go-coverage)
+  au!
+  au FileType go nmap <leader>R <Plug>(go-run)
+  au FileType go nmap <leader>B <Plug>(go-build)
+  au FileType go nmap <leader>T <Plug>(go-test)
+  au FileType go nmap <leader>C <Plug>(go-coverage)
 augroup END
 " }}}
 
 " Elixir {{{
 augroup elixir
-    au!
-    au BufNewFile,BufRead *.ex,*.exs noremap <buffer> <leader>r :!mix test<cr>
-    au BufNewFile,BufRead *_test.exs noremap <buffer> <leader>r :exe "!mix test %:" . line(".")<cr>
-    au BufNewFile,BufRead *_test.exs noremap <buffer> <leader>R :!mix test %<cr>
-    au BufNewFile,BufRead *_test.exs noremap <buffer> <leader>a :!mix test<cr>
+  au!
+  au BufNewFile,BufRead *.ex,*.exs noremap <buffer> <leader>r :!mix test<cr>
+  au BufNewFile,BufRead *_test.exs noremap <buffer> <leader>r :exe "!mix test %:" . line(".")<cr>
+  au BufNewFile,BufRead *_test.exs noremap <buffer> <leader>R :!mix test %<cr>
+  au BufNewFile,BufRead *_test.exs noremap <buffer> <leader>a :!mix test<cr>
 augroup END
 " }}}
 
@@ -304,9 +301,8 @@ let g:ale_sign_error = '❌'
 let g:ale_sign_warning = '⚠️'
 let g:ale_sign_column_always = 1
 
-let g:ale_fixers = {}
 let g:ale_fixers['javascript'] = ['prettier']
-let g:ale_fix_on_save = 1
+" let g:ale_fix_on_save = 1
 let g:ale_javascript_prettier_options = '--single-quote --trailing-comma es5 --no-semi'
 " }}}
 
@@ -375,46 +371,45 @@ augroup END
 
 " AutoGroups {{{
 augroup configgroup
-    autocmd!
-    autocmd VimEnter * highlight clear SignColumn
-    autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
-    autocmd BufEnter *.cls setlocal filetype=java
-    autocmd BufEnter *.zsh-theme setlocal filetype=zsh
-    autocmd BufEnter Makefile setlocal noexpandtab
-    autocmd BufEnter *.sh.tpl setlocal filetype=sh
-    autocmd BufEnter *.sls setlocal filetype=yaml
+  autocmd!
+  autocmd VimEnter * highlight clear SignColumn
+  autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
+  autocmd BufEnter *.cls setlocal filetype=java
+  autocmd BufEnter *.zsh-theme setlocal filetype=zsh
+  autocmd BufEnter Makefile setlocal noexpandtab
+  autocmd BufEnter *.sh.tpl setlocal filetype=sh
+  autocmd BufEnter *.sls setlocal filetype=yaml
 augroup END
 
 augroup filetypegroup
-    autocmd FileType php,twig setlocal ts=4 sts=4 sw=4
-    autocmd FileType python,cfg setlocal ts=4 sts=4 sw=4
-    autocmd FileType cs setlocal ts=4 sts=4 sw=4
-    autocmd FileType apiblueprint,terraform setlocal ts=2 sts=2 sw=2
-    autocmd FileType javascript,html,css,sass,less,yaml,coffee setlocal ts=2 sts=2 sw=2 expandtab
-    autocmd FileType jade,html.handlebars,blade setlocal ts=2 sts=2 sw=2
-    autocmd FileType ruby,pml,eruby,haml setlocal ts=2 sts=2 sw=2
-    autocmd FileType arduino setlocal ts=2 sts=2 sw=2
-    autocmd FileType go setlocal ts=2 sts=2 sw=2 noexpandtab
-    autocmd FileType markdown setlocal wrap textwidth=0 ts=4 sts=4 sw=4
-    autocmd FileType vim setlocal wrap foldmethod=marker
-    autocmd filetype json setlocal ts=2 sts=2 sw=2
-    autocmd FileType sh setlocal tabstop=2 shiftwidth=2 softtabstop=2
+  autocmd FileType php,twig setlocal ts=4 sts=4 sw=4
+  autocmd FileType python,cfg setlocal ts=4 sts=4 sw=4
+  autocmd FileType cs setlocal ts=4 sts=4 sw=4
+  autocmd FileType apiblueprint,terraform setlocal ts=2 sts=2 sw=2
+  autocmd FileType javascript,html,css,sass,less,yaml,coffee setlocal ts=2 sts=2 sw=2 expandtab
+  autocmd FileType jade,html.handlebars,blade setlocal ts=2 sts=2 sw=2
+  autocmd FileType ruby,pml,eruby,haml setlocal ts=2 sts=2 sw=2
+  autocmd FileType arduino setlocal ts=2 sts=2 sw=2
+  autocmd FileType go setlocal ts=2 sts=2 sw=2 noexpandtab
+  autocmd FileType markdown setlocal wrap textwidth=0 ts=4 sts=4 sw=4
+  autocmd FileType vim setlocal wrap foldmethod=marker
+  autocmd filetype json setlocal ts=2 sts=2 sw=2 expandtab
+  autocmd FileType sh setlocal tabstop=2 shiftwidth=2 softtabstop=2
 augroup END
 
 augroup buffergroups
-    autocmd BufNewFile,BufRead *.rss setfiletype xml
-    autocmd BufNewFile,BufRead *.scss setfiletype css.scss
-    autocmd BufNewFile,BufRead Capfile,Rakefile,Vagrantfile setfiletype ruby
+  autocmd BufNewFile,BufRead *.rss setfiletype xml
+  autocmd BufNewFile,BufRead *.scss setfiletype css.scss
+  autocmd BufNewFile,BufRead Capfile,Rakefile,Vagrantfile setfiletype ruby
 augroup END
 
-autocmd BufWritePost .vimrc
-  \ so $MYVIMRC | call Pl#Load()
+autocmd BufWritePost .vimrc so $MYVIMRC
 
 " Restore cursor position upon reopening files {{{
 autocmd BufReadPost *
-    \ if &filetype != "gitcommit" && line("'\"") > 0 && line("'\"") <= line("$") |
-    \   exe "normal! g`\"" |
-    \ endif
+      \ if &filetype != "gitcommit" && line("'\"") > 0 && line("'\"") <= line("$") |
+      \   exe "normal! g`\"" |
+      \ endif
 " }}}
 
 " }}}
@@ -458,58 +453,69 @@ noremap <leader>R :RainbowToggle<CR>
 " .lvimrc {{{
 let g:localvimrc_sandbox = 0
 let g:localvimrc_whitelist=[
-\'/Users/aang/Code/roots/screencasts/xdebug/example.com/',
-\'/Users/aang/Code/roots/screencasts/xdebug/xdebug-trellis.com/',
-\'/Users/aang/Code/pressbooks/prince-queue/main/site/',
-\'/Users/aang/Code/hu/hope-institute/hopeforovc.org/',
-\'/Users/aang/Work/'
-\]
+      \'/Users/aang/Code/roots/screencasts/xdebug/example.com/',
+      \'/Users/aang/Code/roots/screencasts/xdebug/xdebug-trellis.com/',
+      \'/Users/aang/Code/pressbooks/prince-queue/main/site/',
+      \'/Users/aang/Code/hu/hope-institute/hopeforovc.org/',
+      \'/Users/aang/Work/'
+      \]
 " }}}
 
 
 " Custom Functions {{{
 function! ToggleNumber()
-    if(&relativenumber == 1)
-        set norelativenumber
-        set number
-    else
-        set relativenumber
-    endif
+  if(&relativenumber == 1)
+    set norelativenumber
+    set number
+  else
+    set relativenumber
+  endif
 endfunc
 
 " strips trailing whitespace at the end of files. this
 " is called on buffer write in the autogroup above.
 function! <SID>StripTrailingWhitespaces()
-    " save last search & cursor position
-    let _s=@/
-    let l = line(".")
-    let c = col(".")
-    %s/\s\+$//e
-    call cursor(l, c)
+  " save last search & cursor position
+  let _s=@/
+  let l = line(".")
+  let c = col(".")
+  %s/\s\+$//e
+  call cursor(l, c)
 endfunction
 
 " file is large from 10mb
-let g:LargeFile = 1024 * 1024 * 10
-augroup LargeFile
- autocmd BufReadPre * let f=getfsize(expand("<afile>")) | if f > g:LargeFile || f == -2 | call LargeFile() | endif
-augroup END
+" let g:LargeFile = 1024 * 1024 * 10
+" augroup LargeFile
+" autocmd BufReadPre * let f=getfsize(expand("<afile>")) | if f > g:LargeFile || f == -2 | call LargeFile() | endif
+" augroup END
 
-function LargeFile()
- " no syntax highlighting etc
- set eventignore+=FileType
- " save memory when other file is viewed
- setlocal bufhidden=unload
- " is read-only (write with :w new_filename)
- setlocal buftype=nowrite
- " no undo possible
- setlocal undolevels=-1
- " display message
- autocmd VimEnter *  echo "The file is larger than " . (g:LargeFile / 1024 / 1024) . " MB, so some options are changed (see .vimrc for details)."
-endfunction
+" function LargeFile()
+" " no syntax highlighting etc
+" set eventignore+=FileType
+" " save memory when other file is viewed
+" setlocal bufhidden=unload
+" " is read-only (write with :w new_filename)
+" setlocal buftype=nowrite
+" " no undo possible
+" setlocal undolevels=-1
+" " display message
+" autocmd VimEnter *  echo "The file is larger than " . (g:LargeFile / 1024 / 1024) . " MB, so some options are changed (see .vimrc for details)."
+" endfunction
 
 " }}}
 
 " Terminal Emulation {{{
 nnoremap <leader>vt :VTerm<CR>
 set splitright
+" }}}
+
+" Carbon.Now.Sh {{{
+vnoremap <leader>cns :CarbonNowSh<CR>
+" }}}
+
+" AutoFormat {{{
+" au BufWrite *.json :Autoformat
+" let g:autoformat_autoindent = 0
+" let g:autoformat_retab = 0
+" let g:autoformat_remove_trailing_spaces = 0
 " }}}
