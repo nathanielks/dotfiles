@@ -1,3 +1,4 @@
+zmodload zsh/zprof
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
 DOTFILES=$HOME/.dotfiles
@@ -12,6 +13,7 @@ export GOROOT=/usr/local/opt/go/libexec
 PATH="/usr/local/bin:$PATH"
 PATH="/usr/local/sbin:$PATH"
 PATH="/usr/local/opt/curl/bin:$PATH"
+PATH="/usr/local/opt/bc/bin:$PATH"
 PATH="./node_modules/.bin:$PATH"
 PATH=$DOTFILES/bin:$PATH
 PATH=$PATH:/usr/local/share/npm/lib/node_modules # Add Node modules
@@ -30,14 +32,14 @@ DISABLE_AUTO_TITLE=true
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git git-extras git-prompt gitfast git-flow-avh ssh-agent)
+plugins=(git git-extras git-prompt gitfast ssh-agent)
 
 source $ZSH/oh-my-zsh.sh
 
 unsetopt correct_all
 
 # Tmuxinator
-#[[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
+[[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
 
 [[ -f $HOME/.zshrc.env ]] && . $HOME/.zshrc.env
 

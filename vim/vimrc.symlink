@@ -82,6 +82,8 @@ set nowrap              " disable wrapping long lines
 set cmdheight=2         " Number of screen lines to use for the command-line.  Helps avoiding |hit-enter| prompts.
 set textwidth=79        " Maximum width of text that is being inserted.  A longer line will be broken after white space to get this width.
 set autoread            " Make sure that buffers change if the file changed
+set showbreak=↪\
+set listchars=tab:▻\ ,trail:␣,extends:…,eol:¬
 "set listchars="tab:▸\"  " Display a place holder character for tabs and trailing spaces
 " set listchars=tab:»\
 set formatoptions+=1    " When wrapping paragraphs, don't end lines with 1-letter words (looks stupid))"
@@ -130,17 +132,17 @@ command! W :w
 
 " Move around window splits easier
 " https://github.com/neovim/neovim/issues/2048#issuecomment-78045837
-" nnoremap <C-h> <C-w>h
-" nnoremap <C-j> <C-w>j
-" nnoremap <C-k> <C-w>k
-" nnoremap <C-l> <C-w>l
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
 
-let g:tmux_navigator_no_mappings = 1
-nnoremap <silent> <C-j> :TmuxNavigateDown<cr>
-nnoremap <silent> <C-k> :TmuxNavigateUp<cr>
-nnoremap <silent> <C-l> :TmuxNavigateRight<cr>
-nnoremap <silent> <C-h> :TmuxNavigateLeft<CR>
-nnoremap <silent> <C-;> :TmuxNavigatePrevious<cr>
+" let g:tmux_navigator_no_mappings = 1
+" nnoremap <silent> <C-j> :TmuxNavigateDown<cr>
+" nnoremap <silent> <C-k> :TmuxNavigateUp<cr>
+" nnoremap <silent> <C-l> :TmuxNavigateRight<cr>
+" nnoremap <silent> <C-h> :TmuxNavigateLeft<CR>
+" nnoremap <silent> <C-;> :TmuxNavigatePrevious<cr>
 
 " }}}
 
@@ -209,7 +211,7 @@ augroup END
 
 " let g:php_cs_fixer_level = "psr2"
 " nnoremap <silent><leader>pcf :call PhpCsFixerFixFile()<CR>
-let g:ale_php_phpcs_standard = "./phpcs.ruleset.xml"
+let g:ale_php_phpcs_standard = "./ruleset.xml"
 let g:ale_fixers = {}
 let g:ale_fixers['php'] = ['phpcbf']
 
@@ -299,12 +301,14 @@ let g:mustache_abbreviations = 1
 
 " ale {{{
 let g:ale_sign_error = '❌'
-let g:ale_sign_warning = '⚠️'
+let g:ale_sign_warning = '⚠'
 let g:ale_sign_column_always = 1
 
-let g:ale_fixers['javascript'] = ['prettier']
-" let g:ale_fix_on_save = 1
-let g:ale_javascript_prettier_options = '--single-quote --trailing-comma es5 --no-semi'
+let g:ale_fixers['javascript'] = ['prettier-eslint']
+let g:ale_fix_on_save = 1
+" let g:ale_javascript_prettier_options = '--single-quote --trailing-comma es5 --no-semi'
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
 " }}}
 
 " neomake {{{
@@ -379,6 +383,7 @@ augroup configgroup
   autocmd BufEnter *.zsh-theme setlocal filetype=zsh
   autocmd BufEnter Makefile setlocal noexpandtab
   autocmd BufEnter *.sh.tpl setlocal filetype=sh
+  autocmd BufEnter *.yml.tpl setlocal filetype=yaml
   autocmd BufEnter *.sls setlocal filetype=yaml
 augroup END
 
@@ -394,7 +399,7 @@ augroup filetypegroup
   autocmd FileType go setlocal ts=2 sts=2 sw=2 noexpandtab
   autocmd FileType markdown setlocal wrap textwidth=0 ts=4 sts=4 sw=4
   autocmd FileType vim setlocal wrap foldmethod=marker
-  autocmd filetype json setlocal ts=2 sts=2 sw=2 expandtab
+  autocmd filetype json setlocal ts=4 sts=4 sw=4 expandtab
   autocmd FileType sh setlocal tabstop=2 shiftwidth=2 softtabstop=2
 augroup END
 

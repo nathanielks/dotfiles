@@ -25,7 +25,7 @@ alias gpr='g pull-request -b develop'
 alias gd='g diff'
 alias gdk='g difftool'
 alias tf='terraform'
-alias tp='terraform plan -out plan'
+alias tp='terraform plan -out plan | landscape'
 alias ta='terraform apply plan'
 alias be='bundle exec'
 alias bake='bundle exec rake'
@@ -43,3 +43,7 @@ alias l='ls -lah --color'
 alias dm-disk='docker run --rm -it -v /:/docker alpine:edge $@'
 
 alias flush-dns='sudo killall -HUP mDNSResponder;sudo killall mDNSResponderHelper;sudo dscacheutil -flushcache'
+alias work='cd ~/Work'
+alias git-pull-all="git pull && git submodule sync && git submodule foreach --recursive 'git fetch --tags' && git submodule update --init --recursive;"
+alias gpa='git-pull-all'
+alias rgphp="rg -tphp -g '!**/*/vendor' -g '!**/*/lib' -g '!lib/*' -g '!tests/*'"

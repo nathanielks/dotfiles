@@ -5,4 +5,5 @@ then
 fi
 alias e="exa -la"
 
+. /usr/local/etc/profile.d/z.sh
 source "$HOME/.bashit_init"

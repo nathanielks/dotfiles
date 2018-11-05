@@ -50,3 +50,9 @@ function generate_password () {
 	local length="${1:-64}"
 	cat /dev/random | tr -dc 'a-zA-Z0-9' | fold -w "$length" | head -n 1
 }
+
+function count () {
+  local content="${@}"
+
+  echo "${content}" | wc -c
+}

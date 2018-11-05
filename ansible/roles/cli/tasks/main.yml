@@ -57,6 +57,7 @@
     - snappy
     - terminal-notifier
     - terraform
+    - terraform_landscape
     - tldr
     - the_silver_searcher
     - thefuck
