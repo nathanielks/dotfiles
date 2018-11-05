@@ -136,14 +136,6 @@ nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
-
-" let g:tmux_navigator_no_mappings = 1
-" nnoremap <silent> <C-j> :TmuxNavigateDown<cr>
-" nnoremap <silent> <C-k> :TmuxNavigateUp<cr>
-" nnoremap <silent> <C-l> :TmuxNavigateRight<cr>
-" nnoremap <silent> <C-h> :TmuxNavigateLeft<CR>
-" nnoremap <silent> <C-;> :TmuxNavigatePrevious<cr>
-
 " }}}
 
 " Leader Shortcuts {{{
@@ -152,14 +144,10 @@ nnoremap <leader>n :NERDTreeToggle<CR>
 nnoremap <leader>ev :vsp $MYVIMRC<CR>
 nnoremap <leader>ez :vsp ~/.zshrc<CR>
 nnoremap <leader>sv :source $MYVIMRC<CR>
-"nnoremap <leader>l :call ToggleNumber()<CR>
 nmap <leader>l :set list!<CR>
 " turn off search highlighting
 nnoremap <leader><space> :noh<CR>
-" save session. reopen session using vim -S
-nnoremap <leader>s :mksession<CR>
 nnoremap <leader>a :Ack<space>
-nnoremap <leader>c :SyntasticCheck<CR>:Errors<CR>
 nnoremap <leader>1 :set number!<CR>
 
 inoremap jk <esc>
@@ -195,7 +183,6 @@ inoremap <F12> <C-o>:syntax sync fromstart<CR>
 " }}}
 
 " PHP {{{
-let g:pdv_template_dir = $HOME ."/.vim/bundle/pdv/templates_snip"
 let PHP_removeCRwhenUnix=1
 let g:PHP_vintage_case_default_indent = 1
 
@@ -209,8 +196,6 @@ augroup phpSyntaxOverride
   autocmd FileType php call PhpSyntaxOverride()
 augroup END
 
-" let g:php_cs_fixer_level = "psr2"
-" nnoremap <silent><leader>pcf :call PhpCsFixerFixFile()<CR>
 let g:ale_php_phpcs_standard = "./ruleset.xml"
 let g:ale_fixers = {}
 let g:ale_fixers['php'] = ['phpcbf']
@@ -221,7 +206,6 @@ let g:ale_fixers['php'] = ['phpcbf']
 let g:fixmyjs_rc_path = './.eslintrc'
 let g:jsx_ext_required = 0
 
-" autocmd! BufWritePost,BufEnter * Neomake
 noremap <Leader><Leader>f :Fixmyjs<CR>
 
 autocmd FileType javascript.jsx runtime! ftplugin/html/sparkup.vim
@@ -235,28 +219,6 @@ augroup vagrant
   au!
   au BufRead,BufNewFile Vagrantfile set filetype=ruby
 augroup END
-
-augroup rspec
-  au!
-  au FileType ruby map <Leader>rf :call RunCurrentSpecFile()<cr>
-  au FileType ruby map <Leader>rn :call RunNearestSpec()<cr>
-  au FileType ruby map <Leader>rl :call RunLastSpec()<cr>
-  au FileType ruby map <Leader>ra :call RunAllSpecs()<cr>
-augroup END
-" }}}
-
-" Rails {{{
-map <leader>rs :CtrlP app/assets/stylesheets<cr>
-map <leader>rj :CtrlP app/assets/javascripts<cr>
-map <leader>rv :CtrlP app/views<cr>
-map <leader>rc :CtrlP app/controllers<cr>
-map <leader>rm :CtrlP app/models<cr>
-map <leader>rh :CtrlP app/helpers<cr>
-map <leader>rt :CtrlP spec<cr>
-
-map <leader>rr :topleft :split config/routes.rb<cr>
-map <leader>rg :topleft 100 :split Gemfile<cr>
-map <leader>av :AV<cr>
 " }}}
 
 " Go {{{
@@ -269,34 +231,8 @@ augroup go
 augroup END
 " }}}
 
-" Elixir {{{
-augroup elixir
-  au!
-  au BufNewFile,BufRead *.ex,*.exs noremap <buffer> <leader>r :!mix test<cr>
-  au BufNewFile,BufRead *_test.exs noremap <buffer> <leader>r :exe "!mix test %:" . line(".")<cr>
-  au BufNewFile,BufRead *_test.exs noremap <buffer> <leader>R :!mix test %<cr>
-  au BufNewFile,BufRead *_test.exs noremap <buffer> <leader>a :!mix test<cr>
-augroup END
-" }}}
-
-" Phoenix {{{
-" Phoenix specific CtrlP mappings
-map <leader>ps :CtrlP web/static/css<cr>
-map <leader>pj :CtrlP web/static/js<cr>
-map <leader>pv :CtrlP web/views<cr>
-map <leader>pt :CtrlP web/templates<cr>
-map <leader>pc :CtrlP web/controllers<cr>
-map <leader>pm :CtrlP web/models<cr>
-map <leader>pr :vsp web/router.ex<cr>
-map <leader>px :vsp mix.exs<cr>
-" }}}
-
 " Terraform {{{
 let g:terraform_fmt_on_save = 1
-" }}}
-
-" Handlebars {{{
-let g:mustache_abbreviations = 1
 " }}}
 
 " ale {{{
@@ -311,19 +247,7 @@ nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
 " }}}
 
-" neomake {{{
-" nmap <Leader><Space>o :lopen<CR>      " open location window
-" nmap <Leader><Space>c :lclose<CR>     " close location window
-" nmap <Leader><Space>, :ll<CR>         " go to current error/warning
-" nmap <Leader><Space>n :lnext<CR>      " next error/warning
-" nmap <Leader><Space>p :lprev<CR>      " previous error/warning
-" }}}
-
 " Powerline {{{
-"set encoding=utf-8
-"python from powerline.vim import setup as powerline_setup
-"python powerline_setup()
-"python del powerline_setup
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline_left_sep = ''
@@ -353,25 +277,6 @@ highlight link multiple_cursors_visual Visual
 let NERDTreeShowHidden=1
 let g:NERDTreeWinSize = 26
 let NERDSpaceDelims=1
-" }}}
-
-"" Tmux {{{
-"if exists('$TMUX') " allows cursor change in tmux mode
-"    let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
-"    let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
-"else
-"    let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-"    let &t_EI = "\<Esc>]50;CursorShape=0\x7"
-"endif
-"" }}}
-
-" vim-textobj-quote {{{
-map <silent> <leader>qc <Plug>ReplaceWithCurly
-map <silent> <leader>qs <Plug>ReplaceWithStraight
-augroup textobj_quote
-  autocmd!
-  autocmd FileType html,javascript call textobj#quote#init({'educate': 0})
-augroup END
 " }}}
 
 " AutoGroups {{{
@@ -425,23 +330,7 @@ set nobackup
 set noswapfile
 " }}}
 
-" xmpfilter {{{
-" This handy plugin will show the results of the current ruby file
-autocmd FileType ruby,erb,haml nmap <buffer> <F3> <Plug>(xmpfilter-mark)
-autocmd FileType ruby,erb,haml xmap <buffer> <F3> <Plug>(xmpfilter-mark)
-autocmd FileType ruby,erb,haml imap <buffer> <F3> <Plug>(xmpfilter-mark)
-
-autocmd FileType ruby,erb,haml nmap <buffer> <F4> <Plug>(xmpfilter-run)
-autocmd FileType ruby,erb,haml xmap <buffer> <F4> <Plug>(xmpfilter-run)
-autocmd FileType ruby,erb,haml imap <buffer> <F4> <Plug>(xmpfilter-run)
-" }}}
-
 " Surround Plugin config {{{
-let g:surround_{char2nr('-')} = "<% \r %>"
-let g:surround_{char2nr('=')} = "<%= \r %>"
-let g:surround_{char2nr('8')} = "/* \r */"
-let g:surround_{char2nr('s')} = " \r "
-let g:surround_{char2nr('^')} = "/^\r$/"
 let g:surround_indent = 1
 " }}}
 
@@ -459,25 +348,12 @@ noremap <leader>R :RainbowToggle<CR>
 " .lvimrc {{{
 let g:localvimrc_sandbox = 0
 let g:localvimrc_whitelist=[
-      \'/Users/aang/Code/roots/screencasts/xdebug/example.com/',
-      \'/Users/aang/Code/roots/screencasts/xdebug/xdebug-trellis.com/',
-      \'/Users/aang/Code/pressbooks/prince-queue/main/site/',
-      \'/Users/aang/Code/hu/hope-institute/hopeforovc.org/',
       \'/Users/aang/Work/'
       \]
 " }}}
 
 
 " Custom Functions {{{
-function! ToggleNumber()
-  if(&relativenumber == 1)
-    set norelativenumber
-    set number
-  else
-    set relativenumber
-  endif
-endfunc
-
 " strips trailing whitespace at the end of files. this
 " is called on buffer write in the autogroup above.
 function! <SID>StripTrailingWhitespaces()
@@ -513,10 +389,6 @@ endfunction
 " Terminal Emulation {{{
 nnoremap <leader>vt :VTerm<CR>
 set splitright
-" }}}
-
-" Carbon.Now.Sh {{{
-vnoremap <leader>cns :CarbonNowSh<CR>
 " }}}
 
 " AutoFormat {{{
