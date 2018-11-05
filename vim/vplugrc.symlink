@@ -1,10 +1,8 @@
 call plug#begin('~/.vim/bundle')
 
 " Git
-Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-git'
 Plug 'taq/vim-git-branch-info'
-Plug 'mattn/gist-vim'
 
 " System
 Plug 'scrooloose/nerdcommenter'
@@ -16,58 +14,32 @@ Plug 'mileszs/ack.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'rstacruz/sparkup', {'rtp': 'vim/'}
-Plug 'junegunn/vim-easy-align'
 Plug 'kien/ctrlp.vim'
 Plug 'terryma/vim-multiple-cursors'
-Plug 'tpope/vim-eunuch' " Vim sugar for the UNIX shell commands that need it the most
 Plug 'Chiel92/vim-autoformat'
-Plug 'christoomey/vim-tmux-navigator'
 Plug 'embear/vim-localvimrc'
 Plug 'mklabs/split-term.vim'
 Plug 'bogado/file-line'
 Plug 'chaoren/vim-wordmotion'
 
-" Ruby
-Plug 'vim-ruby/vim-ruby'
-Plug 'tpope/vim-rails'
-Plug 'tpope/vim-rvm'
-Plug 'tpope/vim-endwise'
-Plug 't9md/vim-ruby-xmpfilter'
-Plug 'skalnik/vim-vroom'
-
 " JavaScript
 Plug 'pangloss/vim-javascript'
-Plug 'moll/vim-node'
-Plug 'kchmck/vim-coffee-script'
-Plug 'digitaltoad/vim-jade'
 Plug 'elzr/vim-json'
-Plug 'XadillaX/json-formatter.vim'
-Plug 'mxw/vim-jsx'
-Plug 'ruanyl/vim-fixmyjs'
+Plug 'pangloss/vim-javascript'
+Plug 'maxmellon/vim-jsx-pretty'
 Plug 'isRuslan/vim-es6'
-Plug 'posva/vim-vue'
-Plug 'nikvdp/ejs-syntax'
 
 " PHP
 Plug 'StanAngeloff/php.vim'
-Plug 'pedrogimenez/vim-phpunit'
 Plug 'iwyg/pdv'
 Plug 'tobyS/vmustache'
-Plug 'shawncplus/phpcomplete.vim'
-Plug 'evidens/vim-twig'
 Plug '2072/PHP-Indenting-for-VIm'
-" Plug 'stephpy/vim-php-cs-fixer'
-Plug 'jwalton512/vim-blade'
 
 " WordPress
 Plug 'dsawardekar/wordpress.vim'
 
 " Go
 Plug 'fatih/vim-go'
-
-" Elixir
-Plug 'elixir-lang/vim-elixir'
-Plug 'vim-erlang/vim-erlang-runtime'
 
 " Snippets
 Plug 'SirVer/ultisnips'
@@ -77,44 +49,20 @@ Plug '~/Code/GitHub/nathanielks/vim-snippets'
 
 
 " Linting
-" Plug 'scrooloose/syntastic'
-" Plug 'benekastah/neomake'
 Plug 'w0rp/ale'
-"Plug 'sbdchd/neoformat'
 
 
 " Other
-Plug 'tpope/vim-haml'
-Plug 'slim-template/vim-slim'
 Plug 'tpope/vim-markdown'
-Plug 'tpope/vim-pastie'
 Plug 'othree/html5.vim'
-Plug 'groenewege/vim-less'
 Plug 'editorconfig/editorconfig-vim'
-Plug 'markcornick/vim-vagrant'
 Plug 'chase/vim-ansible-yaml'
-Plug 'esneider/YUNOcommit.vim'
-Plug 'mustache/vim-mustache-handlebars'
-Plug 'kylef/apiblueprint.vim'
 Plug 'tpope/vim-abolish'
-Plug 'markcornick/vim-terraform'
+Plug 'hashivim/vim-terraform'
 Plug 'hposca/ultisnips-terraform-snippets'
-Plug 'kana/vim-textobj-user'
-Plug 'reedes/vim-textobj-quote'
 Plug 'luochen1990/rainbow' " Color codes matching tags, parens, brackets, etc
-Plug 'joonty/vdebug', { 'tag': 'v1.5.2' } " Remote DBGP debugging
-Plug 'tpope/vim-obsession' " Automatically save vim sessions
-Plug 'kristijanhusak/vim-carbon-now-sh' " Allows you to make pretty images of code
 
 " Colorscheme
-Plug 'altercation/vim-colors-solarized'
-Plug 'thewatts/wattslandia'
-Plug 'jordwalke/flatlandia'
-Plug 'chriskempson/base16-vim'
-Plug 'blerins/flattown'
-Plug 'jpo/vim-railscasts-theme'
-Plug 'duythinht/inori'
 Plug 'arcticicestudio/nord-vim'
-Plug 'w0ng/vim-hybrid'
 
 call plug#end()
