@@ -35,7 +35,7 @@ function tfepa(){
 	tfp $1 && tfa
 }
 
-eval "$(thefuck --alias frack)"
+eval "$(thefuck --alias frak)"
 eval "$(hub alias -s)"
 
 # Go forward in Git commit hierarchy, towards particular commit
