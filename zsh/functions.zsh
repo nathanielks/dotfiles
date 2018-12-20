@@ -56,3 +56,16 @@ function count () {
 
   echo "${content}" | wc -c
 }
+
+function hmdecode () {
+  local url="$( echo "$1" | cut -d = -f 2-)"
+  php -r "echo urldecode('$url');"
+}
+
+
+function test_circle () {
+  local job="$1"
+  circleci config process .circleci/config.yml > circle.yml
+  circleci local execute -c circle.yml --job "$job"
+  rm circle.yml
+}
