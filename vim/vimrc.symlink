@@ -12,16 +12,23 @@ syntax enable
 set t_Co=256
 " colorscheme base16-default
 let base16colorspace=256
-" set background=dark
-let g:hybrid_custom_term_colors = 1
+set background=dark
 
-" colorscheme hybrid
+let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_auto_colors = 0
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=none   ctermbg=0
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=none ctermbg=8
+
+let g:nord_italic = 1
+let g:nord_italic_comments = 1
+let g:nord_cursor_line_number_background = 1
+
 colorscheme nord
-" colorscheme wattslandia
-" colorscheme solarized
 au ColorScheme * hi Normal ctermbg=none guibg=none
 au ColorScheme * hi NonText ctermbg=none guibg=none
 " }}}
+
+
 
 " Misc {{{
 set ttyfast                     " faster redraw
@@ -83,9 +90,7 @@ set cmdheight=2         " Number of screen lines to use for the command-line.  H
 set textwidth=79        " Maximum width of text that is being inserted.  A longer line will be broken after white space to get this width.
 set autoread            " Make sure that buffers change if the file changed
 set showbreak=↪\
-set listchars=tab:▻\ ,trail:␣,extends:…,eol:¬
-"set listchars="tab:▸\"  " Display a place holder character for tabs and trailing spaces
-" set listchars=tab:»\
+set listchars=tab:.\ ,trail:␣,extends:…,eol:¬
 set formatoptions+=1    " When wrapping paragraphs, don't end lines with 1-letter words (looks stupid))"
 " }}}
 
@@ -147,12 +152,11 @@ nnoremap <leader>sv :source $MYVIMRC<CR>
 nmap <leader>l :set list!<CR>
 " turn off search highlighting
 nnoremap <leader><space> :noh<CR>
-nnoremap <leader>a :Ack<space>
 nnoremap <leader>1 :set number!<CR>
 
 inoremap jk <esc>
 " fold tags
-nnoremap <leader>ft Vatzf
+" nnoremap <leader>ft Vatzf
 " strip all trailing whitespace in the current file
 nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
 " Fix those pesky situations where you edit & need sudo to save
@@ -163,11 +167,12 @@ nnoremap <leader>w <C-w>v<C-w>l
 nnoremap <leader>h <C-w>s<C-w>j
 
 " ack.vim {{{
-let g:ackprg = 'ag --vimgrep --smart-case'
-cnoreabbrev ag Ack
-cnoreabbrev aG Ack
-cnoreabbrev Ag Ack
-cnoreabbrev AG Ack
+" nnoremap <leader>a :Ack<space>
+" let g:ackprg = 'ag --vimgrep --smart-case'
+" cnoreabbrev ag Ack
+" cnoreabbrev aG Ack
+" cnoreabbrev Ag Ack
+" cnoreabbrev AG Ack
 " }}}
 
 " Helpful mappings {{{
@@ -263,7 +268,45 @@ let g:ctrlp_match_window = 'bottom,order:ttb'
 let g:ctrlp_switch_buffer = 0
 let g:ctrlp_working_path_mode = 0
 let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)|vendor|node_modules|public$'
-map <leader>b :CtrlPBuffer<cr>
+" map <leader>b :CtrlPBuffer<cr>
+" }}}
+
+
+" fzf {{{
+	if executable("rg")
+		" ## rg
+		set grepprg=rg\ --vimgrep                                                       "Use ripgrep for grepping
+		function! s:CompleteRg(arg_lead, line, pos)
+			let l:args = join(split(a:line)[1:])
+			return systemlist('get_completions rg ' . l:args)
+		endfunction
+
+		" Add support for ripgrep
+		" https://github.com/dsifford/.dotfiles/blob/master/vim/.vimrc#L130
+		command! -bang -complete=customlist,s:CompleteRg -nargs=* Rg
+					\ call fzf#vim#grep(
+					\   'rg --column --line-number --no-heading --color=always --fixed-strings --ignore-case --hidden --follow --glob "!{.git,node_modules}/*" '.shellescape(<q-args>).'| tr -d "\017"', 1,
+					\   <bang>0 ? fzf#vim#with_preview('up:60%')
+					\           : fzf#vim#with_preview('right:50%', '?'),
+					\   <bang>0)
+		command! -bang -nargs=? -complete=dir Files
+					\ call fzf#vim#files(<q-args>,
+					\   <bang>0 ? fzf#vim#with_preview('up:60%')
+					\           : fzf#vim#with_preview('right:50%', '?'),
+					\   <bang>0)
+	endif
+nmap <Leader>f :Files<CR>
+nmap <Leader>G :GFiles<CR>
+nmap <Leader>b :Buffers<CR>
+nmap <Leader>h :History<CR>
+nmap <Leader>t :BTags<CR>
+nmap <Leader>T :Tags<CR>
+nmap <Leader>l :BLines<CR>
+nmap <Leader>L :Lines<CR>
+nmap <Leader>a :Ag<Space>
+nmap <Leader>H :Helptags!<CR>
+nmap <Leader>C :Commands<CR>
+nmap <Leader>M :Maps<CR>
 " }}}
 
 " Multi Cursor {{{
