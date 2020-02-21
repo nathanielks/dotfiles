@@ -1,7 +1,7 @@
 ---
 - hosts: all
   roles:
-    - { role: cli, tags: [ cli ] }
+#    - { role: cli, tags: [ cli ] }
     - { role: apps, tags: [ apps ] }
   vars:
     - home: /Users/{{ ansible_user_id }}

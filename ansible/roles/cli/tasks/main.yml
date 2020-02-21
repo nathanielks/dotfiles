@@ -1,75 +1,102 @@
 ---
 - name: Tap homebrew repos
-  homebrew_tap: tap={{ item }} state=present
-  with_items:
-    - homebrew/dupes
+  homebrew_tap:
+    name:
+      - aws/tap
+      - moncho/dry
+    state: present
   tags:
     - homebrew
 
 - name: Install command line tools
-  homebrew: name={{ item }} state=present
-  with_items:
-    - ack
-    - asciinema
-    - autoconf
-    - automake
-    - awscli
-    - cask
-    - cli53
-    - homebrew/php/composer
-    - coreutils
-    - cowsay
-    - curl
-    - diff-so-fancy
-    - dnsmasq
-    - exa
-    - ffmpeg
-    - fzf
-    - gcc@4.9
-    - git
-    - git-crypt
-    - git-extras
-    - git-flow-avh
-    - gnu-sed
-    - graphviz
-    - heroku
-    - highlight
-    - htop
-    - hub
-    - imagemagick
-    - jq
-    - libtool
-    - libxslt
-    - libyaml
-    - mas
-    - neovim/neovim/neovim
-    - openssl
-    - packer
-    - parallel
-    - readline
-    - reattach-to-user-namespace
-    - rename
-    - ripgrep
-    - s3cmd
-    - saltstack
-    - shellcheck
-    - siege
-    - snappy
-    - terminal-notifier
-    - terraform
-    - terraform_landscape
-    - tldr
-    - the_silver_searcher
-    - thefuck
-    - tmux
-    - unixodbc
-    - watch
-    - wget
-    - yarn
-    - z
-    - zsh
-    - zsh-completions
-
+  homebrew:
+    state: present
+    name:
+      - asciinema
+      - autoconf
+      - automake
+      - aws-sam-cli
+      - bandwhich
+      - cask
+      - composer
+      - coreutils
+      - curl
+      - diff-so-fancy
+      - dnsmasq
+      - dry
+      - exa
+      - ffmpeg
+      - fzf
+      - gcc@4.9
+      - git
+      - git-crypt
+      - git-extras
+      - git-flow-avh
+      - gnu-tar
+      - gnu-sed
+      - gawk
+      - gnutls
+      - gnu-indent
+      - gnu-getopt
+      - grep
+      - graphviz
+      - highlight
+      - htop
+      - hub
+      - imagemagick
+      - jq
+      - libtool
+      - libxslt
+      - libyaml
+      - mas
+      - nnn
+      - neovim/neovim/neovim
+      - openssl
+      - packer
+      - parallel
+      - readline
+      - reattach-to-user-namespace
+      - rename
+      - ripgrep
+      - s3cmd
+      - saltstack
+      - shellcheck
+      - siege
+      - snappy
+      - terminal-notifier
+      - tfenv
+      - terraform_landscape
+      - tldr
+      - thefuck
+      - tmux
+      - unixodbc
+      - watch
+      - wget
+      - yarn
+      - yamllint
+      - z
+      - zsh
+      - zsh-completions
 
   tags:
     - homebrew
+
+- name: Install python dependencies
+  pip: name={{ item }} state=present executable=/usr/local/bin/pip3
+  with_items:
+    - awscli
+    - neovim
+
+  tags:
+    - pip
+    - python
+
+- name: Install global nodejs dependencies
+  npm:
+    state: present
+    global: yes
+    name:
+      - n
+  tags:
+    - nodejs
+    - npm

@@ -16,22 +16,17 @@ set background=dark
 
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_auto_colors = 0
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=none   ctermbg=0
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=none ctermbg=8
 
 let g:nord_italic = 1
 let g:nord_italic_comments = 1
 let g:nord_cursor_line_number_background = 1
 
-" colorscheme nord
-
-set termguicolors
-colorscheme monokai_pro
-autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=none   ctermbg=0
-autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=none ctermbg=8
+colorscheme nord
 au ColorScheme * hi Normal ctermbg=none guibg=none
 au ColorScheme * hi NonText ctermbg=none guibg=none
 " }}}
-
-
 
 " Misc {{{
 set ttyfast                     " faster redraw
@@ -122,37 +117,20 @@ inoremap jj <ESC>
 inoremap hh <ESC>
 " }}}
 
-" Folding {{{
-" set foldenable          " enable folding
-" set foldcolumn=2        " add a fold column
-" set foldmethod=indent
-set foldlevelstart=99   " start with everything unfolded
-nnoremap <space> za
-" }}}
-
 " Line Shortcuts {{{
 " move by screen lines instead of file lines (useful when lines wrap)
-nnoremap j gj
-nnoremap k gk
-" move to beginning/end of line
-nnoremap B ^
-nnoremap E $
-" $/^ doesn't do anything
-nnoremap $ <nop>
-nnoremap ^ <nop>
-" highlight last inserted text
-nnoremap gV `[v`]
-
-" Allow capital w to write current buffer
-command! W :w
+nnoremap n gj
+nnoremap e gk
+" }}}
 
 " Move around window splits easier
 " https://github.com/neovim/neovim/issues/2048#issuecomment-78045837
 nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
+nnoremap <C-n> <C-w>j
+nnoremap <C-e> <C-w>k
+nnoremap <C-i> <C-w>l
 " }}}
+
 
 " Leader Shortcuts {{{
 let mapleader=","
@@ -165,7 +143,7 @@ nmap <leader>l :set list!<CR>
 nnoremap <leader><space> :noh<CR>
 nnoremap <leader>1 :set number!<CR>
 
-inoremap jk <esc>
+inoremap ne <esc>
 " fold tags
 " nnoremap <leader>ft Vatzf
 " strip all trailing whitespace in the current file
@@ -176,35 +154,9 @@ cmap w!! w !sudo tee % >/dev/null
 nnoremap <leader>w <C-w>v<C-w>l
 " Open horizontal split and switch to it
 nnoremap <leader>h <C-w>s<C-w>j
-
-" ack.vim {{{
-" nnoremap <leader>a :Ack<space>
-" let g:ackprg = 'ag --vimgrep --smart-case'
-" cnoreabbrev ag Ack
-" cnoreabbrev aG Ack
-" cnoreabbrev Ag Ack
-" cnoreabbrev AG Ack
 " }}}
 
-" Helpful mappings {{{
-" Fix indentation / reindent
-map <F7> mzgg=G`z<CR>
-" Set cwd to current file's directory
-nnoremap <leader>cd :cd %:p:h<CR>:pwd<CR>
 
-" Update syntax highlighting
-noremap <F12> <Esc>:syntax sync fromstart<CR>
-inoremap <F12> <C-o>:syntax sync fromstart<CR>
-
-" }}}
-"
-" .lvimrc {{{
-let g:localvimrc_sandbox = 0
-let g:localvimrc_whitelist=[
-      \'/Users/aang/Work/'
-      \]
-" }}}
-"
 " PHP {{{
 let PHP_removeCRwhenUnix=1
 let g:PHP_vintage_case_default_indent = 1
@@ -221,7 +173,6 @@ augroup END
 
 let g:ale_php_phpcs_standard = "./ruleset.xml"
 let g:ale_fixers = {}
-let g:ale_linters = {}
 let g:ale_fixers['php'] = ['phpcbf']
 
 let g:pdv_template_dir = $HOME ."/.vim/bundle/pdv/templates_snip"
@@ -268,7 +219,6 @@ let g:ale_sign_warning = '⚠'
 let g:ale_sign_column_always = 1
 
 let g:ale_fixers['javascript'] = ['prettier-eslint']
-let g:ale_linters['javascript'] = ['eslint']
 let g:ale_fixers['typescript'] = ['prettier-eslint']
 let g:ale_fixers['yaml'] = ['prettier']
 let g:ale_fixers['json'] = []
@@ -299,35 +249,28 @@ let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)|vendor|node_modules|public$'
 
 
 " fzf {{{
+	if executable("rg")
+		" ## rg
+		set grepprg=rg\ --vimgrep                                                       "Use ripgrep for grepping
+		function! s:CompleteRg(arg_lead, line, pos)
+			let l:args = join(split(a:line)[1:])
+			return systemlist('get_completions rg ' . l:args)
+		endfunction
 
-if executable("rg")
-  " ## rg
-  set grepprg=rg\ --vimgrep                                                       "Use ripgrep for grepping
-  function! s:CompleteRg(arg_lead, line, pos)
-    let l:args = join(split(a:line)[1:])
-    return systemlist('get_completions rg ' . l:args)
-  endfunction
-
-  " Add support for ripgrep
-  " https://github.com/dsifford/.dotfiles/blob/master/vim/.vimrc#L130
-    " command! -bang -complete=customlist,s:CompleteRg -nargs=* Rg
-    " \ call fzf#vim#grep(
-    " \   'rg --column --line-number --no-heading --color=always --smart-case --glob "!{.git,node_modules}/*"' . <q-args>, 1,
-    " \   <bang>0 ? fzf#vim#with_preview('up:60%')
-    " \           : fzf#vim#with_preview('right:50%:hidden', '?'),
-    " \   <bang>0)
-  command! -bang -complete=customlist,s:CompleteRg -nargs=* Rg
-        \ call fzf#vim#grep(
-        \   'rg --column --line-number --no-heading --color=always --fixed-strings --ignore-case --hidden --follow --glob "!{.git,node_modules}/*" '.shellescape(<q-args>).'| tr -d "\017"', 1,
-        \   <bang>0 ? fzf#vim#with_preview('up:60%')
-        \           : fzf#vim#with_preview('right:50%', '?'),
-        \   <bang>0)
-  command! -bang -nargs=? -complete=dir Files
-        \ call fzf#vim#files(<q-args>,
-        \   <bang>0 ? fzf#vim#with_preview('up:60%')
-        \           : fzf#vim#with_preview('right:50%', '?'),
-        \   <bang>0)
-endif
+		" Add support for ripgrep
+		" https://github.com/dsifford/.dotfiles/blob/master/vim/.vimrc#L130
+		command! -bang -complete=customlist,s:CompleteRg -nargs=* Rg
+					\ call fzf#vim#grep(
+					\   'rg --column --line-number --no-heading --color=always --fixed-strings --ignore-case --hidden --follow --glob "!{.git,node_modules}/*" '.shellescape(<q-args>).'| tr -d "\017"', 1,
+					\   <bang>0 ? fzf#vim#with_preview('up:60%')
+					\           : fzf#vim#with_preview('right:50%', '?'),
+					\   <bang>0)
+		command! -bang -nargs=? -complete=dir Files
+					\ call fzf#vim#files(<q-args>,
+					\   <bang>0 ? fzf#vim#with_preview('up:60%')
+					\           : fzf#vim#with_preview('right:50%', '?'),
+					\   <bang>0)
+	endif
 nmap <Leader>f :Files<CR>
 nmap <Leader>G :GFiles<CR>
 nmap <Leader>b :Buffers<CR>
@@ -364,7 +307,7 @@ augroup configgroup
   autocmd BufEnter *.zsh-theme setlocal filetype=zsh
   autocmd BufEnter Makefile setlocal noexpandtab
   autocmd BufEnter *.sh.tpl setlocal filetype=sh
-  autocmd BufEnter *.sls,*.neon,*.yml.tpl,*.template setlocal filetype=yaml expandtab
+  autocmd BufEnter *.sls,*.neon,*.yml.tpl,*.template setlocal filetype=yaml
 augroup END
 
 augroup filetypegroup
@@ -420,6 +363,12 @@ let g:rainbow_active = 1
 noremap <leader>R :RainbowToggle<CR>
 " }}}
 
+" .lvimrc {{{
+let g:localvimrc_sandbox = 0
+let g:localvimrc_whitelist=[
+      \'/Users/aang/Work/'
+      \]
+" }}}
 
 
 " Custom Functions {{{
@@ -435,34 +384,27 @@ function! <SID>StripTrailingWhitespaces()
 endfunction
 
 " file is large from 10mb
-let g:LargeFile = 1024 * 1024 * 10
-augroup LargeFile
-autocmd BufReadPre * let f=getfsize(expand("<afile>")) | if f > g:LargeFile || f == -2 | call LargeFile() | endif
-augroup END
+" let g:LargeFile = 1024 * 1024 * 10
+" augroup LargeFile
+" autocmd BufReadPre * let f=getfsize(expand("<afile>")) | if f > g:LargeFile || f == -2 | call LargeFile() | endif
+" augroup END
 
-function LargeFile()
-" no syntax highlighting etc
-set eventignore+=FileType
-" save memory when other file is viewed
-setlocal bufhidden=unload
-" is read-only (write with :w new_filename)
-setlocal buftype=nowrite
-" no undo possible
-setlocal undolevels=-1
-" display message
-autocmd VimEnter *  echo "The file is larger than " . (g:LargeFile / 1024 / 1024) . " MB, so some options are changed (see .vimrc for details)."
-endfunction
+" function LargeFile()
+" " no syntax highlighting etc
+" set eventignore+=FileType
+" " save memory when other file is viewed
+" setlocal bufhidden=unload
+" " is read-only (write with :w new_filename)
+" setlocal buftype=nowrite
+" " no undo possible
+" setlocal undolevels=-1
+" " display message
+" autocmd VimEnter *  echo "The file is larger than " . (g:LargeFile / 1024 / 1024) . " MB, so some options are changed (see .vimrc for details)."
+" endfunction
 
 " }}}
 
 " Terminal Emulation {{{
 nnoremap <leader>vt :VTerm<CR>
 set splitright
-" }}}
-
-" AutoFormat {{{
-" au BufWrite *.json :Autoformat
-" let g:autoformat_autoindent = 0
-" let g:autoformat_retab = 0
-" let g:autoformat_remove_trailing_spaces = 0
 " }}}

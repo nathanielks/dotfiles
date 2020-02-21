@@ -11,6 +11,8 @@ zeus.json
 *.log
 Session.vim
 tags
+.envrc
+phpunit
 
 # PHPStorm
 # User-specific stuff:
@@ -36,3 +38,4 @@ group_vars/temp
 .dockerinfo
 
 .lvimrc
+#twentynineteen

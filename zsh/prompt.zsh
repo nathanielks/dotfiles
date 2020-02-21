@@ -158,7 +158,7 @@ function rvm_prompt() {
 precmd() {
 # Prompt format
 PROMPT='
-%{$fg_bold[blue]%}[${AWS_PROFILE}@${AWS_DEFAULT_REGION/#AWS_DEFAULT_PROFILE} %m ${PWD/#$HOME/~}]$(parse_git_dirty)
+%{$fg_bold[blue]%}[%D{%y/%m/%f} %*] [${AWS_PROFILE}@${AWS_DEFAULT_REGION/#AWS_DEFAULT_PROFILE} %m ${PWD/#$HOME/~}]$(parse_git_dirty)
 %{$fg[white]%}$%{$reset_color%} '
 RPROMPT='$(git_time_since_commit)%{$reset_color%} $(rvm_prompt) %{$fg[green]%}$(current_branch)$(git_prompt_short_sha)$(git_prompt_status)%{$reset_color%}'
 }

@@ -10,6 +10,13 @@ curl -fsSL https://raw.githubusercontent.com/nathanielks/dotfiles/master/install
     ```
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     ```
+- Install Python3
+    ```
+    brew install pyenv
+    pyenv install 3.7.5
+    pyenv global 3.7.5
+    pyenv version
+    ```
 - `brew install ansible`
 - Run ansible
     ```

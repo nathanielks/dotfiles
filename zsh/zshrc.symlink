@@ -6,8 +6,12 @@ DOTFILES=$HOME/.dotfiles
 # Set Vim as the editor
 export EDITOR=nvim
 
+# Go config
 export GOPATH=$HOME/Code/golang
 export GOROOT=/usr/local/opt/go/libexec
+
+# tj/n config
+export N_PREFIX="/usr/local/n"
 
 # Set the PATH
 PATH="/usr/local/bin:$PATH"
@@ -50,3 +54,10 @@ unsetopt correct_all
 fpath=(/usr/local/share/zsh-completions $fpath)
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
+if type rg &> /dev/null; then
+  export FZF_DEFAULT_COMMAND='rg --files --hidden'
+fi
+

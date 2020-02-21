@@ -19,20 +19,13 @@ function vmarked(){
   marked $1
   vim $1
 }
-function tfep(){
-	tfenv $1 plan -out plan ${2:*}
-}
 
-function tfeq(){
-	tfenv $1 destroy -force ${2:*}
+function tp(){
+	tf validate && tf plan -out plan ${*}
 }
 
 function tfa(){
 	tf apply plan $*
-}
-
-function tfepa(){
-	tfp $1 && tfa
 }
 
 eval "$(thefuck --alias frak)"
@@ -51,6 +44,11 @@ function generate_password () {
 	cat /dev/random | tr -dc 'a-zA-Z0-9' | fold -w "$length" | head -n 1
 }
 
+function generate_hexadecimal () {
+	local length="${1:-64}"
+	cat /dev/random | tr -dc 'a-fA-F0-9' | fold -w "$length" | head -n 1
+}
+
 function count () {
   local content="${@}"
 
@@ -59,7 +57,7 @@ function count () {
 
 function hmdecode () {
   local url="$( echo "$1" | cut -d = -f 2-)"
-  php -r "echo urldecode('$url');"
+  php -r "echo urldecode('$url');" | cut -d '&' -f 1 | pbcopy
 }
 
 

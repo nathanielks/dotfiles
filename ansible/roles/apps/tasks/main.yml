@@ -2,58 +2,51 @@
 - name: Tap homebrew repos
   homebrew_tap: tap={{ item }} state=present
   with_items:
-    - homebrew/fonts
+    - homebrew/cask-fonts
   tags:
     - homebrew
 
 - name: Install applications
-  homebrew_cask: name={{ item }} state=present
-  with_items:
-    - 1password
-    - a-better-finder-rename
-    - alfred
-    - bartender
-    - bettertouchtool
-    - betterzipql
-    - calibre
-    - colloquy
-    - dash
-    - docker
-    - dropbox
-    - dropbox-encore
-    - evernote
-    - font-fira-code
-    - firefox
-    - franz
-    - google-chrome
-    - google-drive
-    - gpgtools
-    - hammerspoon
-    - istat-menus
-    - iterm2
-    - karabiner-elements
-    - keybase
-    - mindnode-pro
-    - ngrok
-    - postico
-    - qlcolorcode
-    - qlimagesize
-    - qlmarkdown
-    - qlprettypatch
-    - qlstephen
-    - quicklook-csv
-    - quicklook-json
-    - rescuetime
-    - sequel-pro
-    - sketch
-    - skype
-    - slack
-    - steam
-    - sublime-text
-    - suspicious-package
-    - the-unarchiver
-    - unity-web-player
-    - vagrant
-    - virtualbox
-    - vlc
-    - webpquicklook
+  homebrew_cask:
+    state: present
+    name:
+#      - 1password
+      - a-better-finder-rename
+      - alfred
+      - bartender
+      - bettertouchtool
+      - dash
+      - docker
+      - font-fira-code
+      - font-source-code-pro
+      - firefox
+      - google-chrome
+      - google-drive-file-stream
+      - gpg-suite
+      - istat-menus
+      - iterm2
+      - karabiner-elements
+      - keybase
+      - ngrok
+      - pocket-casts
+      - qlcolorcode
+      - qlimagesize
+      - qlmarkdown
+      - qlprettypatch
+      - qlstephen
+      - quicklook-csv
+      - quicklook-json
+      - rescuetime
+      - sequel-pro
+      - slack
+      - spotify
+      - station
+      - steam
+      - sublime-text
+      - suspicious-package
+      - the-unarchiver
+      - unity-web-player
+      - vagrant
+      - virtualbox
+      - vlc
+      - webpquicklook

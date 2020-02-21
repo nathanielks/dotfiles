@@ -1,4 +1,4 @@
-call plug#begin('~/.vim/bundle')
+call plug#begin('~/.vim/plugged')
 
 " Git
 Plug 'tpope/vim-git'
@@ -23,6 +23,7 @@ Plug 'embear/vim-localvimrc'
 Plug 'mklabs/split-term.vim'
 Plug 'bogado/file-line'
 Plug 'chaoren/vim-wordmotion'
+" Look into https://github.com/wincent/ferret
 
 " JavaScript
 Plug 'pangloss/vim-javascript'
@@ -30,10 +31,12 @@ Plug 'elzr/vim-json'
 Plug 'pangloss/vim-javascript'
 Plug 'maxmellon/vim-jsx-pretty'
 Plug 'isRuslan/vim-es6'
+Plug 'leafgarland/typescript-vim'
 
 " PHP
 Plug 'StanAngeloff/php.vim'
-Plug 'iwyg/pdv'
+Plug 'YaroslavMolchan/pdv'
+"Plug 'Rican7/php-doc-modded'
 Plug 'tobyS/vmustache'
 Plug '2072/PHP-Indenting-for-VIm'
 
@@ -52,6 +55,7 @@ Plug '~/Code/GitHub/nathanielks/vim-snippets'
 
 " Linting
 Plug 'w0rp/ale'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Other
 Plug 'tpope/vim-markdown'
@@ -66,5 +70,10 @@ Plug 'nathanaelkane/vim-indent-guides'
 
 " Colorscheme
 Plug 'arcticicestudio/nord-vim'
+" Plug 'phanviet/vim-monokai-pro'
+Plug 'Erichain/vim-monokai-pro'
+
+" Colemak
+" Plug 'jooize/vim-colemak'
 
 call plug#end()
