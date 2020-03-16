@@ -74,12 +74,14 @@
       - wget
       - yarn
       - yamllint
-      - z
       - zsh
       - zsh-completions
 
   tags:
     - homebrew
+
+# install zoxide instead of z
+# curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/ajeetdsouza/zoxide/master/install.sh | sh
 
 - name: Install python dependencies
   pip: name={{ item }} state=present executable=/usr/local/bin/pip3
