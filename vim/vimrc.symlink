@@ -224,7 +224,7 @@ let g:ale_fixers = {}
 let g:ale_linters = {}
 let g:ale_fixers['php'] = ['phpcbf']
 
-let g:pdv_template_dir = $HOME ."/.vim/bundle/pdv/templates_snip"
+let g:pdv_template_dir = $HOME ."/.vim/plugged/pdv/templates_snip"
 " nnoremap <leader>cp :call PhpDocSingle()<CR>
 nnoremap  <leader>cp :call pdv#DocumentWithSnip()<CR>
 " }}}
