@@ -1,10 +1,22 @@
-zmodload zsh/zprof
+# zmodload zsh/zprof
+
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
 DOTFILES=$HOME/.dotfiles
 
 # Set Vim as the editor
 export EDITOR=nvim
+
+# Specify your defaults in this environment variable
+export HOMEBREW_CASK_OPTS="--appdir=/Applications"
+
+# Terraform Debug
+export TF_LOG=
+export TF_LOG_PATH=
+export TF_INPUT=
+
+export ANSIBLE_COW_SELECTION=random
+export EDITOR='nvim'
 
 # Go config
 export GOPATH=$HOME/Code/golang
@@ -27,20 +39,29 @@ PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 PATH=$PATH:$GOPATH/bin
 PATH="$PATH:./vendor/bin"
 PATH=$PATH:$HOME/.composer/vendor/bin # Add composer stuff to PATH
+PATH="/usr/local/opt/php@7.2/bin:$PATH"
+PATH="/usr/local/opt/php@7.2/sbin:$PATH"
+PATH=$PATH:~/Work/bin
+PATH=$PATH:/usr/local/n/bin
+PATH=$PATH:~/Code/GitHub/nathanielks/docker-cli-helpers/bin
+PATH=$PATH:.
+PATH=$PATH:../bin
+PATH=$PATH:../../bin
+PATH=$PATH:"/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+PATH="$N_PREFIX/bin:$PATH"  # Added by n-install (see http://git.io/n-install-repo).
+PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+PATH="/usr/local/opt/php@7.3/bin:$PATH"
+PATH=$PATH:~/Work/bin
+PATH=$PATH:~/Code/GitHub/nathanielks/docker-cli-helpers/bin
+PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 export PATH
 
+# QMK
 export QMK_HOME=$HOME/Code/GitHub/nathanielks/qmk_firmware
-export AWS_PAGER=
 
-# source every *.zsh file in the repo
-for file ($DOTFILES/zsh/*.zsh) source $file
 
-DISABLE_AUTO_TITLE=true
-
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Example format: plugins=(rails git textmate ruby lighthouse)
+# oh-my-zsh
 plugins=(git git-extras git-prompt gitfast ssh-agent)
-
 source $ZSH/oh-my-zsh.sh
 
 unsetopt correct_all
@@ -48,20 +69,43 @@ unsetopt correct_all
 # Tmuxinator
 [[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
 
+# source every *.zsh file in the repo
+for file ($DOTFILES/zsh/*.zsh) source $file
+
+[[ -f $HOME/.zshrc.local ]] && . $HOME/.zshrc.local
 [[ -f $HOME/.zshrc.env ]] && . $HOME/.zshrc.env
 
 # use .zshrc.local for settings specific to one system
-[[ -f $HOME/.zshrc.local ]] && . $HOME/.zshrc.local
+fpath=(~/.zsh/completions $fpath)
+
+autoload -Uz compinit
+# This is Mac OS specific (I'm using gnucoreutils, so `stat` is diffeernt
+if [ $(date +'%j') != $(/usr/bin/stat -f '%Sm' -t '%j' ~/.zcompdump) ]; then
+  compinit
+else
+  compinit -C
+fi
+
+# AWS
+export AWS_PAGER=
+source /usr/local/share/zsh/site-functions/_aws
+
+
+autoload bashcompinit
+bashcompinit
+
+zstyle :omz:plugins:ssh-agent agent-forwarding on
+zstyle :omz:plugins:ssh-agent identities id_rsa id_rsa_legacy id_ed25519
 
 # ZSH Completions
 fpath=(/usr/local/share/zsh-completions $fpath)
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
 if type rg &> /dev/null; then
   export FZF_DEFAULT_COMMAND='rg --files --hidden'
 fi
 
 eval "$(zoxide init zsh)"
+eval "$(direnv hook zsh)"
