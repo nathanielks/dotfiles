@@ -28,7 +28,7 @@ function tfa(){
 	tf apply plan $*
 }
 
-eval "$(thefuck --alias frak)"
+eval $(thefuck --alias)
 eval "$(hub alias -s)"
 
 # Go forward in Git commit hierarchy, towards particular commit
@@ -66,4 +66,8 @@ function test_circle () {
   circleci config process .circleci/config.yml > circle.yml
   circleci local execute -c circle.yml --job "$job"
   rm circle.yml
+}
+
+function replace_all() {
+  rg -l $1 | xargs gsed -i '' "s/$1/$2/g"
 }

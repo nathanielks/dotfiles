@@ -56,3 +56,7 @@ alias als="composer local-server"
 # Docker
 alias docker-stop-all='docker stop $(docker ps -a -q)'
 alias docker-remove-all='docker rm $(docker ps -a -q)'
+alias docker-rmi-all='docker rmi $(docker images -a -q)'
+alias runcircle='circleci config process .circleci/config.yml > /tmp/process.yml; circleci local execute -c /tmp/process.yml -e CIRCLE_PROJECT_REPONAME=${PWD##*/} --job '
+alias get=git
+alias sum_numbers='paste -s -d+ | bc'

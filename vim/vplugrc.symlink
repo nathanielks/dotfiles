@@ -26,12 +26,18 @@ Plug 'chaoren/vim-wordmotion'
 " Look into https://github.com/wincent/ferret
 
 " JavaScript
-Plug 'pangloss/vim-javascript'
-Plug 'elzr/vim-json'
-Plug 'pangloss/vim-javascript'
+Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
+Plug 'yuezk/vim-js'
+Plug 'HerringtonDarkholme/yats.vim'
 Plug 'maxmellon/vim-jsx-pretty'
-Plug 'isRuslan/vim-es6'
-Plug 'leafgarland/typescript-vim'
+
+" Plug 'pangloss/vim-javascript'
+" Plug 'leafgarland/typescript-vim'
+" Plug 'peitalin/vim-jsx-typescript'
+
+" Plug 'elzr/vim-json'
+" Plug 'maxmellon/vim-jsx-pretty'
+" Plug 'isRuslan/vim-es6'
 
 " PHP
 Plug 'StanAngeloff/php.vim'
@@ -47,15 +53,21 @@ Plug 'dsawardekar/wordpress.vim'
 Plug 'fatih/vim-go'
 
 " Snippets
-Plug 'SirVer/ultisnips'
+" Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 " Plug 'nathanielks/vim-snippets'
 Plug '~/Code/GitHub/nathanielks/vim-snippets'
 
 
 " Linting
-Plug 'w0rp/ale'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Plug 'dense-analysis/ale', {'tag': 'v2.4.0'}
+Plug 'dense-analysis/ale'
+"Plug 'neoclide/coc.nvim', {'branch': 'release'}
+let g:coc_global_extensions = [
+  \ 'coc-tsserver',
+  \ 'coc-phpls'
+  \ ]
+
 
 " Other
 Plug 'tpope/vim-markdown'
@@ -64,7 +76,7 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'chase/vim-ansible-yaml'
 Plug 'tpope/vim-abolish'
 Plug 'hashivim/vim-terraform'
-Plug 'hposca/ultisnips-terraform-snippets'
+Plug 'juliosueiras/vim-terraform-snippets'
 Plug 'luochen1990/rainbow' " Color codes matching tags, parens, brackets, etc
 Plug 'nathanaelkane/vim-indent-guides'
 

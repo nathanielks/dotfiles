@@ -28,6 +28,13 @@ ZSH_THEME_GIT_PROMPT_AHEAD=" %{$fg[red]%}(!)"
 ZSH_THEME_GIT_PROMPT_SHA_BEFORE=" %{$fg[white]%}[%{$fg[blue]%}"
 ZSH_THEME_GIT_PROMPT_SHA_AFTER="%{$fg[white]%}]"
 
+MODE_INDICATOR_VIINS='%F{15}<%F{8}INSERT<%f'
+MODE_INDICATOR_VICMD='%F{10}<%F{2}NORMAL<%f'
+MODE_INDICATOR_REPLACE='%F{9}<%F{1}REPLACE<%f'
+MODE_INDICATOR_SEARCH='%F{13}<%F{5}SEARCH<%f'
+MODE_INDICATOR_VISUAL='%F{12}<%F{4}VISUAL<%f'
+MODE_INDICATOR_VLINE='%F{12}<%F{4}V-LINE<%f'
+
 # get the name of the branch we are on
 function git_prompt_info() {
   ref=$(git symbolic-ref HEAD 2> /dev/null) || return
@@ -158,7 +165,7 @@ function rvm_prompt() {
 precmd() {
 # Prompt format
 PROMPT='
-%{$fg_bold[blue]%}[%D{%y/%m/%f} %*] [${AWS_PROFILE}@${AWS_DEFAULT_REGION/#AWS_DEFAULT_PROFILE} %m ${PWD/#$HOME/~}]$(parse_git_dirty)
+%{$fg_bold[blue]%}[%D{%y/%m/%f} %*] [${AWS_PROFILE}@${AWS_DEFAULT_REGION/#AWS_DEFAULT_PROFILE} %m ${PWD/#$HOME/~}]$(parse_git_dirty) ${MODE_INDICATOR_PROMPT}
 %{$fg[white]%}$%{$reset_color%} '
 RPROMPT='$(git_time_since_commit)%{$reset_color%} $(rvm_prompt) %{$fg[green]%}$(current_branch)$(git_prompt_short_sha)$(git_prompt_status)%{$reset_color%}'
 }

@@ -3,6 +3,7 @@
   homebrew_tap: tap={{ item }} state=present
   with_items:
     - homebrew/cask-fonts
+    - dwarvesf/homebrew-tap
   tags:
     - homebrew
 
@@ -10,7 +11,7 @@
   homebrew_cask:
     state: present
     name:
-#      - 1password
+      #      - 1password
       - a-better-finder-rename
       - alfred
       - bartender
@@ -18,6 +19,7 @@
       - dash
       - docker
       - font-fira-code
+      - font-fira-code-nerd-font
       - font-source-code-pro
       - firefox
       - google-chrome
@@ -48,5 +50,6 @@
       - unity-web-player
       - vagrant
       - virtualbox
+      - vimmotion
       - vlc
       - webpquicklook

@@ -29,6 +29,9 @@ PATH="$PATH:./vendor/bin"
 PATH=$PATH:$HOME/.composer/vendor/bin # Add composer stuff to PATH
 export PATH
 
+export QMK_HOME=$HOME/Code/GitHub/nathanielks/qmk_firmware
+export AWS_PAGER=
+
 # source every *.zsh file in the repo
 for file ($DOTFILES/zsh/*.zsh) source $file
 

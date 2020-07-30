@@ -4,6 +4,8 @@
     name:
       - aws/tap
       - moncho/dry
+      - moncho/dry
+      - dwarvesf/homebrew-tap
     state: present
   tags:
     - homebrew
@@ -17,6 +19,7 @@
       - automake
       - aws-sam-cli
       - bandwhich
+      - bat
       - cask
       - composer
       - coreutils
@@ -26,10 +29,12 @@
       - dry
       - exa
       - ffmpeg
+      - fish
       - fzf
       - gcc@4.9
       - git
       - git-crypt
+      - git-delta
       - git-extras
       - git-flow-avh
       - gnu-tar
@@ -63,6 +68,7 @@
       - shellcheck
       - siege
       - snappy
+      - starship
       - terminal-notifier
       - tfenv
       - terraform_landscape
@@ -70,6 +76,7 @@
       - thefuck
       - tmux
       - unixodbc
+      - vimmotion
       - watch
       - wget
       - yarn
@@ -99,6 +106,7 @@
     global: yes
     name:
       - n
+      - neovim
   tags:
     - nodejs
     - npm

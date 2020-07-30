@@ -4,14 +4,14 @@
 " Launch Config {{{
 source ~/.vplugrc
 autocmd! bufwritepost .vimrc source %
+autocmd! bufwritepost init.vim source %
 " }}}
 
 " Colors {{{
-syntax on
 syntax enable
 set t_Co=256
 " colorscheme base16-default
-let base16colorspace=256
+" let base16colorspace=256
 set background=dark
 
 let g:indent_guides_enable_on_vim_startup = 1
@@ -25,10 +25,10 @@ let g:nord_cursor_line_number_background = 1
 
 set termguicolors
 colorscheme monokai_pro
-autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=none   ctermbg=0
-autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=none ctermbg=8
-au ColorScheme * hi Normal ctermbg=none guibg=none
-au ColorScheme * hi NonText ctermbg=none guibg=none
+" autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=none   ctermbg=0
+" autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=none ctermbg=8
+" au ColorScheme * hi Normal ctermbg=none guibg=none
+" au ColorScheme * hi NonText ctermbg=none guibg=none
 " }}}
 
 
@@ -163,7 +163,7 @@ nnoremap <leader>sv :source $MYVIMRC<CR>
 nmap <leader>l :set list!<CR>
 " turn off search highlighting
 nnoremap <leader><space> :noh<CR>
-nnoremap <leader>1 :set number!<CR>
+" nnoremap <leader>1 :set number!<CR>
 
 inoremap jk <esc>
 " fold tags
@@ -176,6 +176,15 @@ cmap w!! w !sudo tee % >/dev/null
 nnoremap <leader>w <C-w>v<C-w>l
 " Open horizontal split and switch to it
 nnoremap <leader>h <C-w>s<C-w>j
+
+" UltiSnips {{{
+
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<leader><leader>n"
+let g:UltiSnipsJumpBackwardTrigger="<leader><leader>p"
+
+" }}}
 
 " ack.vim {{{
 " nnoremap <leader>a :Ack<space>
@@ -201,10 +210,28 @@ inoremap <F12> <C-o>:syntax sync fromstart<CR>
 " .lvimrc {{{
 let g:localvimrc_sandbox = 0
 let g:localvimrc_whitelist=[
-      \'/Users/aang/Work/'
+      \'/Users/aang/Work/',
+      \'/Users/aang/Work/repos/vantage-backend',
+      \'/Users/aang/Work/repos/vantage',
+      \'/Users/aang/Code/letters-to-reps/frontend'
       \]
 " }}}
 "
+" ale {{{
+let g:ale_sign_error = '❌'
+let g:ale_sign_warning = '⚠'
+let g:ale_sign_column_always = 1
+
+let g:ale_fixers = {}
+let g:ale_linters = {}
+let g:ale_fixers['yaml'] = ['prettier']
+let g:ale_fixers['json'] = []
+let g:ale_fix_on_save = 1
+" let g:ale_javascript_prettier_options = '--single-quote --trailing-comma es5 --no-semi'
+nmap <silent> <C-e>p <Plug>(ale_previous_wrap)
+nmap <silent> <C-e>n <Plug>(ale_next_wrap)
+" }}}
+
 " PHP {{{
 let PHP_removeCRwhenUnix=1
 let g:PHP_vintage_case_default_indent = 1
@@ -220,24 +247,50 @@ augroup phpSyntaxOverride
 augroup END
 
 let g:ale_php_phpcs_standard = "./ruleset.xml"
-let g:ale_fixers = {}
-let g:ale_linters = {}
 let g:ale_fixers['php'] = ['phpcbf']
 
 let g:pdv_template_dir = $HOME ."/.vim/plugged/pdv/templates_snip"
 " nnoremap <leader>cp :call PhpDocSingle()<CR>
 nnoremap  <leader>cp :call pdv#DocumentWithSnip()<CR>
+let g:wordpress_vim_wordpress_path = "./wordpress"
 " }}}
 
-" Javascript {{{
-let g:fixmyjs_rc_path = './.eslintrc'
-let g:jsx_ext_required = 0
+" Javascript v1 {{{
+" let g:fixmyjs_rc_path = './.eslintrc'
+" let g:jsx_ext_required = 0
 
 noremap <Leader><Leader>f :ALEFix<CR>
 
-autocmd FileType javascript.jsx runtime! ftplugin/html/sparkup.vim
-autocmd FileType ejs runtime! ftplugin/html/sparkup.vim
+" autocmd FileType javascript.jsx runtime! ftplugin/html/sparkup.vim
+" autocmd FileType ejs runtime! ftplugin/html/sparkup.vim
 
+" }}}
+
+" Javascript v2 {{{
+let g:ale_linter_aliases = {'typescriptreact': 'typescript'}
+let g:ale_linters['javascript'] = ['eslint']
+let g:ale_fixers['javascript'] = ['eslint', 'prettier-eslint']
+let g:ale_fixers['typescript'] = ['eslint', 'prettier-eslint']
+let g:ale_fixers['typescriptreact'] = ['eslint', 'prettier-eslint']
+" let g:ale_linters['javascript'] = ['standard']
+" let g:ale_linters['typescript'] = ['standard']
+" let g:ale_linters['typescriptreact'] = ['standard']
+" let g:ale_fixers['javascript'] = ['standard']
+" let g:ale_fixers['typescript'] = ['standard']
+" let g:ale_fixers['typescriptreact'] = ['standard']
+let g:ale_fixers['yaml'] = ['prettier']
+let g:ale_fixers['json'] = []
+
+autocmd BufEnter *.{js,jsx,ts,tsx} :syntax sync fromstart
+autocmd BufLeave *.{js,jsx,ts,tsx} :syntax sync clear
+
+" if isdirectory('./node_modules') && isdirectory('./node_modules/prettier')
+  " let g:coc_global_extensions += ['coc-prettier']
+" endif
+
+" if isdirectory('./node_modules') && isdirectory('./node_modules/eslint')
+  " let g:coc_global_extensions += ['coc-eslint']
+" endif
 " }}}
 
 " Ruby {{{
@@ -262,21 +315,6 @@ augroup END
 let g:terraform_fmt_on_save = 1
 " }}}
 
-" ale {{{
-let g:ale_sign_error = '❌'
-let g:ale_sign_warning = '⚠'
-let g:ale_sign_column_always = 1
-
-let g:ale_fixers['javascript'] = ['prettier-eslint']
-let g:ale_linters['javascript'] = ['eslint']
-let g:ale_fixers['typescript'] = ['prettier-eslint']
-let g:ale_fixers['yaml'] = ['prettier']
-let g:ale_fixers['json'] = []
-let g:ale_fix_on_save = 1
-" let g:ale_javascript_prettier_options = '--single-quote --trailing-comma es5 --no-semi'
-" nmap <silent> <C-k> <Plug>(ale_previous_wrap)
-" nmap <silent> <C-j> <Plug>(ale_next_wrap)
-" }}}
 
 " Powerline {{{
 let g:airline#extensions#tabline#left_sep = ' '
@@ -362,6 +400,7 @@ augroup configgroup
   autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
   autocmd BufEnter *.cls setlocal filetype=java
   autocmd BufEnter *.zsh-theme setlocal filetype=zsh
+  autocmd BufEnter .vplugrc setlocal filetype=vim
   autocmd BufEnter Makefile setlocal noexpandtab
   autocmd BufEnter *.sh.tpl setlocal filetype=sh
   autocmd BufEnter *.sls,*.neon,*.yml.tpl,*.template setlocal filetype=yaml expandtab
@@ -372,14 +411,14 @@ augroup filetypegroup
   autocmd FileType python,cfg setlocal ts=4 sts=4 sw=4
   autocmd FileType cs setlocal ts=4 sts=4 sw=4
   autocmd FileType apiblueprint,terraform setlocal ts=2 sts=2 sw=2
-  autocmd FileType javascript,html,css,sass,less,yaml,coffee setlocal ts=2 sts=2 sw=2 expandtab
+  autocmd FileType javascript,html,css,sass,less,coffee setlocal ts=4 sts=4 sw=4 expandtab
   autocmd FileType jade,html.handlebars,blade setlocal ts=2 sts=2 sw=2
   autocmd FileType ruby,pml,eruby,haml setlocal ts=2 sts=2 sw=2
   autocmd FileType arduino setlocal ts=2 sts=2 sw=2
   autocmd FileType go setlocal ts=2 sts=2 sw=2 noexpandtab
   autocmd FileType markdown setlocal wrap textwidth=0 ts=4 sts=4 sw=4
   autocmd FileType vim setlocal wrap foldmethod=marker
-  autocmd filetype json setlocal ts=4 sts=4 sw=4 expandtab
+  autocmd filetype json,yaml setlocal ts=4 sts=4 sw=4 expandtab
   autocmd FileType sh setlocal tabstop=2 shiftwidth=2 softtabstop=2
 augroup END
 
@@ -387,6 +426,7 @@ augroup buffergroups
   autocmd BufNewFile,BufRead *.rss setfiletype xml
   autocmd BufNewFile,BufRead *.scss setfiletype css.scss
   autocmd BufNewFile,BufRead Capfile,Rakefile,Vagrantfile setfiletype ruby
+  autocmd BufNewFile,BufRead *.talon setfiletype talon
 augroup END
 
 autocmd BufWritePost .vimrc so $MYVIMRC
