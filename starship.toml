@@ -67,7 +67,20 @@ show_version = false
 
 [git_branch]
 symbol = " "
-truncation_symbol = ""
+
+[git_status]
+prefix = ": "
+suffix = ""
+style = "bold purple"
+ahead = "🚀"
+untracked = "🤷"
+stashed = "📦"
+modified = "📝"
+staged.value = "++"
+staged.style = "green"
+staged_count.enabled = true
+staged_count.style = "green"
+deleted = "🗑"
 
 [package]
 disabled = true
