@@ -109,3 +109,5 @@ fi
 
 eval "$(zoxide init zsh)"
 eval "$(direnv hook zsh)"
+eval $(thefuck --alias)
+eval "$(hub alias -s)"
