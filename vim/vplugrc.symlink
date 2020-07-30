@@ -79,6 +79,7 @@ Plug 'hashivim/vim-terraform'
 Plug 'juliosueiras/vim-terraform-snippets'
 Plug 'luochen1990/rainbow' " Color codes matching tags, parens, brackets, etc
 Plug 'nathanaelkane/vim-indent-guides'
+Plug 'cespare/vim-toml'
 
 " Colorscheme
 Plug 'arcticicestudio/nord-vim'
