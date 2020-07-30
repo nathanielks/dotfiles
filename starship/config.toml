@@ -32,6 +32,7 @@ prompt_order = [
     "git_commit",
     "git_state",
     "git_status",
+    "custom.time_since_commit",
     "hg_branch",
     "cmd_duration",
     "custom",
@@ -71,7 +72,6 @@ symbol = " "
 [git_status]
 prefix = ": "
 suffix = ""
-style = "bold purple"
 ahead = "🚀"
 untracked = "🤷"
 stashed = "📦"
@@ -81,6 +81,10 @@ staged.style = "green"
 staged_count.enabled = true
 staged_count.style = "green"
 deleted = "🗑"
+
+[git_commit]
+style = "bold purple"
+only_detached = false
 
 [package]
 disabled = true
@@ -99,3 +103,10 @@ style = "bold red"
 [[battery.display]]  # "bold yellow" style when capacity is between 10% and 30%
 threshold = 30
 style = "bold yellow"
+
+[custom.time_since_commit]
+command = "~/.dotfiles/starship/time-since-commit.zsh"
+when = """ git rev-parse --git-dir > /dev/null 2>&1 """
+prefix = " "
+suffix = " ago "
+shell = ["/usr/local/bin/zsh"]
