@@ -1,0 +1,31 @@
+[directory]
+truncate_to_repo = false
+
+[character]
+error_symbol = "✗"
+use_symbol_for_status = true
+
+[time]
+disabled = false
+use_12hr = true
+format = "[%r]"
+style = "bold cyan"
+
+[aws]
+style = "bold blue"
+symbol = " "
+
+[terraform]
+disabled = true
+symbol = "🏎💨 "
+show_version = false
+
+[git_branch]
+symbol = " "
+truncation_symbol = ""
+
+[line_break]
+# disabled = true
+
+[package]
+disabled = true

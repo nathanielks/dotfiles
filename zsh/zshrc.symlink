@@ -4,6 +4,9 @@
 ZSH=$HOME/.oh-my-zsh
 DOTFILES=$HOME/.dotfiles
 
+# Starship config
+export STARSHIP_CONFIG=$DOTFILES/starship.toml
+
 # Set Vim as the editor
 export EDITOR=nvim
 
