@@ -64,7 +64,7 @@ export QMK_HOME=$HOME/Code/GitHub/nathanielks/qmk_firmware
 
 
 # oh-my-zsh
-plugins=(git git-extras git-prompt gitfast ssh-agent)
+plugins=(git git-extras git-prompt gitfast ssh-agent zsh-autosuggestions)
 source $ZSH/oh-my-zsh.sh
 
 unsetopt correct_all
