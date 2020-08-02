@@ -64,7 +64,7 @@ export QMK_HOME=$HOME/Code/GitHub/nathanielks/qmk_firmware
 
 
 # oh-my-zsh
-plugins=(git git-extras git-prompt gitfast ssh-agent zsh-autosuggestions)
+plugins=(aws fzf git git-extras git-prompt gitfast ssh-agent zsh-autosuggestions zsh-completions)
 source $ZSH/oh-my-zsh.sh
 
 unsetopt correct_all
@@ -88,6 +88,13 @@ if [ $(date +'%j') != $(/usr/bin/stat -f '%Sm' -t '%j' ~/.zcompdump) ]; then
 else
   compinit -C
 fi
+
+# FZF tab completion
+source $HOME/.oh-my-zsh/custom/plugins/fzf-tab-completion/zsh/fzf-zsh-completion.sh
+# only aws command completion
+# zstyle ':completion:*:*:aws' fzf-search-display true
+# or for everything
+zstyle ':completion:*' fzf-search-display true
 
 # AWS
 export AWS_PAGER=
