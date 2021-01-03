@@ -38,4 +38,5 @@ group_vars/temp
 .dockerinfo
 
 .lvimrc
+.vim
 #twentynineteen
