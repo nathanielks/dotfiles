@@ -19,7 +19,6 @@ let g:indent_guides_auto_colors = 0
 let g:nord_italic = 1
 let g:nord_italic_comments = 1
 let g:nord_cursor_line_number_background = 1
-
 " colorscheme nord
 
 set termguicolors
@@ -32,9 +31,8 @@ colorscheme monokai_pro
 " autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=none ctermbg=8
 " au ColorScheme * hi Normal ctermbg=none guibg=none
 " au ColorScheme * hi NonText ctermbg=none guibg=none
+
 " }}}
-
-
 
 " Misc {{{
 set ttyfast                     " faster redraw
@@ -137,7 +135,7 @@ inoremap hh <ESC>
 " set foldcolumn=2        " add a fold column
 " set foldmethod=indent
 set foldlevelstart=99   " start with everything unfolded
-nnoremap <space> za
+nnoremap <leader>z
 " }}}
 
 " Line Shortcuts {{{
@@ -177,50 +175,23 @@ nnoremap <leader><space> :noh<CR>
 
 inoremap jk <esc>
 " fold tags
-" nnoremap <leader>ft Vatzf
+
 " strip all trailing whitespace in the current file
 nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
+
 " Fix those pesky situations where you edit & need sudo to save
 cmap w!! w !sudo tee % >/dev/null
+
 " Open verticle split and switch to it
 nnoremap <leader>w <C-w>v<C-w>l
+
 " Open horizontal split and switch to it
 nnoremap <leader>h <C-w>s<C-w>j
-
-augroup conf
-  au!
-  au BufEnter,BufRead *.conf setf conf
-augroup END
-
-
-" UltiSnips {{{
-
-" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<leader><leader>n"
-let g:UltiSnipsJumpBackwardTrigger="<leader><leader>p"
-
-" }}}
-
-" ack.vim {{{
-" nnoremap <leader>a :Ack<space>
-" let g:ackprg = 'ag --vimgrep --smart-case'
-" cnoreabbrev ag Ack
-" cnoreabbrev aG Ack
-" cnoreabbrev Ag Ack
-" cnoreabbrev AG Ack
 " }}}
 
 " Helpful mappings {{{
 " Fix indentation / reindent
 map <F7> mzgg=G`z<CR>
-" Set cwd to current file's directory
-nnoremap <leader>cd :cd %:p:h<CR>:pwd<CR>
-
-" Update syntax highlighting
-noremap <F12> <Esc>:syntax sync fromstart<CR>
-inoremap <F12> <C-o>:syntax sync fromstart<CR>
-
 " }}}
 "
 " .lvimrc {{{
@@ -238,12 +209,10 @@ let g:ale_sign_error = '❌'
 let g:ale_sign_warning = '⚠'
 let g:ale_sign_column_always = 1
 
-let g:ale_fixers = {}
-let g:ale_linters = {}
 let g:ale_fix_on_save = 1
-" let g:ale_javascript_prettier_options = '--single-quote --trailing-comma es5 --no-semi'
 nmap <silent> <C-e>p <Plug>(ale_previous_wrap)
 nmap <silent> <C-e>n <Plug>(ale_next_wrap)
+noremap <Leader><Leader>f :ALEFix<CR>
 " }}}
 
 " coc.nvim {{{
@@ -300,127 +269,6 @@ nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 " }}}
 
-" PHP {{{
-let PHP_removeCRwhenUnix=1
-let g:PHP_vintage_case_default_indent = 1
-
-function! PhpSyntaxOverride()
-  hi! def link phpDocTags  phpDefine
-  hi! def link phpDocParam phpType
-endfunction
-
-augroup phpSyntaxOverride
-  autocmd!
-  autocmd FileType php call PhpSyntaxOverride()
-augroup END
-
-let g:ale_php_phpcs_standard = "./ruleset.xml"
-let g:ale_fixers['php'] = ['phpcbf']
-
-let g:pdv_template_dir = $HOME ."/.vim/plugged/pdv/templates_snip"
-" nnoremap <leader>cp :call PhpDocSingle()<CR>
-nnoremap  <leader>cp :call pdv#DocumentWithSnip()<CR>
-let g:wordpress_vim_wordpress_path = "./wordpress"
-
-" https://www.erickpatrick.net/blog/my-neovim-setup-for-php-development
-if executable('intelephense')
-  augroup LspPHPIntelephense
-    au!
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'intelephense',
-        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'intelephense --stdio']},
-        \ 'whitelist': ['php'],
-        \ 'initialization_options': {'storagePath': '/tmp/intelephense'},
-        \ 'workspace_config': {
-        \   'intelephense': {
-        \     'files': {
-        \       'maxSize': 1000000,
-        \       'associations': ['*.php', '*.phtml'],
-        \       'exclude': [],
-        \     },
-        \     'completion': {
-        \       'insertUseDeclaration': v:true,
-        \       'fullyQualifyGlobalConstantsAndFunctions': v:false,
-        \       'triggerParameterHints': v:true,
-        \       'maxItems': 100,
-        \     },
-        \     'format': {
-        \       'enable': v:true
-        \     },
-        \   },
-        \ }
-        \})
-  augroup END
-endif
-" }}}
-
-" Javascript v1 {{{
-" let g:fixmyjs_rc_path = './.eslintrc'
-" let g:jsx_ext_required = 0
-
-noremap <Leader><Leader>f :ALEFix<CR>
-
-" autocmd FileType javascript.jsx runtime! ftplugin/html/sparkup.vim
-" autocmd FileType ejs runtime! ftplugin/html/sparkup.vim
-
-" }}}
-
-" Javascript v2 {{{
-let g:ale_linter_aliases = {'typescriptreact': 'typescript'}
-let g:ale_linters['javascript'] = ['eslint']
-let g:ale_fixers['javascript'] = ['eslint']
-let g:ale_fixers['typescript'] = ['eslint']
-let g:ale_fixers['typescriptreact'] = ['eslint']
-" let g:ale_linters['javascript'] = ['standard']
-" let g:ale_linters['typescript'] = ['standard']
-" let g:ale_linters['typescriptreact'] = ['standard']
-" let g:ale_fixers['javascript'] = ['standard']
-" let g:ale_fixers['typescript'] = ['standard']
-" let g:ale_fixers['typescriptreact'] = ['standard']
-let g:ale_fixers['yaml'] = ['prettier']
-let g:ale_fixers['json'] = ['prettier']
-
-autocmd BufEnter *.{js,jsx,ts,tsx} :syntax sync fromstart
-autocmd BufLeave *.{js,jsx,ts,tsx} :syntax sync clear
-
-" if isdirectory('./node_modules') && isdirectory('./node_modules/prettier')
-  " let g:coc_global_extensions += ['coc-prettier']
-" endif
-
-" if isdirectory('./node_modules') && isdirectory('./node_modules/eslint')
-  " let g:coc_global_extensions += ['coc-eslint']
-" endif
-" }}}
-
-" Ruby {{{
-" Teach vim to syntax highlight Vagrantfile as ruby
-augroup vagrant
-  au!
-  au BufRead,BufNewFile Vagrantfile set filetype=ruby
-augroup END
-" }}}
-
-" Go {{{
-"
-let g:go_fmt_command = "goimports"
-let g:go_def_mapping_enabled = 0
-let g:go_def_mode='gopls'
-let g:go_info_mode='gopls'
-
-augroup go
-  au!
-  au FileType go nmap <leader>R <Plug>(go-run)
-  au FileType go nmap <leader>B <Plug>(go-build)
-  au FileType go nmap <leader>T <Plug>(go-test)
-  au FileType go nmap <leader>C <Plug>(go-coverage)
-augroup END
-" }}}
-
-" Terraform {{{
-let g:terraform_fmt_on_save = 1
-" }}}
-
-
 " Powerline {{{
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
@@ -432,15 +280,6 @@ let g:airline#extensions#ale#enabled = 1
 set laststatus=2 " the last window will have a status line
 let g:airline#extensions#whitespace#enabled=0
 " }}}
-
-" CtrlP {{{
-let g:ctrlp_match_window = 'bottom,order:ttb'
-let g:ctrlp_switch_buffer = 0
-let g:ctrlp_working_path_mode = 0
-let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)|vendor|node_modules|public$'
-" map <leader>b :CtrlPBuffer<cr>
-" }}}
-
 
 " fzf {{{
 
@@ -464,8 +303,8 @@ if executable("rg")
 
 	command! -nargs=* -bang Rg call RipgrepFzf(<q-args>, <bang>0)
 endif
+
 nmap <Leader>f :Files<CR>
-nmap <Leader>G :GFiles<CR>
 nmap <Leader>b :Buffers<CR>
 nmap <Leader>h :History<CR>
 nmap <Leader>t :BTags<CR>
@@ -488,56 +327,15 @@ highlight link multiple_cursors_visual Visual
 
 " NERDTree {{{
 let NERDTreeShowHidden=1
-let g:NERDTreeWinSize = 26
+let g:NERDTreeWinSize = 30
 let NERDSpaceDelims=1
 " }}}
-
-" AutoGroups {{{
-augroup configgroup
-  autocmd!
-  autocmd VimEnter * highlight clear SignColumn
-  autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
-  autocmd BufEnter *.cls setlocal filetype=java
-  autocmd BufEnter *.zsh-theme setlocal filetype=zsh
-  autocmd BufEnter .vplugrc setlocal filetype=vim
-  autocmd BufEnter Makefile setlocal noexpandtab
-  autocmd BufEnter *.sh.tpl setlocal filetype=sh
-  autocmd BufEnter *.sls,*.neon,*.yml.tpl,*.template setlocal filetype=yaml expandtab
-augroup END
-
-augroup filetypegroup
-  autocmd FileType php,twig setlocal ts=4 sts=4 sw=4
-  autocmd FileType python,cfg setlocal ts=4 sts=4 sw=4
-  autocmd FileType cs setlocal ts=4 sts=4 sw=4
-  autocmd FileType apiblueprint,terraform setlocal ts=2 sts=2 sw=2
-  autocmd FileType javascript,html,css,sass,less,coffee setlocal ts=4 sts=4 sw=4 expandtab
-  autocmd FileType jade,html.handlebars,blade setlocal ts=2 sts=2 sw=2
-  autocmd FileType ruby,pml,eruby,haml setlocal ts=2 sts=2 sw=2
-  autocmd FileType arduino setlocal ts=2 sts=2 sw=2
-  autocmd FileType go setlocal ts=2 sts=2 sw=2 noexpandtab
-  autocmd FileType markdown setlocal wrap textwidth=0 ts=4 sts=4 sw=4
-  autocmd FileType vim setlocal wrap foldmethod=marker
-  autocmd filetype json setlocal ts=4 sts=4 sw=4 expandtab
-  autocmd filetype yaml setlocal ts=2 sts=2 sw=2 expandtab
-  autocmd FileType sh setlocal tabstop=2 shiftwidth=2 softtabstop=2
-augroup END
-
-augroup buffergroups
-  autocmd BufNewFile,BufRead *.rss setfiletype xml
-  autocmd BufNewFile,BufRead *.scss setfiletype css.scss
-  autocmd BufNewFile,BufRead Capfile,Rakefile,Vagrantfile setfiletype ruby
-  autocmd BufNewFile,BufRead *.talon setfiletype talon
-augroup END
-
-autocmd BufWritePost .vimrc so $MYVIMRC
 
 " Restore cursor position upon reopening files {{{
 autocmd BufReadPost *
       \ if &filetype != "gitcommit" && line("'\"") > 0 && line("'\"") <= line("$") |
       \   exe "normal! g`\"" |
       \ endif
-" }}}
-
 " }}}
 
 " Backups {{{
@@ -549,18 +347,9 @@ set noswapfile
 let g:surround_indent = 1
 " }}}
 
-" SnipMate {{{
-let g:snipMate = {}
-let g:snipMate.scope_aliases = {}
-let g:snipMate.scope_aliases['eruby'] = 'eruby,eruby-rails'
-" }}}
-
 " Rainbow Parentheses Improved {{{
 let g:rainbow_active = 1
-noremap <leader>R :RainbowToggle<CR>
 " }}}
-
-
 
 " Custom Functions {{{
 " strips trailing whitespace at the end of files. this
@@ -599,10 +388,128 @@ endfunction
 nnoremap <leader>vt :VTerm<CR>
 set splitright
 " }}}
+"
+" AutoGroups {{{
+augroup conf
+  au!
+  au BufEnter,BufRead *.conf setf conf
+augroup END
 
-" AutoFormat {{{
-" au BufWrite *.json :Autoformat
-" let g:autoformat_autoindent = 0
-" let g:autoformat_retab = 0
-" let g:autoformat_remove_trailing_spaces = 0
+augroup configgroup
+  autocmd!
+  autocmd VimEnter * highlight clear SignColumn
+  autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
+  autocmd BufEnter *.cls setlocal filetype=java
+  autocmd BufEnter *.zsh-theme setlocal filetype=zsh
+  autocmd BufEnter .vplugrc setlocal filetype=vim
+  autocmd BufEnter Makefile setlocal noexpandtab
+  autocmd BufEnter *.sh.tpl setlocal filetype=sh
+  autocmd BufEnter *.sls,*.neon,*.yml.tpl,*.template setlocal filetype=yaml expandtab
+augroup END
+
+augroup filetypegroup
+  autocmd FileType php,twig setlocal ts=4 sts=4 sw=4
+  autocmd FileType python,cfg setlocal ts=4 sts=4 sw=4
+  autocmd FileType cs setlocal ts=4 sts=4 sw=4
+  autocmd FileType apiblueprint,terraform setlocal ts=2 sts=2 sw=2
+  autocmd FileType javascript,html,css,sass,less,coffee setlocal ts=4 sts=4 sw=4 expandtab
+  autocmd FileType jade,html.handlebars,blade setlocal ts=2 sts=2 sw=2
+  autocmd FileType ruby,pml,eruby,haml setlocal ts=2 sts=2 sw=2
+  autocmd FileType arduino setlocal ts=2 sts=2 sw=2
+  autocmd FileType go setlocal ts=2 sts=2 sw=2 noexpandtab
+  autocmd FileType markdown setlocal wrap textwidth=0 ts=4 sts=4 sw=4
+  autocmd FileType vim setlocal wrap foldmethod=marker
+  autocmd filetype json setlocal ts=4 sts=4 sw=4 expandtab
+  autocmd filetype yaml setlocal ts=2 sts=2 sw=2 expandtab
+  autocmd FileType sh setlocal tabstop=2 shiftwidth=2 softtabstop=2
+augroup END
+
+augroup buffergroups
+  autocmd BufNewFile,BufRead *.rss setfiletype xml
+  autocmd BufNewFile,BufRead *.scss setfiletype css.scss
+  autocmd BufNewFile,BufRead Capfile,Rakefile,Vagrantfile setfiletype ruby
+  autocmd BufNewFile,BufRead *.talon setfiletype talon
+augroup END
+
+autocmd BufWritePost .vimrc so $MYVIMRC
+" }}}
+"
+" PHP {{{
+let PHP_removeCRwhenUnix=1
+let g:PHP_vintage_case_default_indent = 1
+
+let g:ale_php_phpcs_standard = "./ruleset.xml"
+let g:ale_fixers['php'] = ['phpcbf']
+
+let g:wordpress_vim_wordpress_path = "./wordpress"
+
+" https://www.erickpatrick.net/blog/my-neovim-setup-for-php-development
+if executable('intelephense')
+  augroup LspPHPIntelephense
+    au!
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'intelephense',
+        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'intelephense --stdio']},
+        \ 'whitelist': ['php'],
+        \ 'initialization_options': {'storagePath': '/tmp/intelephense'},
+        \ 'workspace_config': {
+        \   'intelephense': {
+        \     'files': {
+        \       'maxSize': 1000000,
+        \       'associations': ['*.php', '*.phtml'],
+        \       'exclude': [],
+        \     },
+        \     'completion': {
+        \       'insertUseDeclaration': v:true,
+        \       'fullyQualifyGlobalConstantsAndFunctions': v:false,
+        \       'triggerParameterHints': v:true,
+        \       'maxItems': 100,
+        \     },
+        \     'format': {
+        \       'enable': v:true
+        \     },
+        \   },
+        \ }
+        \})
+  augroup END
+endif
+" }}}
+
+" Javascript v2 {{{
+let g:ale_linter_aliases = {'typescriptreact': 'typescript'}
+
+" if isdirectory('./node_modules') && isdirectory('./node_modules/prettier')
+  " let g:coc_global_extensions += ['coc-prettier']
+" endif
+
+" if isdirectory('./node_modules') && isdirectory('./node_modules/eslint')
+  " let g:coc_global_extensions += ['coc-eslint']
+" endif
+" }}}
+
+" Ruby {{{
+" Teach vim to syntax highlight Vagrantfile as ruby
+augroup vagrant
+  au!
+  au BufRead,BufNewFile Vagrantfile set filetype=ruby
+augroup END
+" }}}
+
+" Go {{{
+let g:go_fmt_command = "goimports"
+let g:go_def_mapping_enabled = 0
+let g:go_def_mode='gopls'
+let g:go_info_mode='gopls'
+
+augroup go
+  au!
+  au FileType go nmap <leader>R <Plug>(go-run)
+  au FileType go nmap <leader>B <Plug>(go-build)
+  au FileType go nmap <leader>T <Plug>(go-test)
+  au FileType go nmap <leader>C <Plug>(go-coverage)
+augroup END
+" }}}
+
+" Terraform {{{
+let g:terraform_fmt_on_save = 1
 " }}}
