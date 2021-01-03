@@ -109,8 +109,16 @@ set showbreak=↪\
 set listchars=tab:.\ ,trail:␣,extends:…,eol:¬
 set formatoptions+=1    " When wrapping paragraphs, don't end lines with 1-letter words (looks stupid))"
 set updatetime=300 " Smaller updatetime for CursorHold & CursorHoldI
-set signcolumn=yes " always show signcolumns
 set shortmess+=c " don't give |ins-completion-menu| messages.
+
+" Always show the signcolumn, otherwise it would shift the text each time
+" diagnostics appear/become resolved.
+if has("patch-8.1.1564")
+  " Recently vim can merge signcolumn and number column into one
+  set signcolumn=number
+else
+  set signcolumn=yes
+endif
 " }}}
 
 " Searching {{{
@@ -164,8 +172,8 @@ nnoremap <C-l> <C-w>l
 
 " Leader Shortcuts {{{
 let mapleader=","
-nnoremap <leader>n :NERDTreeToggle<CR>
 nnoremap <leader>ev :vsp $MYVIMRC<CR>
+nnoremap <leader>vp :vsp ~/.vplugrc<CR>
 nnoremap <leader>ez :vsp ~/.zshrc<CR>
 nnoremap <leader>sv :source $MYVIMRC<CR>
 nmap <leader>l :set list!<CR>
@@ -205,6 +213,8 @@ let g:localvimrc_whitelist=[
 " }}}
 "
 " ale {{{
+let g:ale_linters = {}
+let g:ale_fixers = {}
 let g:ale_sign_error = '❌'
 let g:ale_sign_warning = '⚠'
 let g:ale_sign_column_always = 1
@@ -216,8 +226,22 @@ noremap <Leader><Leader>f :ALEFix<CR>
 " }}}
 
 " coc.nvim {{{
+let g:coc_global_extensions = [
+  \ 'coc-css',
+  \ 'coc-diagnostic',
+  \ 'coc-emmet',
+  \ 'coc-highlight',
+  \ 'coc-html',
+  \ 'coc-json',
+  \ 'coc-phpls',
+  \ 'coc-sh',
+  \ 'coc-tsserver',
+  \ 'coc-yaml',
+  \]
+
 " Use tab for trigger completion with characters ahead and navigate.
-" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config.
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
       \ <SID>check_back_space() ? "\<TAB>" :
@@ -230,43 +254,62 @@ function! s:check_back_space() abort
 endfunction
 
 " Use <c-space> to trigger completion.
-inoremap <silent><expr> <c-space> coc#refresh()
+if has('nvim')
+  inoremap <silent><expr> <c-space> coc#refresh()
+else
+  inoremap <silent><expr> <c-@> coc#refresh()
+endif
 
-" Use `[c` and `]c` to navigate diagnostics
-nmap <silent> [c <Plug>(coc-diagnostic-prev)
-nmap <silent> ]c <Plug>(coc-diagnostic-next)
+" Make <CR> auto-select the first completion item and notify coc.nvim to
+" format on enter, <cr> could be remapped by other vim plugin
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
-" Remap keys for gotos
+" Use `[g` and `]g` to navigate diagnostics
+" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+" GoTo code navigation.
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
-" Use U to show documentation in preview window
-nnoremap <silent> U :call <SID>show_documentation()<CR>
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call <SID>show_documentation()<CR>
 
-" Remap for rename current word
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
+  else
+    execute '!' . &keywordprg . " " . expand('<cword>')
+  endif
+endfunction
+
+" Highlight the symbol and its references when holding the cursor.
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Symbol renaming.
 nmap <leader>rn <Plug>(coc-rename)
 
-" Remap for format selected region
-vmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
-" Show all diagnostics
-nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
-" Manage extensions
-nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
-" Show commands
-nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
-" Find symbol of current document
-nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
-" Search workspace symbols
-nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
-" Do default action for next item.
-nnoremap <silent> <space>j  :<C-u>CocNext<CR>
-" Do default action for previous item.
-nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
-" Resume latest coc list
-nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+" Formatting selected code.
+xmap <leader><leader>f  <Plug>(coc-format-selected)
+nmap <leader><leader>f  <Plug>(coc-format-selected)
+
+" TODO I'd like to figure out a cleaner way of doing this, if possible
+autocmd BufEnter *.js,*.ts,*.jsx,*.tsx
+      \ nmap <leader><leader>f  :CocCommand eslint.executeAutofix<CR> |
+      \ xmap <leader><leader>f  :CocCommand eslint.executeAutofix<CR> |
+autocmd BufLeave *.js,*.ts,*.jsx,*.tsx
+      \ nmap <leader><leader>f  <Plug>(coc-format-selected) |
+      \ xmap <leader><leader>f  <Plug>(coc-format-selected) |
+
+" Trigger codeaction (a popup with available actions that can be performed
+" under the cursor)
+nmap <leader>do <Plug>(coc-codeaction)
 " }}}
 
 " Powerline {{{
@@ -282,7 +325,6 @@ let g:airline#extensions#whitespace#enabled=0
 " }}}
 
 " fzf {{{
-
 if executable("rg")
   " ## rg
   set grepprg=rg\ --vimgrep                                                       "Use ripgrep for grepping
@@ -316,6 +358,12 @@ nmap <Leader>A :RgAll<Space>
 nmap <Leader>H :Helptags!<CR>
 nmap <Leader>C :Commands<CR>
 nmap <Leader>M :Maps<CR>
+
+let g:fzf_action = {
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-s': 'split',
+  \ 'ctrl-v': 'vsplit'
+  \}
 " }}}
 
 " Multi Cursor {{{
@@ -326,9 +374,13 @@ highlight link multiple_cursors_visual Visual
 " }}}
 
 " NERDTree {{{
-let NERDTreeShowHidden=1
+let g:NERDSpaceDelims=1
+let g:NERDTreeMinimalUI = 0
+let g:NERDTreeShowHidden = 1
 let g:NERDTreeWinSize = 30
-let NERDSpaceDelims=1
+nnoremap <leader>n :NERDTreeToggle<CR>
+" Automaticaly close nvim if NERDTree is only thing left open
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 " }}}
 
 " Restore cursor position upon reopening files {{{
@@ -385,8 +437,9 @@ endfunction
 " }}}
 
 " Terminal Emulation {{{
-nnoremap <leader>vt :VTerm<CR>
 set splitright
+set splitbelow
+nnoremap <leader>vt :VTerm<CR>
 " }}}
 "
 " AutoGroups {{{
@@ -478,13 +531,21 @@ endif
 " Javascript v2 {{{
 let g:ale_linter_aliases = {'typescriptreact': 'typescript'}
 
-" if isdirectory('./node_modules') && isdirectory('./node_modules/prettier')
-  " let g:coc_global_extensions += ['coc-prettier']
-" endif
+" enable highlighting when I enter a JavaScript or TypeScript buffer, and
+" disable it when I leave:
+" https://thoughtbot.com/blog/modern-typescript-and-react-development-in-vim
+autocmd BufEnter *.{js,jsx,ts,tsx} :syntax sync fromstart
+autocmd BufLeave *.{js,jsx,ts,tsx} :syntax sync clear
 
-" if isdirectory('./node_modules') && isdirectory('./node_modules/eslint')
-  " let g:coc_global_extensions += ['coc-eslint']
-" endif
+" conditionally load coc-prettier if in use
+if isdirectory('./node_modules') && isdirectory('./node_modules/prettier')
+  let g:coc_global_extensions += ['coc-prettier']
+endif
+
+" conditionally load coc-eslint if in use
+if isdirectory('./node_modules') && isdirectory('./node_modules/eslint')
+  let g:coc_global_extensions += ['coc-eslint']
+endif
 " }}}
 
 " Ruby {{{
