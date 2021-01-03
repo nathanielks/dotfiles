@@ -15,7 +15,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'rstacruz/sparkup', {'rtp': 'vim/'}
 "Plug 'kien/ctrlp.vim'
-Plug '/usr/local/opt/fzf'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'Chiel92/vim-autoformat'
@@ -24,6 +24,7 @@ Plug 'mklabs/split-term.vim'
 Plug 'bogado/file-line'
 Plug 'chaoren/vim-wordmotion'
 " Look into https://github.com/wincent/ferret
+Plug 'NLKNguyen/papercolor-theme'
 
 " JavaScript
 Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
@@ -49,6 +50,9 @@ Plug '2072/PHP-Indenting-for-VIm'
 " WordPress
 Plug 'dsawardekar/wordpress.vim'
 
+" Nginx
+Plug 'chr4/nginx.vim'
+
 " Go
 Plug 'fatih/vim-go'
 
@@ -60,11 +64,9 @@ Plug '~/Code/GitHub/nathanielks/vim-snippets'
 
 
 " Linting
-" Plug 'dense-analysis/ale', {'tag': 'v2.4.0'}
-Plug 'dense-analysis/ale'
-"Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'dense-analysis/ale', {'tag': 'v3.0.0'}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 let g:coc_global_extensions = [
-  \ 'coc-tsserver',
   \ 'coc-phpls'
   \ ]
 

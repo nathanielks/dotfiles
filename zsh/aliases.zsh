@@ -1,6 +1,7 @@
 alias reload!="source ~/.zshrc"
 alias a='php artisan'
 alias o='open . && fg';
+alias y='yarn'
 alias tkill='tmux kill-session -t'
 alias vdu='vagrant destroy -f && vagrant up'
 alias ajdpush="composer update && bundle exec cap staging deploy && cd ../servers && ansible-playbook -i hosts/staging -K restart.yml"
@@ -26,6 +27,7 @@ alias gd='g diff'
 alias gdk='g difftool'
 alias gupdate='gco master; gpa; g delete-merged-branches'
 alias tf='terraform'
+alias tfu='terraform force-unlock'
 # alias tp='terraform plan -out plan | landscape'
 alias ta='terraform apply plan'
 alias be='bundle exec'
@@ -52,6 +54,7 @@ alias typora="open -a typora"
 alias nn="nnn -dHS"
 alias pip="/usr/local/bin/pip3"
 alias als="composer local-server"
+alias alsdc='COMPOSE_PROJECT_NAME=$(basename `pwd`) VOLUME=$(pwd) PWD=$(pwd)/vendor/altis/local-server/docker/ docker-compose -f vendor/altis/local-server/docker/docker-compose.yml'
 
 # Docker
 alias docker-stop-all='docker stop $(docker ps -a -q)'

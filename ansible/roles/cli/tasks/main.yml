@@ -107,6 +107,8 @@
     name:
       - n
       - neovim
+      - intelephense
+      - diagnostic-languageserver
   tags:
     - nodejs
     - npm

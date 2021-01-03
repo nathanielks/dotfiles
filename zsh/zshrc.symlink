@@ -22,7 +22,8 @@ export ANSIBLE_COW_SELECTION=random
 export EDITOR='nvim'
 
 # Go config
-export GOPATH=$HOME/Code/golang
+export GOPATH=$HOME/go
+export GOBIN="$GOPATH/bin"
 export GOROOT=/usr/local/opt/go/libexec
 
 # tj/n config
@@ -39,13 +40,12 @@ PATH=$PATH:/usr/local/share/npm/lib/node_modules # Add Node modules
 PATH=$PATH:/usr/local/share/npm/bin # Add node binaries to PATH
 PATH=$PATH:/usr/local/aws/bin
 PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
-PATH=$PATH:$GOPATH/bin
+PATH=$PATH:$GOBIN
 PATH="$PATH:./vendor/bin"
 PATH=$PATH:$HOME/.composer/vendor/bin # Add composer stuff to PATH
 PATH="/usr/local/opt/php@7.2/bin:$PATH"
 PATH="/usr/local/opt/php@7.2/sbin:$PATH"
 PATH=$PATH:~/Work/bin
-PATH=$PATH:/usr/local/n/bin
 PATH=$PATH:~/Code/GitHub/nathanielks/docker-cli-helpers/bin
 PATH=$PATH:.
 PATH=$PATH:../bin
@@ -57,14 +57,21 @@ PATH="/usr/local/opt/php@7.3/bin:$PATH"
 PATH=$PATH:~/Work/bin
 PATH=$PATH:~/Code/GitHub/nathanielks/docker-cli-helpers/bin
 PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+PATH="$PATH:/usr/local/opt/mysql@5.7/bin"
 export PATH
+
+LIBRARY_PATH="/usr/local/opt"
+export LIBRARY_PATH
+
+setopt auto_cd
+cdpath=($GOPATH)
 
 # QMK
 export QMK_HOME=$HOME/Code/GitHub/nathanielks/qmk_firmware
 
 
 # oh-my-zsh
-plugins=(aws fzf git git-extras git-prompt gitfast ssh-agent zsh-autosuggestions zsh-completions)
+plugins=(aws fzf git git-extras git-prompt gitfast zsh-autosuggestions zsh-completions)
 source $ZSH/oh-my-zsh.sh
 
 unsetopt correct_all
@@ -104,9 +111,6 @@ source /usr/local/share/zsh/site-functions/_aws
 autoload bashcompinit
 bashcompinit
 
-zstyle :omz:plugins:ssh-agent agent-forwarding on
-zstyle :omz:plugins:ssh-agent identities id_rsa id_rsa_legacy id_ed25519
-
 # ZSH Completions
 fpath=(/usr/local/share/zsh-completions $fpath)
 
@@ -114,11 +118,12 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 
 
 if type rg &> /dev/null; then
-  export FZF_DEFAULT_COMMAND='rg --files --hidden'
+  export FZF_DEFAULT_COMMAND='rg --files --hidden --no-ignore'
 fi
 
 eval "$(zoxide init zsh)"
 eval "$(direnv hook zsh)"
 eval $(thefuck --alias)
 eval "$(hub alias -s)"
+
 eval "$(starship init zsh)"

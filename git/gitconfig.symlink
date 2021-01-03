@@ -16,13 +16,14 @@
  pager = delta --theme='Monokai Extended'
 [interactive]
     diffFilter = delta --color-only
+	singleKey = yes
 [difftool]
 	prompt = false
 [mergetool]
 	prompt = false
 [diff]
   tool = Kaleidoscope
-	noprefix = true
+	; noprefix = true
 [commit]
 	#gpgsign = true
 [mergetool "Kaleidoscope"]
@@ -49,5 +50,7 @@
   stash-all = stash save --include-untracked
   # We wanna grab those pesky un-added files!
   # https://git-scm.com/docs/git-stash#
+; [pull]
+	; ff = only
 [pull]
-	ff = only
+	rebase = false
