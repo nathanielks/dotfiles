@@ -42,6 +42,13 @@ Plug 'elzr/vim-json'
 Plug 'leafgarland/typescript-vim'
 Plug 'peitalin/vim-jsx-typescript'
 
+" PHP
+Plug 'tobyS/vmustache'
+Plug 'YaroslavMolchan/pdv'
+
+" Go
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+
 " Syntax highlighting
 Plug 'sheerun/vim-polyglot'
 

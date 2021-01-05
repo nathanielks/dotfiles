@@ -510,6 +510,9 @@ if executable('intelephense')
         \ }
         \})
   augroup END
+
+let g:pdv_template_dir = $HOME ."/.vim/plugged/pdv/templates"
+nnoremap <C-p> :call pdv#DocumentCurrentLine()<CR>
 endif
 " }}}
 
