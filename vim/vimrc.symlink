@@ -555,6 +555,10 @@ augroup END
 " }}}
 
 " Go {{{
+"
+" Go snippets:
+" https://github.com/fatih/vim-go/blob/master/gosnippets/UltiSnips/go.snippets
+
 let g:go_fmt_command = "goimports"
 let g:go_def_mapping_enabled = 0
 let g:go_def_mode='gopls'
@@ -562,10 +566,10 @@ let g:go_info_mode='gopls'
 
 augroup go
   au!
-  au FileType go nmap <leader>R <Plug>(go-run)
-  au FileType go nmap <leader>B <Plug>(go-build)
-  au FileType go nmap <leader>T <Plug>(go-test)
-  au FileType go nmap <leader>C <Plug>(go-coverage)
+  au FileType go nmap <leader><leader>r <Plug>(go-run)
+  au FileType go nmap <leader><leader>b <Plug>(go-build)
+  au FileType go nmap <leader><leader>t <Plug>(go-test)
+  au FileType go nmap <leader><leader>c <Plug>(go-coverage)
 augroup END
 
 " https://dev.to/jogendra/using-vim-for-go-development-5hc6
