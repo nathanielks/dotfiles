@@ -474,7 +474,18 @@ augroup END
 
 autocmd BufWritePost .vimrc so $MYVIMRC
 " }}}
-"
+
+" Snippets {{{
+
+" Trigger configuration. You need to change this to something other than <tab> if you use one of the following:
+" - https://github.com/Valloric/YouCompleteMe
+" - https://github.com/nvim-lua/completion-nvim
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-f>"
+let g:UltiSnipsJumpBackwardTrigger="<c-b>"
+
+" }}}
+
 " PHP {{{
 " https://marioyepes.com/vim-setup-for-modern-web-development/#intellisense
 let PHP_removeCRwhenUnix=1

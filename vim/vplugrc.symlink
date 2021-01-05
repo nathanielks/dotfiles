@@ -17,6 +17,10 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-surround'
 
+" Snippets
+Plug 'SirVer/UltiSnips'
+Plug 'honza/vim-snippets'
+
 " NERDTree
 Plug 'scrooloose/nerdtree'
 Plug 'ryanoasis/vim-devicons'
