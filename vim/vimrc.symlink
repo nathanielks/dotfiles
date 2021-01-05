@@ -459,7 +459,7 @@ augroup filetypegroup
   autocmd FileType go setlocal ts=2 sts=2 sw=2 noexpandtab
   autocmd FileType markdown setlocal wrap textwidth=0 ts=4 sts=4 sw=4
   autocmd FileType vim setlocal wrap foldmethod=marker
-  autocmd filetype json setlocal ts=4 sts=4 sw=4 expandtab
+  autocmd filetype json setlocal ts=2 sts=2 sw=2 expandtab
   autocmd filetype yaml setlocal ts=2 sts=2 sw=2 expandtab
   autocmd FileType sh setlocal tabstop=2 shiftwidth=2 softtabstop=2
 augroup END
