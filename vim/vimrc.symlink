@@ -302,14 +302,22 @@ nmap <leader>do <Plug>(coc-codeaction)
 " }}}
 
 " Powerline {{{
-let g:airline#extensions#tabline#left_sep = ' '
-let g:airline#extensions#tabline#left_alt_sep = '|'
-let g:airline_left_sep = ''
-let g:airline_left_alt_sep = ''
-let g:airline_right_sep = ''
-let g:airline_right_alt_sep = ''
 set laststatus=2 " the last window will have a status line
-let g:airline#extensions#whitespace#enabled=0
+let g:lightline = {
+      \ 'component_function': {
+      \   'filename': 'LightlineTruncatedFileName',
+      \ },
+      \ }
+
+" https://github.com/itchyny/lightline.vim/issues/532#issuecomment-745992513
+function! LightlineTruncatedFileName()
+  let l:filePath = expand('%')
+  if winwidth(0) > 100
+    return l:filePath
+  else
+    return pathshorten(l:filePath)
+  endif
+endfunction
 " }}}
 
 " fzf {{{
