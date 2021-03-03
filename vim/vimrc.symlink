@@ -208,6 +208,7 @@ let g:localvimrc_whitelist=[
       \'/Users/aang/Work/',
       \'/Users/aang/Work/repos/vantage-backend',
       \'/Users/aang/Work/repos/vantage',
+      \'/Users/aang/Work/repos/product-dev',
       \'/Users/aang/Code/letters-to-reps/frontend'
       \]
 " }}}
@@ -471,6 +472,7 @@ augroup filetypegroup
   autocmd filetype json setlocal ts=2 sts=2 sw=2 expandtab
   autocmd filetype yaml setlocal ts=2 sts=2 sw=2 expandtab
   autocmd FileType sh setlocal tabstop=2 shiftwidth=2 softtabstop=2
+  autocmd FileType pullrequest setlocal nowrap textwidth=0 wrapmargin=0
 augroup END
 
 augroup buffergroups
