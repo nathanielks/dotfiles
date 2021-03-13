@@ -18,10 +18,11 @@
       - bettertouchtool
       - dash
       - docker
+      - figma
+      - firefox
       - font-fira-code
       - font-fira-code-nerd-font
       - font-source-code-pro
-      - firefox
       - google-chrome
       - google-drive-file-stream
       - gpg-suite
