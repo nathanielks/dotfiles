@@ -7,8 +7,8 @@ DOTFILES=$HOME/.dotfiles
 # Starship config
 export STARSHIP_CONFIG=$DOTFILES/starship/config.toml
 
-# Set Vim as the editor
-export EDITOR=nvim
+# Set LunarVim as the editor
+export EDITOR=lvim
 
 # Specify your defaults in this environment variable
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
@@ -19,7 +19,6 @@ export TF_LOG_PATH=
 export TF_INPUT=
 
 export ANSIBLE_COW_SELECTION=random
-export EDITOR='nvim'
 
 # Go config
 export GOPATH=$HOME/go
@@ -35,6 +34,7 @@ PATH="/usr/local/sbin:$PATH"
 PATH="/usr/local/opt/curl/bin:$PATH"
 PATH="/usr/local/opt/bc/bin:$PATH"
 PATH="./node_modules/.bin:$PATH"
+PATH="../node_modules/.bin:$PATH"
 PATH=$DOTFILES/bin:$PATH
 PATH=$PATH:/usr/local/share/npm/lib/node_modules # Add Node modules
 PATH=$PATH:/usr/local/share/npm/bin # Add node binaries to PATH
@@ -58,6 +58,12 @@ PATH=$PATH:~/Work/bin
 PATH=$PATH:~/Code/GitHub/nathanielks/docker-cli-helpers/bin
 PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 PATH="$PATH:/usr/local/opt/mysql@5.7/bin"
+PATH="$PATH:$HOME/.local/bin"
+PATH="$PATH:$HOME/Library/Python/3.9/bin"
+PATH="$PATH:/usr/local/lima/bin"
+if [ -d "/usr/local/adb-fastboot/platform-tools" ] ; then
+ PATH="/usr/local/adb-fastboot/platform-tools:$PATH"
+fi
 export PATH
 
 LIBRARY_PATH="/usr/local/opt"
@@ -71,7 +77,7 @@ export QMK_HOME=$HOME/Code/GitHub/nathanielks/qmk_firmware
 
 
 # oh-my-zsh
-plugins=(aws fzf git git-extras git-prompt gitfast zsh-autosuggestions zsh-completions)
+plugins=(aws fzf git git-extras git-prompt gitfast zsh-autosuggestions zsh-completions ssh-agent)
 source $ZSH/oh-my-zsh.sh
 
 unsetopt correct_all
@@ -107,6 +113,9 @@ zstyle ':completion:*' fzf-search-display true
 export AWS_PAGER=
 source /usr/local/share/zsh/site-functions/_aws
 
+# libicu detection
+export LDFLAGS="-L/usr/local/opt/icu4c/lib"
+export CPPFLAGS="-I/usr/local/opt/icu4c/include"
 
 autoload bashcompinit
 bashcompinit
@@ -118,7 +127,7 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 
 
 if type rg &> /dev/null; then
-  export FZF_DEFAULT_COMMAND='rg --files --hidden --no-ignore'
+  export FZF_DEFAULT_COMMAND='rg --files --hidden'
 fi
 
 eval "$(zoxide init zsh)"
@@ -127,3 +136,35 @@ eval $(thefuck --alias)
 eval "$(hub alias -s)"
 
 eval "$(starship init zsh)"
+
+
+export ZEPHYR_TOOLCHAIN_VARIANT="gnuarmemb"
+export GNUARMEMB_TOOLCHAIN_PATH="$HOME/Code/zmk/gcc-arm"
+
+export ZMK_FIRMWARE_DIR="/Users/aang/Code/zmk/firmware"
+export ZMK_CONFIG_DIR="/Users/aang/Code/zmk/zmk-config/config"
+
+function dwest() {
+  WORKDIR="/workspaces/firmware"
+  if [[ "$1" == "build" ]]; then
+    WORKDIR="/workspaces/firmware/app"
+  fi
+
+  docker run --rm \
+    -w "$WORKDIR" \
+    -v "$ZMK_FIRMWARE_DIR:/workspaces/firmware" \
+    -v "$ZMK_CONFIG_DIR:/workspaces/zmk-config" \
+    west west $1 ${@:2}
+    # zmkfirmware/zephyr-west-action-arm $1 ${@:2}
+}
+
+alias kl="dwest build -p -d build/left -b nice_nano -- -DSHIELD=dactyl_manuform_4x5_left -DZMK_CONFIG=/workspaces/zmk-config"
+alias kr="dwest build -p -d build/right -b nice_nano -- -DSHIELD=dactyl_manuform_4x5_right -DZMK_CONFIG=/workspaces/zmk-config"
+
+# tabtab source for electron-forge package
+# uninstall by removing these lines or running `tabtab uninstall electron-forge`
+[[ -f /Users/aang/.npm/_npx/6913fdfd1ea7a741/node_modules/tabtab/.completions/electron-forge.zsh ]] && . /Users/aang/.npm/_npx/6913fdfd1ea7a741/node_modules/tabtab/.completions/electron-forge.zsh
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+eval "$(pyenv init -)"
+
+source /Users/aang/.config/broot/launcher/bash/br

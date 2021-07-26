@@ -36,11 +36,11 @@ alias rc='bundle exec rails c'
 # alias git=hub
 alias v=vagrant
 alias ave='ansible-vault edit '
-alias v='NVIM_TUI_ENABLE_TRUE_COLOR=1 nvim'
-alias vim='NVIM_TUI_ENABLE_TRUE_COLOR=1 nvim'
+alias l='NVIM_TUI_ENABLE_TRUE_COLOR=1 lvim'
+alias v='NVIM_TUI_ENABLE_TRUE_COLOR=1 lvim'
+alias nv='NVIM_TUI_ENABLE_TRUE_COLOR=1 lvim'
 alias r='redux'
 alias bvp='bv vagrant provision'
-alias l='ls -lah --color'
 # http://www.freshblurbs.com/blog/2017/04/16/inspect-docker-volumes-on-mac.html
 # dm-disk ls -l /docker/var/lib/docker/volumes/
 alias dm-disk='docker run --rm -it -v /:/docker alpine:edge $@'
@@ -49,6 +49,7 @@ alias flush-dns='sudo killall -HUP mDNSResponder;sudo killall mDNSResponderHelpe
 alias work='cd ~/Work'
 alias git-pull-all="git pull && git submodule sync && git submodule foreach --recursive 'git fetch --tags' && git submodule update --init --recursive;"
 alias gpa='git-pull-all'
+alias gp='git-pull-all; git push'
 alias rgphp="rg -tphp -g '!**/*/vendor' -g '!**/*/lib' -g '!lib/*' -g '!tests/*'"
 alias typora="open -a typora"
 alias nn="nnn -dHS"

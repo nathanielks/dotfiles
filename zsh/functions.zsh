@@ -1,5 +1,33 @@
+function gpsu() {
+  git push --set-upstream origin $(git branch --show-current)
+}
+
 function kp() {
   kill -9 $(lsof -ti :${1})
+}
+
+# FIND PROCESS
+function p(){
+        ps aux | grep -i $1 | grep -v grep
+}
+
+# KILL ALL
+function ka(){
+
+    cnt=$( p $1 | wc -l)  # total count of processes found
+    klevel=${2:-15}       # kill level, defaults to 15 if argument 2 is empty
+
+    echo -e "\nSearching for '$1' -- Found" $cnt "Running Processes .. "
+    p $1
+
+    echo -e '\nTerminating' $cnt 'processes .. '
+
+    ps aux  |  grep -i $1 |  grep -v grep   | awk '{print $2}' | xargs sudo kill -klevel
+    echo -e "Done!\n"
+
+    echo "Running search again:"
+    p "$1"
+    echo -e "\n"
 }
 
 function ff { osascript -e 'tell application "Finder"'\
@@ -9,16 +37,6 @@ function ff { osascript -e 'tell application "Finder"'\
  -e 'end if' -e 'end tell'; };\
 
 function cdff { cd "`ff $@`"; };
-
-function marked(){
-	open -a "Marked 2" $1
-}
-
-function vmarked(){
-  touch $1
-  marked $1
-  vim $1
-}
 
 function tp(){
 	tf validate && tf plan -out plan ${*}
@@ -66,5 +84,19 @@ function test_circle () {
 }
 
 function replace_all() {
-  rg -l $1 | xargs gsed -i '' "s/$1/$2/g"
+  rg -l $1 | xargs gsed -i '' -e "s/$1/$2/g"
+}
+
+# Codi
+# Usage: codi [filetype] [filename]
+function codi() {
+  local syntax="${1:-javascript}"
+  shift
+  vim -c \
+    "let g:startify_disable_at_vimenter = 1 |\
+    set bt=nofile ls=0 noru nonu nornu |\
+    hi ColorColumn ctermbg=NONE |\
+    hi VertSplit ctermbg=NONE |\
+    hi NonText ctermfg=0 |\
+    Codi $syntax" "$@"
 }
