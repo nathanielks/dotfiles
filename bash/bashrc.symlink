@@ -7,3 +7,7 @@ alias e="exa -la"
 
 . /usr/local/etc/profile.d/z.sh
 source "$HOME/.bashit_init"
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+source /Users/aang/.config/broot/launcher/bash/br
