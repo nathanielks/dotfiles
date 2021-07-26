@@ -1,17 +1,31 @@
 {
-  "coc.preferences.formatOnType": false,
-  "coc.preferences.formatOnSaveFiletypes": [
-  ],
+  "coc.preferences.formatOnType": true,
+  "coc.preferences.formatOnSaveFiletypes": [ ],
   "diagnostic.errorSign": "❌",
   "diagnostic.infoSign": "ℹ",
   "diagnostic.virtualText": true,
   "diagnostic.warningSign": "⚠",
-  "eslint.filetypes": ["javascript", "typescript", "typescriptreact", "javascriptreact", "typescript.tsx"],
+  "eslint.filetypes": [
+    "vue",
+    "javascript",
+    "typescript",
+    "typescriptreact",
+    "javascriptreact",
+    "typescript.tsx"
+  ],
   "json.enable": true,
   "json.format.enable": true,
   "yaml.format.enable": true,
   "yaml.format.singleQuote": true,
   "yaml.trace.server": "verbose",
+  "stylelintplus.autoFixOnFormat": true,
+  "stylelintplus.autoFixOnSave": true,
+  "prettier.standardIntegration": true,
+  "prettier.onlyUseLocalVersion": true,
+  "prettier.disableLanguages": [],
+  "vetur.format.defaultFormatter.html": "prettier",
+  "vetur.format.defaultFormatter.css": "prettier",
+  "vetur.format.defaultFormatter.js": "prettier-eslint",
   "diagnostic-languageserver.filetypes": {
     "php": ["phpcs"]
   },
@@ -49,10 +63,7 @@
     "terraform": {
       "command": "terraform-ls",
       "args": ["serve"],
-      "filetypes": [
-        "terraform",
-        "tf"
-      ],
+      "filetypes": ["terraform", "tf"],
       "initializationOptions": {},
       "settings": {}
     }

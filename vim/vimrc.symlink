@@ -1,17 +1,19 @@
-" Nathaniel Schweinberg
+" Nathaniel Schweinber
 " Inspired by @scrogson, @dougblackio, @thewatts, @nvie
 
 " Launch Config {{{
 source ~/.vplugrc
 autocmd! bufwritepost .vimrc source %
+autocmd! bufwritepost .vplugrc source %
 autocmd! bufwritepost init.vim source %
 " }}}
 
 " Colors {{{
 syntax enable
 set t_Co=256
-" colorscheme base16-default
-" let base16colorspace=256
+" colorscheme base16-flat
+" colorscheme base16-google-light
+let base16colorspace=256
 
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_auto_colors = 0
@@ -22,8 +24,20 @@ let g:nord_cursor_line_number_background = 1
 " colorscheme nord
 
 set termguicolors
-set background=dark
-colorscheme monokai_pro
+" set background=dark
+" colorscheme monokai_pro
+" colorscheme one-monokai
+let g:monokai_term_italic = 1
+let g:monokai_gui_italic = 1
+
+colorscheme sonokai
+let g:sonokai_enable_italic = 1
+let g:sonokai_style = 'atlantis'
+let g:sonokai_diagnostic_text_highlight = 1
+let g:sonokai_diagnostic_line_highlight = 1
+let g:sonokai_diagnostic_virtual_text = 'colored'
+let g:sonokai_current_word = 'bold'
+autocmd vimenter * hi Normal guibg=NONE ctermbg=NONE
 
 " set background=light
 " colorscheme PaperColor
@@ -31,6 +45,9 @@ colorscheme monokai_pro
 " autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=none ctermbg=8
 " au ColorScheme * hi Normal ctermbg=none guibg=none
 " au ColorScheme * hi NonText ctermbg=none guibg=none
+
+set fillchars+=vert:│
+hi VertSplit ctermbg=NONE guibg=NONE
 
 " }}}
 
@@ -60,8 +77,16 @@ vnoremap <leader>d "_d
 vnoremap <leader>p "_dP
 
 " Source https://vim.fandom.com/wiki/Map_semicolon_to_colon
-nmap ; :
-noremap ;; ;
+
+let g:comfortable_motion_friction = 00.0
+let g:comfortable_motion_air_drag = 4.0
+
+let g:comfortable_motion_no_default_key_mappings = 1
+" nnoremap <silent> <C-d> :call comfortable_motion#flick(100)<CR>
+" nnoremap <silent> <C-u> :call comfortable_motion#flick(-100)<CR>
+
+noremap <silent> <ScrollWheelDown> :call comfortable_motion#flick(40)<CR>
+noremap <silent> <ScrollWheelUp>   :call comfortable_motion#flick(-40)<CR>
 " }}}
 
 " Spaces & Tabs {{{
@@ -110,11 +135,22 @@ set listchars=tab:.\ ,trail:␣,extends:…,eol:¬
 set formatoptions+=1    " When wrapping paragraphs, don't end lines with 1-letter words (looks stupid))"
 set updatetime=300 " Smaller updatetime for CursorHold & CursorHoldI
 set shortmess+=c " don't give |ins-completion-menu| messages.
+" decrease the time Vim waits to listen for the next key
+" for instance, if you have the following:
+" nnoremap <leader>f Foo
+" nnoremap <leader>fa FooBar
+" Vim will wait timeoutlen for the 'a' in 'fa' before performing the command
+" set ttimeoutlen=200
+" set timeoutlen=200
+
+" Remove different colored signcolumn
+highlight clear SignColumn
 
 " Always show the signcolumn, otherwise it would shift the text each time
 " diagnostics appear/become resolved.
 if has("patch-8.1.1564")
   " Recently vim can merge signcolumn and number column into one
+  " Waiting until this is merged into neovim mainline
   set signcolumn=number
 else
   set signcolumn=yes
@@ -139,11 +175,13 @@ inoremap hh <ESC>
 " }}}
 
 " Folding {{{
-" set foldenable          " enable folding
+set foldenable          " enable folding
 " set foldcolumn=2        " add a fold column
-" set foldmethod=indent
+set foldmethod=manual
 set foldlevelstart=99   " start with everything unfolded
-nnoremap <leader>z
+nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
+vnoremap <Space> zf
+" nnoremap <leader>z
 " }}}
 
 " Line Shortcuts {{{
@@ -195,12 +233,32 @@ nnoremap <leader>w <C-w>v<C-w>l
 
 " Open horizontal split and switch to it
 nnoremap <leader>h <C-w>s<C-w>j
+
+" Fugitive
+nnoremap <leader>gw :Gwrite<CR>
+nnoremap <leader>gc :Git commit<CR>
+nnoremap <leader>gb :Gblame<CR>
+nnoremap <leader>gr :Git reset %<CR>
+nnoremap <leader>gs :Git<CR>
+nnoremap <leader>gd :Git diff<CR>
 " }}}
 
 " Helpful mappings {{{
 " Fix indentation / reindent
 map <F7> mzgg=G`z<CR>
 " }}}
+
+" Treesitter {{{
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+  highlight = {
+    enable = true,              -- false will disable the whole extension
+  },
+}
+EOF
+" }}}
+
 "
 " .lvimrc {{{
 let g:localvimrc_sandbox = 0
@@ -215,6 +273,8 @@ let g:localvimrc_whitelist=[
 "
 
 " coc.nvim {{{
+let g:vista_default_executive = 'coc'
+
 let g:coc_global_extensions = [
   \ 'coc-css',
   \ 'coc-diagnostic',
@@ -286,30 +346,55 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 nmap <leader>rn <Plug>(coc-rename)
 
 " Formatting selected code.
-xmap <leader><leader>f  <Plug>(coc-format-selected)
-nmap <leader><leader>f  <Plug>(coc-format-selected)
+xmap <leader><leader>fs  <Plug>(coc-format-selected)
+nmap <leader><leader>fs  <Plug>(coc-format-selected)
+
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
+nnoremap <leader><leader>fp :Prettier<CR>
 
 " TODO I'd like to figure out a cleaner way of doing this, if possible
 autocmd BufEnter *.js,*.ts,*.jsx,*.tsx
-      \ nmap <leader><leader>f  :CocCommand eslint.executeAutofix<CR> |
-      \ xmap <leader><leader>f  :CocCommand eslint.executeAutofix<CR> |
+      \ nmap <leader><leader>fs  :CocCommand eslint.executeAutofix<CR> |
+      \ xmap <leader><leader>fs  :CocCommand eslint.executeAutofix<CR> |
 autocmd BufLeave *.js,*.ts,*.jsx,*.tsx
-      \ nmap <leader><leader>f  <Plug>(coc-format-selected) |
-      \ xmap <leader><leader>f  <Plug>(coc-format-selected) |
+      \ nmap <leader><leader>fs  <Plug>(coc-format-selected) |
+      \ xmap <leader><leader>fs  <Plug>(coc-format-selected) |
 
 " Trigger codeaction (a popup with available actions that can be performed
 " under the cursor)
 nmap <leader>do <Plug>(coc-codeaction)
 " }}}
 
+" Projectionist {{{
+nnoremap <leader>aa :A<cr>
+nnoremap <leader>as :AS<cr>
+nnoremap <leader>av :AV<cr>
+nnoremap <leader>Fs :Fpstory<cr>
+" }}}
+
 " Powerline {{{
 set laststatus=2 " the last window will have a status line
 let g:lightline = {
+      \ 'colorscheme': 'sonokai',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'readonly', 'filename', 'modified' ],
+      \             [ 'vistaMethod' ] ],
+      \   'right': [ [ 'lineinfo' ],
+      \              [ 'percent' ],
+      \              [ 'fileencoding', 'filetype' ] ]
+      \ },
       \ 'component_function': {
-      \   'filename': 'LightlineTruncatedFileName',
+      \   'filename': 'LightlineFileName',
+      \   'vistaMethod': 'NearestMethodOrFunction',
+      \   'fugitive': 'FugitiveHead'
       \ },
       \ }
 
+function! LightlineFileName()
+  let l:filePath = expand('%')
+  return l:filePath
+endfunction
 " https://github.com/itchyny/lightline.vim/issues/532#issuecomment-745992513
 function! LightlineTruncatedFileName()
   let l:filePath = expand('%')
@@ -319,9 +404,33 @@ function! LightlineTruncatedFileName()
     return pathshorten(l:filePath)
   endif
 endfunction
+
+" https://github.com/liuchengxu/vista.vim#show-the-nearest-methodfunction-in-the-statusline
+function! NearestMethodOrFunction() abort
+  return get(b:, 'vista_nearest_method_or_function', '')
+endfunction
+
+command! LightlineReload call LightlineReload()
+nnoremap <leader><leader>lr :LightlineReload<CR>
+
+function! LightlineReload()
+  call lightline#init()
+  call lightline#colorscheme()
+  call lightline#update()
+endfunction
+
+" By default vista.vim never run if you don't call it explicitly.
+"
+" If you want to show the nearest function in your statusline automatically,
+" you can add the following line to your vimrc
+autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
+nnoremap <leader><leader>vs :Vista!!<CR>
+nnoremap <leader><leader>vf :Vista finder coc<CR>
 " }}}
 
 " fzf {{{
+let g:vista_fzf_preview = ['right:50%']
+let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
 if executable("rg")
   " ## rg
   set grepprg=rg\ --vimgrep                                                       "Use ripgrep for grepping
@@ -350,11 +459,12 @@ nmap <Leader>t :BTags<CR>
 nmap <Leader>T :Tags<CR>
 nmap <Leader>l :BLines<CR>
 nmap <Leader>L :Lines<CR>
-nmap <Leader>a :Rg<Space>
-nmap <Leader>A :RgAll<Space>
+nmap <Leader>R :Rg<Space>
+" nmap <Leader>R :RgAll<Space>
 nmap <Leader>H :Helptags!<CR>
 nmap <Leader>C :Commands<CR>
 nmap <Leader>M :Maps<CR>
+nmap <Leader>S :Snippets<CR>
 
 let g:fzf_action = {
   \ 'ctrl-t': 'tab split',
@@ -450,6 +560,7 @@ augroup configgroup
   autocmd VimEnter * highlight clear SignColumn
   autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
   autocmd BufEnter *.cls setlocal filetype=java
+  autocmd BufEnter *.vue setlocal filetype=vue
   autocmd BufEnter *.zsh-theme setlocal filetype=zsh
   autocmd BufEnter .vplugrc setlocal filetype=vim
   autocmd BufEnter Makefile setlocal noexpandtab
@@ -462,7 +573,7 @@ augroup filetypegroup
   autocmd FileType python,cfg setlocal ts=4 sts=4 sw=4
   autocmd FileType cs setlocal ts=4 sts=4 sw=4
   autocmd FileType apiblueprint,terraform setlocal ts=2 sts=2 sw=2
-  autocmd FileType javascript,html,css,sass,less,coffee setlocal ts=4 sts=4 sw=4 expandtab
+  autocmd FileType javascript,vue,html,css,sass,less,coffee setlocal ts=2 sts=2 sw=2 expandtab
   autocmd FileType jade,html.handlebars,blade setlocal ts=2 sts=2 sw=2
   autocmd FileType ruby,pml,eruby,haml setlocal ts=2 sts=2 sw=2
   autocmd FileType arduino setlocal ts=2 sts=2 sw=2
@@ -480,6 +591,7 @@ augroup buffergroups
   autocmd BufNewFile,BufRead *.scss setfiletype css.scss
   autocmd BufNewFile,BufRead Capfile,Rakefile,Vagrantfile setfiletype ruby
   autocmd BufNewFile,BufRead *.talon setfiletype talon
+  autocmd BufNewFile,BufRead *.gcode setfiletype gcode
 augroup END
 
 autocmd BufWritePost .vimrc so $MYVIMRC
@@ -491,7 +603,7 @@ autocmd BufWritePost .vimrc so $MYVIMRC
 " - https://github.com/Valloric/YouCompleteMe
 " - https://github.com/nvim-lua/completion-nvim
 let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-f>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<c-b>"
 
 " }}}
@@ -554,6 +666,27 @@ endif
 if isdirectory('./node_modules') && isdirectory('./node_modules/eslint')
   let g:coc_global_extensions += ['coc-eslint']
 endif
+
+" let NERDCommenter comment Vue properly
+let g:ft = ''
+function! NERDCommenter_before()
+  if &ft == 'vue'
+    let g:ft = 'vue'
+    let stack = synstack(line('.'), col('.'))
+    if len(stack) > 0
+      let syn = synIDattr((stack)[0], 'name')
+      if len(syn) > 0
+        exe 'setf ' . substitute(tolower(syn), '^vue_', '', '')
+      endif
+    endif
+  endif
+endfunction
+function! NERDCommenter_after()
+  if g:ft == 'vue'
+    setf vue
+    let g:ft = ''
+  endif
+endfunction
 " }}}
 
 " Ruby {{{

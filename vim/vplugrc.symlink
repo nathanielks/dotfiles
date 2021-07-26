@@ -1,10 +1,12 @@
 call plug#begin('~/.vim/plugged')
 
 " Colorscheme
-Plug 'Erichain/vim-monokai-pro'
+" Plug 'fratajczak/one-monokai-vim'
+" Plug 'Erichain/vim-monokai-pro'
 " Plug 'arcticicestudio/nord-vim'
-" Plug 'phanviet/vim-monokai-pro'
+Plug 'sainnhe/sonokai'
 " Plug 'NLKNguyen/papercolor-theme'
+" Plug 'chriskempson/base16-vim'
 
 " System
 Plug 'Raimondi/delimitMate' "automatic closing of quotes, parenthesis, brackets, etc.
@@ -16,6 +18,16 @@ Plug 'luochen1990/rainbow' " Color codes matching tags, parens, brackets, etc
 Plug 'scrooloose/nerdcommenter'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-surround'
+Plug 'lukas-reineke/indent-blankline.nvim', {'branch': 'lua'}
+Plug 'yuttie/comfortable-motion.vim'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-projectionist'
+Plug 'c-brenn/fuzzy-projectionist.vim'
+Plug 'metakirby5/codi.vim'
+
+" COC
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'liuchengxu/vista.vim'
 
 " Snippets
 Plug 'SirVer/UltiSnips'
@@ -33,27 +45,32 @@ Plug 'junegunn/fzf.vim'
 " Terminal Emulator
 Plug 'mklabs/split-term.vim'
 
-" COC
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
 " JavaScript
 Plug 'pangloss/vim-javascript'
 Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
-Plug 'jparise/vim-graphql'
-Plug 'elzr/vim-json'
+" Plug 'jparise/vim-graphql'
+" Plug 'elzr/vim-json'
+" Plug 'awlayton/coc-prettier', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'}
 
 " TypeScript
-Plug 'leafgarland/typescript-vim'
-Plug 'peitalin/vim-jsx-typescript'
+" Plug 'leafgarland/typescript-vim'
+" Plug 'peitalin/vim-jsx-typescript'
 
 " PHP
-Plug 'tobyS/vmustache'
-Plug 'YaroslavMolchan/pdv'
+" Plug 'tobyS/vmustache'
+" Plug 'YaroslavMolchan/pdv'
 
 " Go
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+" Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 " Syntax highlighting
-Plug 'sheerun/vim-polyglot'
+"Plug 'sheerun/vim-polyglot'
+" Plug 'posva/vim-vue'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
+" 3D Printing
+Plug 'mloidl/gcode.vim'
+
+" Screenshots
+Plug 'kristijanhusak/vim-carbon-now-sh'
 call plug#end()
