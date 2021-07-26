@@ -40,3 +40,6 @@ group_vars/temp
 .lvimrc
 .vim
 #twentynineteen
+.projections.json
+
+*.orig
