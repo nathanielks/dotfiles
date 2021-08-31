@@ -1,60 +1,54 @@
-prompt_order = [
-    "username",
-    "hostname",
-    "kubernetes",
-    "directory",
-    "aws",
-    "docker_context",
-    "package",
-    "dotnet",
-    "elixir",
-    "elm",
-    "erlang",
-    "golang",
-    "java",
-    "julia",
-    "nim",
-    "nodejs",
-    "ocaml",
-    "php",
-    "purescript",
-    "python",
-    "ruby",
-    "rust",
-    "terraform",
-    "zig",
-    "nix_shell",
-    "conda",
-    "memory_usage",
-    "env_var",
-    "crystal",
-    "git_branch",
-    "git_commit",
-    "git_state",
-    "git_status",
-    "custom.time_since_commit",
-    "hg_branch",
-    "cmd_duration",
-    "custom",
-    "line_break",
-    "jobs",
-    "battery",
-    "time",
-    "character",
-]
-
+format = """\
+  $username\
+  $hostname\
+  $kubernetes\
+  $directory\
+  $aws\
+  $docker_context\
+  $package\
+  $dotnet\
+  $elixir\
+  $elm\
+  $erlang\
+  $golang\
+  $java\
+  $julia\
+  $nim\
+  $nodejs\
+  $ocaml\
+  $php\
+  $purescript\
+  $python\
+  $ruby\
+  $rust\
+  $terraform\
+  $zig\
+  $nix_shell\
+  $conda\
+  $memory_usage\
+  $env_var\
+  $crystal\
+  $git_branch\
+  $git_commit\
+  $git_state\
+  $git_status\
+  ${custom.time_since_commit}\
+  $hg_branch\
+  $cmd_duration\
+  $line_break\
+  $jobs\
+  $battery\
+  $time\
+  $character\
+  """
 
 [directory]
 truncate_to_repo = false
 
-[character]
-error_symbol = "✗"
-use_symbol_for_status = true
-
 [time]
 disabled = false
 use_12hr = true
-format = "[%r]"
+time_format = "%r"
 style = "bold cyan"
 
 [aws]
@@ -70,16 +64,11 @@ show_version = false
 symbol = " "
 
 [git_status]
-prefix = ": "
-suffix = ""
+format = '([$all_status$ahead_behind]($style) )'
 ahead = "🚀"
 untracked = "🤷"
 stashed = "📦"
 modified = "📝"
-staged.value = "++"
-staged.style = "green"
-staged_count.enabled = true
-staged_count.style = "green"
 deleted = "🗑"
 
 [git_commit]
@@ -107,6 +96,5 @@ style = "bold yellow"
 [custom.time_since_commit]
 command = "~/.dotfiles/starship/time-since-commit.zsh"
 when = """ git rev-parse --git-dir > /dev/null 2>&1 """
-prefix = " "
-suffix = " ago "
-shell = ["/usr/local/bin/zsh"]
+format = "[$symbol$output ago]($style)"
+shell = ["/usr/bin/zsh"]
