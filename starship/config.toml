@@ -96,4 +96,4 @@ style = "bold yellow"
 [custom.time_since_commit]
 command = "~/.dotfiles/starship/time-since-commit.zsh"
 when = """ git rev-parse --git-dir > /dev/null 2>&1 """
-format = "[$symbol$output ago]($style)"
+format = "[$symbol$output ago ]($style)"
