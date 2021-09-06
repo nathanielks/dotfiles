@@ -44,7 +44,7 @@ format = """\
 
 [character]
 success_symbol ="[](bold green)"
-failure_symbol ="[](bold red)"
+error_symbol ="[](bold red)"
 
 [directory]
 truncate_to_repo = false
