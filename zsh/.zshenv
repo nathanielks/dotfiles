@@ -1,9 +1,51 @@
 # Prezto loads this via the environment module
 
+export DOTFILES=$HOME/.dotfiles
 
 export EDITOR="lvim"
-export PATH="$HOME/.local/bin:$PATH"
-export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
 export NVM_DIR="$HOME/.nvm"
-
 export STARSHIP_CONFIG=~/.dotfiles/starship/config.toml
+
+# Go config
+export GOPATH=$HOME/go
+export GOBIN="$GOPATH/bin"
+export GOROOT=/usr/local/opt/go/libexec
+
+if type rg &> /dev/null; then
+  export FZF_DEFAULT_COMMAND='rg --files --hidden'
+fi
+
+# ZMK
+export ZEPHYR_TOOLCHAIN_VARIANT="gnuarmemb"
+export GNUARMEMB_TOOLCHAIN_PATH="$HOME/Code/zmk/gcc-arm"
+export ZMK_FIRMWARE_DIR="$HOME/Code/zmk/firmware"
+export ZMK_CONFIG_DIR="$HOME/Code/zmk/zmk-config/config"
+
+# QMK
+export QMK_HOME=$HOME/Code/GitHub/nathanielks/qmk_firmware
+
+# tj/n config
+export N_PREFIX="/usr/local/n"
+PATH="$N_PREFIX/bin:$PATH"  # Added by n-install (see http://git.io/n-install-repo).
+
+# PATH modifications
+## System level
+PATH="/usr/local/bin:$PATH"
+PATH="/usr/local/sbin:$PATH"
+
+# User level
+PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
+PATH="$GOBIN:$PATH"
+PATH="$HOME/.local/bin:$PATH"
+PATH=$DOTFILES/bin:$PATH
+
+# Project level
+PATH="./vendor/bin:$PATH"
+PATH="../node_modules/.bin:$PATH"
+PATH="./node_modules/.bin:$PATH"
+PATH="./bin:$PATH"
+
+export PATH
+
+export LIBRARY_PATH="/usr/local/opt"
