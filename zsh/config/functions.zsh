@@ -59,7 +59,7 @@ function generate_password () {
 	cat /dev/random | tr -dc 'a-zA-Z0-9' | fold -w "$length" | head -n 1
 }
 
-function generate_hexadecimal () {
+function generate_hex () {
 	local length="${1:-64}"
 	cat /dev/random | tr -dc 'a-fA-F0-9' | fold -w "$length" | head -n 1
 }
@@ -69,12 +69,6 @@ function count () {
 
   echo "${content}" | wc -c
 }
-
-function hmdecode () {
-  local url="$( echo "$1" | cut -d = -f 2-)"
-  php -r "echo urldecode('$url');" | cut -d '&' -f 1 | pbcopy
-}
-
 
 function test_circle () {
   local job="$1"

@@ -4,7 +4,6 @@ alias o='open . && fg';
 alias y='yarn'
 alias tkill='tmux kill-session -t'
 alias vdu='vagrant destroy -f && vagrant up'
-alias ajdpush="composer update && bundle exec cap staging deploy && cd ../servers && ansible-playbook -i hosts/staging -K restart.yml"
 alias c="composer"
 alias cu="composer update && ga . && gc -m 'updated composer'"
 alias dc="docker-compose"
@@ -16,55 +15,41 @@ alias gfrf="git flow release finish"
 alias gfhs="git flow hotfix start"
 alias gfhf="git flow hotfix finish"
 alias goback='git checkout HEAD~'
-alias gs="git status"
-alias gc="git commit"
-alias ga="git add"
 alias grc="git rebase --continue"
-alias mm="middleman"
 alias gcod='gco develop'
-alias gcom='gco master'
+alias gcos='gco staging'
+alias gcom='gco main'
 alias gbrl='g branch --list'
-alias gpr='g pull-request -b develop'
+alias gpr='gh pull-request create'
 alias gd='g diff'
-alias gdk='g difftool'
+alias gdt='g difftool'
 alias gco="git checkout"
 alias g="git"
 alias gupdate='gco master; gpa; g delete-merged-branches'
 alias tf='terraform'
 alias tfu='terraform force-unlock'
-# alias tp='terraform plan -out plan | landscape'
 alias ta='terraform apply plan'
 alias be='bundle exec'
 alias bake='bundle exec rake'
 alias rc='bundle exec rails c'
-# alias git=hub
-alias v=vagrant
-alias ave='ansible-vault edit '
 alias l='NVIM_TUI_ENABLE_TRUE_COLOR=1 lvim'
-alias v='NVIM_TUI_ENABLE_TRUE_COLOR=1 lvim'
 alias nv='NVIM_TUI_ENABLE_TRUE_COLOR=1 lvim'
-alias r='redux'
-alias bvp='bv vagrant provision'
 # http://www.freshblurbs.com/blog/2017/04/16/inspect-docker-volumes-on-mac.html
 # dm-disk ls -l /docker/var/lib/docker/volumes/
 alias dm-disk='docker run --rm -it -v /:/docker alpine:edge $@'
 
 alias flush-dns='sudo killall -HUP mDNSResponder;sudo killall mDNSResponderHelper;sudo dscacheutil -flushcache'
-alias work='cd ~/Work'
 alias git-pull-all="git pull && git submodule sync && git submodule foreach --recursive 'git fetch --tags' && git submodule update --init --recursive;"
 alias gpa='git-pull-all'
-alias gp='git-pull-all; git push'
+alias gp='git push'
 alias rgphp="rg -tphp -g '!**/*/vendor' -g '!**/*/lib' -g '!lib/*' -g '!tests/*'"
 alias typora="open -a typora"
 alias nn="nnn -dHS"
 alias pip="/usr/local/bin/pip3"
-alias als="composer local-server"
-alias alsdc='COMPOSE_PROJECT_NAME=$(basename `pwd`) VOLUME=$(pwd) PWD=$(pwd)/vendor/altis/local-server/docker/ docker-compose -f vendor/altis/local-server/docker/docker-compose.yml'
 
 # Docker
 alias docker-stop-all='docker stop $(docker ps -a -q)'
 alias docker-remove-all='docker rm $(docker ps -a -q)'
 alias docker-rmi-all='docker rmi $(docker images -a -q)'
 alias runcircle='circleci config process .circleci/config.yml > /tmp/process.yml; circleci local execute -c /tmp/process.yml -e CIRCLE_PROJECT_REPONAME=${PWD##*/} --job '
-alias get=git
 alias sum_numbers='paste -s -d+ | bc'
