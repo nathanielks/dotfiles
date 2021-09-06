@@ -22,19 +22,20 @@
 	prompt = false
 [mergetool]
 	prompt = false
-[diff]
-  tool = Kaleidoscope
-	; noprefix = true
 [commit]
-	#gpgsign = true
-[mergetool "Kaleidoscope"]
-	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
-	trustexitcode = true
+  #gpgsign = true
 [merge]
-  tool = Kaleidoscope
-  conflictstyle = diff3
-[difftool "Kaleidoscope"]
-  cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
+  tool = meld
+[mergetool "meld"]
+  # Choose one of these 2 lines (not both!) explained below.
+  cmd = meld "$LOCAL" "$MERGED" "$REMOTE" --output "$MERGED"
+  cmd = meld "$LOCAL" "$BASE" "$REMOTE" --output "$MERGED"
+[diff]
+    tool = meld
+[difftool]
+    prompt = false
+[difftool "meld"]
+    cmd = meld "$LOCAL" "$REMOTE"
 [status]
   showUntrackedFiles = all
   # Sometimes a newly-added folder, since it's only one line in git status, can slip under the radar.

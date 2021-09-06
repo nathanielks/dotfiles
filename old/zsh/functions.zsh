@@ -100,3 +100,7 @@ function codi() {
     hi NonText ctermfg=0 |\
     Codi $syntax" "$@"
 }
+
+function dsh () {
+  docker exec -it $1 sh
+}

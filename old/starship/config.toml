@@ -42,6 +42,10 @@ format = """\
   $character\
   """
 
+[character]
+success_symbol ="[](bold green)"
+failure_symbol ="[](bold red)"
+
 [directory]
 truncate_to_repo = false
 
