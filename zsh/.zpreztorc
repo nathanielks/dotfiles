@@ -30,6 +30,8 @@ zstyle ':prezto:load' pmodule \
   'ssh' \
   'osx' \
   'homebrew' \
+  'node' \
+  'docker' \
   'command-not-found' \
   'git' \
   'history' \

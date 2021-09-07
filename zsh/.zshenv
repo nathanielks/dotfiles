@@ -4,7 +4,8 @@ export DOTFILES=$HOME/.dotfiles
 
 export EDITOR="lvim"
 export NVM_DIR="$HOME/.nvm"
-export STARSHIP_CONFIG=~/.dotfiles/starship/config.toml
+export STARSHIP_CONFIG="$DOTFILES/starship/config.toml"
+export KITTY_CONFIG_DIRECTORY="$DOTFILES/kitty/.config/kitty"
 
 # Go config
 export GOPATH=$HOME/go

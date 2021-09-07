@@ -11,7 +11,7 @@ eval "$(pyenv init -)"
 eval "$(direnv hook zsh)"
 eval "$(zoxide init zsh)"
 eval "$(starship init zsh)"
-source "$HOME/.config/broot/launcher/zsh/br"
+source "$HOME/.config/broot/launcher/bash/br"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # Aliases and Functions
