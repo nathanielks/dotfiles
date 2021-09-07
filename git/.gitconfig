@@ -6,6 +6,7 @@
 [user]
 	name = Nathaniel Schweinberg
 	email = 314009+nathanielks@users.noreply.github.com
+	signingkey = FE0207A38BD54DC4
 	#signingkey = natanielks@gmail.com
 [push]
   default = simple
@@ -23,6 +24,7 @@
 [mergetool]
 	prompt = false
 [commit]
+	gpgsign = true
   #gpgsign = true
 [merge]
   tool = meld
