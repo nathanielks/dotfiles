@@ -97,5 +97,12 @@ lvim.builtin.which_key.mappings["A"] = {
   s = { ":AS<cr>", "Open Alternate in split" },
   v = { ":AV<cr>", "Open Alternate in vertical split" },
 }
-lvim.builtin.which_key.mappings["z"] = { "<cmd>ZenMod<CR>", "Zen Mode" }
-lvim.builtin.which_key.mappings["v"] = { "<cmd>vs<CR>", "Split vertically" }
+lvim.builtin.which_key.mappings["F"] = {
+  name = "+fold",
+  O = {":set foldlevel=20", 'open all'},
+  C = {":set foldlevel=0", 'close all'},
+  c = {":foldclose", 'close'},
+  o = {":foldopen", 'open'}
+}
+lvim.builtin.which_key.mappings["Z"] = { "<cmd>ZenMod<CR>", "Zen Mode" }
+lvim.builtin.which_key.mappings["V"] = { "<cmd>vs<CR>", "Split vertically" }
