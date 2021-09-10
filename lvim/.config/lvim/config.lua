@@ -3,7 +3,8 @@ lvim.format_on_save = false
 lvim.lint_on_save = true
 
 vim.g.tokyonight_italic_functions = true
-lvim.colorscheme = "tokyonight"
+vim.o.background = "light"
+lvim.colorscheme = "PaperColorSlim"
 
 lvim.builtin.compe.autocomplete = true
 
@@ -30,6 +31,7 @@ lvim.builtin.treesitter.highlight.enabled = true
 lvim.plugins = {
   {"lunarvim/colorschemes"},
   {"folke/tokyonight.nvim"},
+  {"pappasam/papercolor-theme-slim"},
   {"Raimondi/delimitMate"},
   {"tpope/vim-projectionist"},
   {"tpope/vim-surround"},
