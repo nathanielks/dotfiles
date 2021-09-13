@@ -78,6 +78,15 @@ lvim.plugins = {
   {
     "folke/todo-comments.nvim",
     requires = "nvim-lua/plenary.nvim"
+  },
+  { 
+    "beauwilliams/focus.nvim", 
+    config = function() 
+      require("focus").setup({
+        hybridnumber = true,
+        winhighlight = true
+      })
+    end 
   }
 }
 
@@ -107,4 +116,4 @@ lvim.builtin.which_key.mappings["F"] = {
   o = {":foldopen", 'open'}
 }
 lvim.builtin.which_key.mappings["Z"] = { "<cmd>ZenMod<CR>", "Zen Mode" }
-lvim.builtin.which_key.mappings["V"] = { "<cmd>vs<CR>", "Split vertically" }
+lvim.builtin.which_key.mappings["V"] = { "<cmd>FocusSplitNicely<CR>", "Split vertically" }
