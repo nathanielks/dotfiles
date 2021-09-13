@@ -25,10 +25,6 @@ export ZMK_CONFIG_DIR="$HOME/Code/zmk/zmk-config/config"
 # QMK
 export QMK_HOME=$HOME/Code/GitHub/nathanielks/qmk_firmware
 
-# tj/n config
-export N_PREFIX="/usr/local/n"
-PATH="$N_PREFIX/bin:$PATH"  # Added by n-install (see http://git.io/n-install-repo).
-
 # PATH modifications
 ## System level
 PATH="/usr/local/bin:$PATH"

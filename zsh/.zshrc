@@ -29,3 +29,4 @@ setopt auto_cd
 
 # Add GOPATH to paths cd will go into
 cdpath=($GOPATH)
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

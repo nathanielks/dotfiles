@@ -8,6 +8,6 @@ if [[ ! -d "$HOME/.local/share/lunarvim" ]]; then
   bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh)
 fi
 
-for pkg in stow kitty lvim; do
+for pkg in stow kitty nvm lvim; do
   bash "post-install.$pkg.sh"
 done
