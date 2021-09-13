@@ -59,7 +59,7 @@ PATH=$PATH:~/Code/GitHub/nathanielks/docker-cli-helpers/bin
 PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 PATH="$PATH:/usr/local/opt/mysql@5.7/bin"
 PATH="$PATH:$HOME/.local/bin"
-PATH="$PATH:$HOME/Library/Python/3.9/bin"
+#PATH="$PATH:$HOME/Library/Python/3.9/bin"
 PATH="$PATH:/usr/local/lima/bin"
 if [ -d "/usr/local/adb-fastboot/platform-tools" ] ; then
  PATH="/usr/local/adb-fastboot/platform-tools:$PATH"
@@ -114,8 +114,8 @@ export AWS_PAGER=
 source /usr/local/share/zsh/site-functions/_aws
 
 # libicu detection
-export LDFLAGS="-L/usr/local/opt/icu4c/lib"
-export CPPFLAGS="-I/usr/local/opt/icu4c/include"
+#export LDFLAGS="-L/usr/local/opt/icu4c/lib"
+#export CPPFLAGS="-I/usr/local/opt/icu4c/include"
 
 autoload bashcompinit
 bashcompinit
@@ -158,8 +158,10 @@ function dwest() {
     # zmkfirmware/zephyr-west-action-arm $1 ${@:2}
 }
 
-alias kl="dwest build -p -d build/left -b nice_nano -- -DSHIELD=dactyl_manuform_4x5_left -DZMK_CONFIG=/workspaces/zmk-config"
-alias kr="dwest build -p -d build/right -b nice_nano -- -DSHIELD=dactyl_manuform_4x5_right -DZMK_CONFIG=/workspaces/zmk-config"
+alias zbl="dwest build -p -d build/left -b nice_nano -- -DSHIELD=tbk_mini_left -DZMK_CONFIG=/workspaces/zmk-config"
+alias zbr="dwest build -p -d build/right -b nice_nano -- -DSHIELD=tbk_mini_right -DZMK_CONFIG=/workspaces/zmk-config"
+alias zcl="cp $ZMK_FIRMWARE_DIR/app/build/left/zephyr/zmk.uf2 /Volumes/NICENANO"
+alias zcr="cp $ZMK_FIRMWARE_DIR/app/build/right/zephyr/zmk.uf2 /Volumes/NICENANO"
 
 # tabtab source for electron-forge package
 # uninstall by removing these lines or running `tabtab uninstall electron-forge`
