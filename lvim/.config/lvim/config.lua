@@ -3,8 +3,9 @@ lvim.format_on_save = false
 lvim.lint_on_save = true
 
 vim.g.tokyonight_italic_functions = true
-vim.o.background = "light"
-lvim.colorscheme = "PaperColorSlim"
+lvim.colorscheme = "tokyonight"
+-- vim.o.background = "light"
+-- lvim.colorscheme = "PaperColorSlim"
 
 lvim.builtin.compe.autocomplete = true
 
