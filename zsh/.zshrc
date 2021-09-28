@@ -4,7 +4,10 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
 fi
 
 # Package configuration
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+if [[ "$OS_TYPE" == "linux-gnu"* ]]; then
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+fi
+
 [ -s "$NVM_DIR/zsh_completion" ] && \. "$NVM_DIR/zsh_completion"  # This loads nvm bash_completion
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 eval "$(pyenv init -)"
@@ -26,3 +29,4 @@ setopt auto_cd
 
 # Add GOPATH to paths cd will go into
 cdpath=($GOPATH)
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
