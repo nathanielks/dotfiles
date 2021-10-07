@@ -1,66 +1,41 @@
 -- general
 lvim.format_on_save = true
-lvim.lint_on_save = true
-
-
 lvim.colorscheme = "nightfox"
-
-vim.g.tokyonight_italic_functions = true
--- lvim.colorscheme = "tokyonight"
-
--- lvim.colorscheme = "PaperColorSlim"
--- vim.o.background = "light"
--- keymappings
 lvim.leader = "space"
 
--- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
+-- Treesitter parsers change this to a table of the languages you want i.e. {"java", "python", javascript}
 lvim.builtin.dashboard.active = true
 lvim.builtin.terminal.active = true
-
--- lvim.builtin.zen.active = true
--- lvim.builtin.zen.window.height = 0.90
-
-lvim.builtin.nvimtree.side = "left"
-lvim.builtin.nvimtree.hide_dotfiles = 0
-
-lvim.builtin.telescope.path_display = { "shorten" }
-
--- if you don't want all the parsers change this to a table of the ones you want
 lvim.builtin.treesitter.ensure_installed = "maintained"
 lvim.builtin.treesitter.highlight.enabled = true
-
-lvim.lang.javascript.linters = { { exe = "eslint_d" } }
-lvim.lang.javascript.formatters = { { exe = "eslint_d" } }
-lvim.lang.vue.formatters = { { exe = "eslint_d" } }
-lvim.lang.vue.linters = { { exe = "eslint_d" } }
+lvim.builtin.nvimtree.hide_dotfiles = 0
+lvim.builtin.telescope.path_display = { "shorten" }
 
 -- Additional Plugins
+-- lvim.plugins = {
+--     {"lunarvim/colorschemes"},
+--     {"folke/tokyonight.nvim"}, {
+--         "ray-x/lsp_signature.nvim",
+--         config = function() require"lsp_signature".on_attach() end,
+--         event = "BufRead"
+--     }
+-- }
 lvim.plugins = {
-  {"EdenEast/nightfox.nvim"},
   {"lunarvim/colorschemes"},
+  {"EdenEast/nightfox.nvim"},
   {"folke/tokyonight.nvim"},
   {"pappasam/papercolor-theme-slim"},
+  {
+      "ray-x/lsp_signature.nvim",
+      config = function() require"lsp_signature".on_attach() end,
+      event  = "BufRead"
+  },
   {"Raimondi/delimitMate"},
   {"tpope/vim-projectionist"},
   {"tpope/vim-surround"},
   {"editorconfig/editorconfig-vim"},
   {"mklabs/split-term.vim"},
   {"folke/zen-mode.nvim"},
-  {
-    "folke/twilight.nvim",
-    config = function()
-      require("twilight").setup {
-        dimming = {
-          alpha = 0.25, -- amount of dimming
-        }
-      }
-    end
-  },
-  {
-      "ray-x/lsp_signature.nvim",
-      config = function() require"lsp_signature".on_attach() end,
-      event = "InsertEnter"
-  },
   {
     "abecodes/tabout.nvim",
     config = function()
@@ -92,24 +67,11 @@ lvim.plugins = {
     config = function() 
       require("focus").setup({
         hybridnumber = true,
-        winhighlight = true
+        -- winhighlight = true
       })
     end 
-  },
-  {"nvim-treesitter/playground"}
+  }
 }
-
-vim.g.rooter_patterns = {
-  "package.json",
-  "src",
-  ".git"
-}
-
--- Autocommands (https://neovim.io/doc/user/autocmd.html)
--- lvim.autocommands.custom_groups = {
---   { "BufWinEnter", "*.lua", "setlocal ts=8 sw=8" },
--- }
-
 
 lvim.builtin.which_key.mappings["A"] = {
   name = "Projectionist",
@@ -117,6 +79,7 @@ lvim.builtin.which_key.mappings["A"] = {
   s = { ":AS<cr>", "Open Alternate in split" },
   v = { ":AV<cr>", "Open Alternate in vertical split" },
 }
+
 lvim.builtin.which_key.mappings["F"] = {
   name = "+fold",
   O = {":set foldlevel=20", 'open all'},
@@ -124,5 +87,6 @@ lvim.builtin.which_key.mappings["F"] = {
   c = {":foldclose", 'close'},
   o = {":foldopen", 'open'}
 }
+
 lvim.builtin.which_key.mappings["Z"] = { "<cmd>ZenMod<CR>", "Zen Mode" }
 lvim.builtin.which_key.mappings["V"] = { "<cmd>FocusSplitNicely<CR>", "Split vertically" }
