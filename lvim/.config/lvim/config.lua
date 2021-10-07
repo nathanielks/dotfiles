@@ -1,14 +1,15 @@
 -- general
-lvim.format_on_save = false
+lvim.format_on_save = true
 lvim.lint_on_save = true
 
+
+lvim.colorscheme = "nightfox"
+
 vim.g.tokyonight_italic_functions = true
-lvim.colorscheme = "tokyonight"
--- vim.o.background = "light"
+-- lvim.colorscheme = "tokyonight"
+
 -- lvim.colorscheme = "PaperColorSlim"
-
-lvim.builtin.compe.autocomplete = true
-
+-- vim.o.background = "light"
 -- keymappings
 lvim.leader = "space"
 
@@ -28,8 +29,14 @@ lvim.builtin.telescope.path_display = { "shorten" }
 lvim.builtin.treesitter.ensure_installed = "maintained"
 lvim.builtin.treesitter.highlight.enabled = true
 
+lvim.lang.javascript.linters = { { exe = "eslint_d" } }
+lvim.lang.javascript.formatters = { { exe = "eslint_d" } }
+lvim.lang.vue.formatters = { { exe = "eslint_d" } }
+lvim.lang.vue.linters = { { exe = "eslint_d" } }
+
 -- Additional Plugins
 lvim.plugins = {
+  {"EdenEast/nightfox.nvim"},
   {"lunarvim/colorschemes"},
   {"folke/tokyonight.nvim"},
   {"pappasam/papercolor-theme-slim"},
@@ -88,7 +95,8 @@ lvim.plugins = {
         winhighlight = true
       })
     end 
-  }
+  },
+  {"nvim-treesitter/playground"}
 }
 
 vim.g.rooter_patterns = {
