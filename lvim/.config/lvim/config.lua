@@ -62,14 +62,18 @@ lvim.plugins = {
     "folke/todo-comments.nvim",
     requires = "nvim-lua/plenary.nvim"
   },
-  { 
-    "beauwilliams/focus.nvim", 
-    config = function() 
+  {
+    "beauwilliams/focus.nvim",
+    config = function()
       require("focus").setup({
         hybridnumber = true,
         -- winhighlight = true
       })
     end 
+  },
+  {
+    "phaazon/hop.nvim",
+    as = 'hop'
   }
 }
 
@@ -90,3 +94,12 @@ lvim.builtin.which_key.mappings["F"] = {
 
 lvim.builtin.which_key.mappings["Z"] = { "<cmd>ZenMod<CR>", "Zen Mode" }
 lvim.builtin.which_key.mappings["V"] = { "<cmd>FocusSplitNicely<CR>", "Split vertically" }
+lvim.builtin.which_key.mappings["h"] = {
+  name = "Hop.nvim",
+  w = { "<cmd>HopWord<cr>", "hop around by highlighting words" },
+  p = { "<cmd>HopPattern<cr>", "hop around by matching against a pattern (as with /)" },
+  o = { "<cmd>HopChar1<cr>", "type a single key and hop to any occurrence of that key in the document." },
+  t = { "<cmd>HopChar2<cr>", "type a bigram (two keys) and hop to any occurrence of that bigram in the document" },
+  l = { "<cmd>HopLine<cr>", "jump to any visible line in your buffer" },
+}
+lvim.builtin.which_key.mappings["H"] = { "<cmd>nohlsearch<CR>", "No Highlight" }
