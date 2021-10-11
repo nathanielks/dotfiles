@@ -1,5 +1,3 @@
 #!/usr/bin/env bash
 
-for lang in javascript typescript vue json go python lua html css; do
-  lvim +qall +LspInstall $lang
-done
+lvim +'LspInstall bashls terraformls tsserver jsonls vimls yamlls vuels tflint html cssls diagnosticls dockerls dotls eslintls' +q
