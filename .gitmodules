@@ -1,0 +1,3 @@
+[submodule "contrib/fzf"]
+	path = contrib/fzf
+	url = https://github.com/lildude/fzf-prezto

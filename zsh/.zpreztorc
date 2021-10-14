@@ -41,7 +41,8 @@ zstyle ':prezto:load' pmodule \
   'completion' \
   'syntax-highlighting' \
   'history-substring-search' \
-  'autosuggestions'
+  'autosuggestions' \
+  'fzf'
 
 #
 # Autosuggestions
