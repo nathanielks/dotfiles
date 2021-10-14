@@ -1,6 +1,8 @@
 -- general
 lvim.format_on_save = true
 lvim.colorscheme = "nightfox"
+-- lvim.colorscheme = "PaperColorSlim"
+-- vim.o.background = "light"
 lvim.leader = "space"
 
 -- Treesitter parsers change this to a table of the languages you want i.e. {"java", "python", javascript}
@@ -10,6 +12,16 @@ lvim.builtin.treesitter.ensure_installed = "maintained"
 lvim.builtin.treesitter.highlight.enabled = true
 lvim.builtin.nvimtree.hide_dotfiles = 0
 lvim.builtin.telescope.path_display = { "shorten" }
+
+-- Formatters
+lvim.lang.javascript.formatters = { { exe = "eslint_d", args = { "--fix" } } }
+lvim.lang.javascriptreact.formatters = lvim.lang.javascript.formatters
+lvim.lang.vue.formatters = lvim.lang.javascript.formatters
+
+-- Linters
+lvim.lang.javascript.linters = { { exe = "eslint_d" } }
+lvim.lang.javascriptreact.linters = lvim.lang.javascript.linters
+lvim.lang.vue.linters = lvim.lang.javascript.linters
 
 -- Additional Plugins
 -- lvim.plugins = {
