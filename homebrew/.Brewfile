@@ -36,6 +36,8 @@ brew "jq"
 brew "lazygit"
 brew "pyenv"
 brew "starship"
+brew "direnv"
+brew "wget"
 
 # Modern Unix
 brew 'ripgrep' # Faster grep
@@ -44,6 +46,7 @@ brew 'broot' # Fast directory explorer
 brew "exa" # better ls
 brew "fd" # better find
 brew "bat" # better cat
+brew "fzf"
 
 
 # Databases
@@ -61,8 +64,14 @@ tap 'homebrew/cask'
 cask 'qlstephen'
 cask 'betterzipql'
 
+# Mac apps
+cask istat-menus
+
 # Command-not-found
 # this is used by prezto's command-not-found module:
 # https://github.com/sorin-ionescu/prezto/tree/master/modules/command-not-found#command-not-found
 # https://github.com/Homebrew/homebrew-command-not-found#install
 tap 'homebrew/command-not-found'
+
+# Fonts
+brew tap homebrew/cask-fonts 
