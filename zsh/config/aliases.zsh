@@ -46,6 +46,7 @@ alias rgphp="rg -tphp -g '!**/*/vendor' -g '!**/*/lib' -g '!lib/*' -g '!tests/*'
 alias typora="open -a typora"
 alias nn="nnn -dHS"
 alias pip="/usr/local/bin/pip3"
+alias awsls="aws --endpoint ${LOCALSTACK_ENDPOINT}"
 
 # Docker
 alias docker-stop-all='docker stop $(docker ps -a -q)'

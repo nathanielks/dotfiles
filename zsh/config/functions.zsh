@@ -98,3 +98,7 @@ function codi() {
 function dsh () {
   docker exec -it $1 sh
 }
+
+function json () {
+  echo $1 | jq '.'
+}
