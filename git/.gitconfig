@@ -12,7 +12,7 @@
   default = simple
 	followTags = true
 [core]
-  editor = "nvim"
+  editor = "lvim"
 	excludesfile = ~/.gitignore
  # pager = delta --plus-color="#012800" --minus-color="#340001" --theme='Monokai Extended'
  pager = delta --theme='Monokai Extended'
@@ -58,3 +58,5 @@
 	; ff = only
 [pull]
 	rebase = false
+[init]
+	defaultBranch = main
