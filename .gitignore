@@ -4,4 +4,5 @@ vim/tmp/*
 .DS_Store
 mutt/temp
 mutt/cache
-lvim/.config/lvim/plugin/packer_compiled.lua
+lvim/.config/**/*
+!lvim/.config/config.lua
