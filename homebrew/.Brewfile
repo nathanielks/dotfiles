@@ -37,6 +37,7 @@ brew "lazygit"
 brew "pyenv"
 brew "starship"
 brew "direnv"
+brew "curl"
 brew "wget"
 
 # Modern Unix
@@ -65,7 +66,7 @@ cask 'qlstephen'
 cask 'betterzipql'
 
 # Mac apps
-cask istat-menus
+cask 'istat-menus'
 
 # Command-not-found
 # this is used by prezto's command-not-found module:
@@ -74,4 +75,4 @@ cask istat-menus
 tap 'homebrew/command-not-found'
 
 # Fonts
-brew tap homebrew/cask-fonts 
+tap 'homebrew/cask-fonts'
