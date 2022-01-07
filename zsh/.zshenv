@@ -59,4 +59,4 @@ fi
 export PATH
 
 export LIBRARY_PATH="/usr/local/opt"
-
+export AWS_PAGER=""
