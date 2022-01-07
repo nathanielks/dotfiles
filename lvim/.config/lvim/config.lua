@@ -14,14 +14,24 @@ lvim.builtin.nvimtree.hide_dotfiles = 0
 lvim.builtin.telescope.path_display = { "shorten" }
 
 -- Formatters
-lvim.lang.javascript.formatters = { { exe = "eslint_d", args = { "--fix" } } }
-lvim.lang.javascriptreact.formatters = lvim.lang.javascript.formatters
-lvim.lang.vue.formatters = lvim.lang.javascript.formatters
+local formatters = require "lvim.lsp.null-ls.formatters"
+formatters.setup {
+  {
+    exe = "eslint_d",
+    args = { "--fix" },
+    filetypes = { "vue", "javascript", "javascriptreact" }
+  }
+}
+
 
 -- Linters
-lvim.lang.javascript.linters = { { exe = "eslint_d" } }
-lvim.lang.javascriptreact.linters = lvim.lang.javascript.linters
-lvim.lang.vue.linters = lvim.lang.javascript.linters
+local linters = require "lvim.lsp.null-ls.linters"
+linters.setup {
+  {
+    exe = "eslint_d",
+    filetypes = { "vue", "javascript", "javascriptreact" }
+  }
+}
 
 -- Additional Plugins
 -- lvim.plugins = {
