@@ -7,6 +7,7 @@ lvim.leader = "space"
 
 -- Treesitter parsers change this to a table of the languages you want i.e. {"java", "python", javascript}
 lvim.builtin.dashboard.active = true
+lvim.builtin.notify.active = true
 lvim.builtin.terminal.active = true
 lvim.builtin.treesitter.ensure_installed = "maintained"
 lvim.builtin.treesitter.highlight.enabled = true
@@ -17,8 +18,7 @@ lvim.builtin.telescope.path_display = { "shorten" }
 local formatters = require "lvim.lsp.null-ls.formatters"
 formatters.setup {
   {
-    exe = "eslint_d",
-    args = { "--fix" },
+    command = "eslint_d",
     filetypes = { "vue", "javascript", "javascriptreact" }
   }
 }
@@ -28,7 +28,7 @@ formatters.setup {
 local linters = require "lvim.lsp.null-ls.linters"
 linters.setup {
   {
-    exe = "eslint_d",
+    command = "eslint_d",
     filetypes = { "vue", "javascript", "javascriptreact" }
   }
 }
