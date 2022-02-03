@@ -22,6 +22,7 @@ tap "homebrew/core"
 brew 'zsh'
 brew 'ssh-copy-id'
 brew 'git'
+brew 'git-extras'
 brew 'gibo' # quickly access Github's git ignore templates
 brew 'less'
 brew 'lesspipe' # pre-processes various file formats so they can be paged via Less
