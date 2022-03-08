@@ -1,8 +1,9 @@
 -- general
 lvim.format_on_save = true
-lvim.colorscheme = "nightfox"
--- lvim.colorscheme = "PaperColorSlim"
--- vim.o.background = "light"
+-- lvim.colorscheme = "nightfox"
+-- vim.o.background = "dark"
+lvim.colorscheme = "PaperColorSlim"
+vim.o.background = "light"
 lvim.leader = "space"
 
 -- Treesitter parsers change this to a table of the languages you want i.e. {"java", "python", javascript}
@@ -17,6 +18,10 @@ lvim.builtin.telescope.path_display = { "shorten" }
 -- Formatters
 local formatters = require "lvim.lsp.null-ls.formatters"
 formatters.setup {
+  {
+    command = "prettier",
+    filetypes = { "json" }
+  },
   {
     command = "eslint_d",
     filetypes = { "vue", "javascript", "javascriptreact" }
@@ -45,7 +50,7 @@ linters.setup {
 lvim.plugins = {
   {"lunarvim/colorschemes"},
   {"EdenEast/nightfox.nvim"},
-  {"folke/tokyonight.nvim"},
+  -- {"folke/tokyonight.nvim"},
   {"pappasam/papercolor-theme-slim"},
   {
       "ray-x/lsp_signature.nvim",
@@ -55,9 +60,27 @@ lvim.plugins = {
   {"Raimondi/delimitMate"},
   {"tpope/vim-projectionist"},
   {"tpope/vim-surround"},
+  {"tpope/vim-eunuch"},
   {"editorconfig/editorconfig-vim"},
   {"mklabs/split-term.vim"},
   {"folke/zen-mode.nvim"},
+    {
+      "folke/todo-comments.nvim",
+      config = function()
+        require("todo-comments").setup()
+      end,
+    },
+  {
+    "folke/trouble.nvim",
+    requuires = "kyazdani42/nvim-web-devicons",
+    config = function()
+      require("trouble").setup {
+        -- your configuration comes here
+        -- or leave it empty to use the default settings
+        -- refer to the configuration section below
+      }
+    end
+  },
   {
     "abecodes/tabout.nvim",
     config = function()
@@ -81,24 +104,67 @@ lvim.plugins = {
     --after = {'completion-nvim'} -- if a completion plugin is using tabs load it before
   },
   {
-    "folke/todo-comments.nvim",
-    requires = "nvim-lua/plenary.nvim"
-  },
-  {
     "beauwilliams/focus.nvim",
     config = function()
       require("focus").setup({
         hybridnumber = true,
         -- winhighlight = true
       })
-    end 
+    end
   },
   {
     "phaazon/hop.nvim",
-    as = 'hop'
+    as = 'hop',
+    config = function ()
+      require('hop').setup()
+    end
+  },
+  {
+    "cormacrelf/dark-notify",
+    config = function ()
+      require('dark_notify').run({
+        schemes = {
+          dark = "nightfox",
+          light = "PaperColorSlim"
+        }
+      })
+    end
+  },
+  {
+    "nvim-treesitter/nvim-tree-docs",
+    requires = "nvim-treesitter/nvim-treesitter",
+    config = function ()
+      require "nvim-treesitter.configs".setup({
+        tree_docs = {
+          enable = true,
+          keymaps = {
+            doc_node_at_cursor = 'fb',
+            doc_all_in_range = 'fb'
+          },
+          spec_config = {
+            jsdoc = {
+              slots = {
+                class = {
+                  memberof = false
+                },
+                member = {
+                  memberof = false
+                },
+                method = {
+                  memberof = false
+                }
+              }
+            }
+          }
+        }
+      })
+    end
   }
 }
 
+lvim.builtin.which_key.mappings["s"]["T"] = {
+  "<cmd>TodoTelescope<cr>", "TODOs"
+}
 lvim.builtin.which_key.mappings["A"] = {
   name = "Projectionist",
   a = { ":A<cr>", "Open Alternate" },
@@ -106,6 +172,17 @@ lvim.builtin.which_key.mappings["A"] = {
   v = { ":AV<cr>", "Open Alternate in vertical split" },
 }
 
+lvim.builtin.which_key.mappings["E"] = {
+  name = "Eunuch",
+  d = {':Delete<cr>', 'Delete a buffer and the file on disk simultaneously.'},
+  m = {':Move<cr>', 'Rename a buffer and the file on disk simultaneously.'},
+  r = {':Rename<cr>', "Like :Move, but relative to the current file's containing directory."},
+  c = {':Chmod<cr>', 'Change the permissions of the current file.'},
+  M = {':Mkdir<cr>', 'Create a directory, defaulting to the parent of the current file.'},
+  w = {':Wall<cr>', 'Write every open window. Handy for kicking off tools like guard.'},
+  W = {':SudoWrite<cr>', 'Write a privileged file with sudo.'},
+  e = {':SudoEdit<cr>', 'Edit a privileged file with sudo.'},
+}
 lvim.builtin.which_key.mappings["F"] = {
   name = "+fold",
   O = {":set foldlevel=20", 'open all'},
