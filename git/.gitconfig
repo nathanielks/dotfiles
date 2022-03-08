@@ -16,8 +16,9 @@
 	excludesfile = ~/.gitignore
  # pager = delta --plus-color="#012800" --minus-color="#340001" --theme='Monokai Extended'
  pager = delta --theme='Monokai Extended'
+  ; pager = delta --light --theme='GitHub'
 [interactive]
-    diffFilter = delta --color-only
+  diffFilter = delta --color-only
 	singleKey = yes
 [difftool]
 	prompt = false
