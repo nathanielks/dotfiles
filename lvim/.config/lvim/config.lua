@@ -202,3 +202,4 @@ lvim.builtin.which_key.mappings["h"] = {
   l = { "<cmd>HopLine<cr>", "jump to any visible line in your buffer" },
 }
 lvim.builtin.which_key.mappings["H"] = { "<cmd>nohlsearch<CR>", "No Highlight" }
+lvim.builtin.which_key.mappings["l"]["T"] = { "<cmd>TroubleToggle<CR>", "Trouble Quickfix List"  }
