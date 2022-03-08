@@ -60,11 +60,16 @@ brew 'go'
 # Neovim
 # I prefer over Vim for the simple reason they accepted one of my patches ;)
 brew 'neovim'
+brew 'dark-notify'
 
 # Quicklook plugins
 tap 'homebrew/cask'
 cask 'qlstephen'
 cask 'betterzipql'
+
+# apps
+cask 'slack'
+cask 'obsidian'
 
 # Mac apps
 cask 'istat-menus'
