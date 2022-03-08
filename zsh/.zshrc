@@ -12,6 +12,7 @@ if [[ "$OS_TYPE" == "linux-gnu"* ]]; then
   eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 elif [[ $OSTYPE == darwin* && "$arch" == "arm64" ]]; then
   eval "$(/opt/homebrew/bin/brew shellenv)"
+  export PATH="/opt/homebrew/lib/ruby/gems/3.1.0/bin:/opt/homebrew/opt/ruby/bin:$PATH"
 elif [[ $OSTYPE == darwin* && "$arch" == "i386" ]]; then
   eval "$(/usr/local/bin/brew shellenv)"
 fi

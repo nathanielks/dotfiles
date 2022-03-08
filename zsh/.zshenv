@@ -49,11 +49,10 @@ PATH="./bin:$PATH"
 
 # Get OpenSSL compiler flags set correctly
 if [[ $OSTYPE == darwin* ]]; then
-  PATH="/opt/homebrew/opt/openssl@3/bin:$PATH"
-
   export LDFLAGS="-L/opt/homebrew/opt/openssl@3/lib -L/opt/homebrew/opt/zlib/lib"
   export CPPFLAGS="-I/opt/homebrew/opt/openssl@3/include -I/opt/homebrew/opt/zlib/include"
   export PKG_CONFIG_PATH="/opt/homebrew/opt/openssl@3/lib/pkgconfig:/opt/homebrew/opt/zlib/lib/pkgconfig"
+  PATH="/opt/homebrew/opt/ruby/bin:$PATH"
 fi
 
 export PATH
