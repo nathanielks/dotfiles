@@ -10,7 +10,11 @@ export KITTY_CONFIG_DIRECTORY="$DOTFILES/kitty/.config/kitty"
 # Go config
 export GOPATH=$HOME/go
 export GOBIN="$GOPATH/bin"
-export GOROOT=/usr/local/opt/go/libexec
+if [[ $OSTYPE == darwin* && "$arch" == "arm64" ]]; then
+  export GOROOT=/opt/homebrew/opt/go/libexec
+elif [[ $OSTYPE == darwin* && "$arch" == "i386" ]]; then
+  export GOROOT=/usr/local/opt/go/libexec
+fi
 
 # Python
 export PYENV_ROOT="$HOME/.pyenv" 
