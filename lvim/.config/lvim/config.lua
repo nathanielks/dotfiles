@@ -2,8 +2,9 @@
 lvim.format_on_save = true
 -- lvim.colorscheme = "nightfox"
 -- vim.o.background = "dark"
-lvim.colorscheme = "PaperColorSlim"
-vim.o.background = "light"
+-- lvim.colorscheme = "PaperColorSlim"
+-- vim.o.background = "light"
+lvim.colorscheme = "inspired-github"
 lvim.leader = "space"
 
 -- Treesitter parsers change this to a table of the languages you want i.e. {"java", "python", javascript}
@@ -51,6 +52,7 @@ lvim.plugins = {
   {"lunarvim/colorschemes"},
   {"EdenEast/nightfox.nvim"},
   -- {"folke/tokyonight.nvim"},
+  {"mvpopuk/inspired-github.vim"},
   {"pappasam/papercolor-theme-slim"},
   {
       "ray-x/lsp_signature.nvim",
@@ -67,7 +69,14 @@ lvim.plugins = {
     {
       "folke/todo-comments.nvim",
       config = function()
-        require("todo-comments").setup()
+        require("todo-comments").setup {
+        keywords = {
+          QSTN = {
+            icon = "",
+            color = "warning"
+          }
+        }
+      }
       end,
     },
   {
@@ -125,7 +134,7 @@ lvim.plugins = {
       require('dark_notify').run({
         schemes = {
           dark = "nightfox",
-          light = "PaperColorSlim"
+          light = "inspired-github"
         }
       })
     end
@@ -138,8 +147,8 @@ lvim.plugins = {
         tree_docs = {
           enable = true,
           keymaps = {
-            doc_node_at_cursor = 'fb',
-            doc_all_in_range = 'fb'
+            doc_node_at_cursor = 'df',
+            doc_all_in_range = 'df'
           },
           spec_config = {
             jsdoc = {
@@ -175,10 +184,10 @@ lvim.builtin.which_key.mappings["A"] = {
 lvim.builtin.which_key.mappings["E"] = {
   name = "Eunuch",
   d = {':Delete<cr>', 'Delete a buffer and the file on disk simultaneously.'},
-  m = {':Move<cr>', 'Rename a buffer and the file on disk simultaneously.'},
-  r = {':Rename<cr>', "Like :Move, but relative to the current file's containing directory."},
-  c = {':Chmod<cr>', 'Change the permissions of the current file.'},
-  M = {':Mkdir<cr>', 'Create a directory, defaulting to the parent of the current file.'},
+  m = {':Move', 'Rename a buffer and the file on disk simultaneously.'},
+  r = {':Rename', "Like :Move, but relative to the current file's containing directory."},
+  c = {':Chmod', 'Change the permissions of the current file.'},
+  M = {':Mkdir', 'Create a directory, defaulting to the parent of the current file.'},
   w = {':Wall<cr>', 'Write every open window. Handy for kicking off tools like guard.'},
   W = {':SudoWrite<cr>', 'Write a privileged file with sudo.'},
   e = {':SudoEdit<cr>', 'Edit a privileged file with sudo.'},
