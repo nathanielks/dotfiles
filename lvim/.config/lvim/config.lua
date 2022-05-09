@@ -12,9 +12,43 @@ lvim.builtin.alpha.active = true
 lvim.builtin.alpha.mode = "dashboard"
 lvim.builtin.notify.active = true
 lvim.builtin.terminal.active = true
-lvim.builtin.treesitter.ensure_installed = "maintained"
+lvim.builtin.treesitter.ensure_installed = {
+  "bash",
+  "cmake",
+  -- "common",
+  "css",
+  "fish",
+  "go",
+  "graphql",
+  "hcl",
+  "html",
+  "http",
+  "javascript",
+  "jsdoc",
+  "json",
+  "json5",
+  "jsonc",
+  "latex",
+  "lua",
+  "make",
+  "markdown",
+  "php",
+  "prisma",
+  "pug",
+  "python",
+  "regex",
+  "ruby",
+  "rust",
+  "scss",
+  "svelte",
+  "toml",
+  "tsx",
+  "typescript",
+  "vim",
+  "vue",
+  "yaml" }
 lvim.builtin.treesitter.highlight.enabled = true
-lvim.builtin.nvimtree.hide_dotfiles = 0
+lvim.builtin.nvimtree.setup.filters.dotfiles = true
 lvim.builtin.telescope.path_display = { "shorten" }
 lvim.builtin.project.manual_mode = true
 
@@ -176,9 +210,7 @@ lvim.plugins = {
     "stevearc/aerial.nvim",
     requires = "nvim-treesitter/nvim-treesitter",
     config = function ()
-      require("lspconfig").javascript.setup{
-        on_attach = require("aerial").on_attach,
-      }
+      require("aerial").setup()
     end
   }
 }
