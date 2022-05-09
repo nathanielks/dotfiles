@@ -8,7 +8,8 @@ lvim.format_on_save = true
 lvim.leader = "space"
 
 -- Treesitter parsers change this to a table of the languages you want i.e. {"java", "python", javascript}
-lvim.builtin.dashboard.active = true
+lvim.builtin.alpha.active = true
+lvim.builtin.alpha.mode = "dashboard"
 lvim.builtin.notify.active = true
 lvim.builtin.terminal.active = true
 lvim.builtin.treesitter.ensure_installed = "maintained"
