@@ -4,7 +4,7 @@ lvim.format_on_save = true
 -- vim.o.background = "dark"
 -- lvim.colorscheme = "PaperColorSlim"
 -- vim.o.background = "light"
-lvim.colorscheme = "inspired-github"
+-- lvim.colorscheme = "inspired-github"
 lvim.leader = "space"
 
 -- Treesitter parsers change this to a table of the languages you want i.e. {"java", "python", javascript}
@@ -15,6 +15,7 @@ lvim.builtin.treesitter.ensure_installed = "maintained"
 lvim.builtin.treesitter.highlight.enabled = true
 lvim.builtin.nvimtree.hide_dotfiles = 0
 lvim.builtin.telescope.path_display = { "shorten" }
+lvim.builtin.project.manual_mode = true
 
 -- Formatters
 local formatters = require "lvim.lsp.null-ls.formatters"
@@ -168,6 +169,16 @@ lvim.plugins = {
         }
       })
     end
+  },
+  {"simrat39/symbols-outline.nvim"},
+  {
+    "stevearc/aerial.nvim",
+    requires = "nvim-treesitter/nvim-treesitter",
+    config = function ()
+      require("lspconfig").javascript.setup{
+        on_attach = require("aerial").on_attach,
+      }
+    end
   }
 }
 
@@ -212,3 +223,5 @@ lvim.builtin.which_key.mappings["h"] = {
 }
 lvim.builtin.which_key.mappings["H"] = { "<cmd>nohlsearch<CR>", "No Highlight" }
 lvim.builtin.which_key.mappings["l"]["T"] = { "<cmd>TroubleToggle<CR>", "Trouble Quickfix List"  }
+lvim.builtin.which_key.mappings["l"]["o"] = { "<cmd>SymbolsOutline<CR>", "Symbols Outline"  }
+-- lvim.builtin.which_key.mappings["l"]["o"] = { "<cmd>AerialToggle!<CR>", "Symbols Outline"  }
