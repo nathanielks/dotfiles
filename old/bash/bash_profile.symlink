@@ -1,5 +1,0 @@
-if [ -f ~/.bashrc ]; then
-  . ~/.bashrc
-fi
-
-source /Users/aang/.config/broot/launcher/bash/br
