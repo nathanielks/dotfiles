@@ -56,7 +56,7 @@ lvim.builtin.project.manual_mode = true
 local formatters = require "lvim.lsp.null-ls.formatters"
 formatters.setup {
   {
-    command = "prettier",
+    command = "prettier_d_slim",
     filetypes = { "json" }
   },
   {
