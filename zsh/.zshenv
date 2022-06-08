@@ -61,6 +61,10 @@ fi
 
 export PATH
 
+export DIFF_PAGER_LIGHT="delta --light --syntax-theme='GitHub'"
+export DIFF_PAGER_DARK="delta --syntax-theme='Monokai Extended'"
 export LIBRARY_PATH="/usr/local/opt"
 export AWS_PAGER=""
 . "$HOME/.cargo/env"
+
+export SSH_AUTH_SOCK="~/.1password/agent.sock"

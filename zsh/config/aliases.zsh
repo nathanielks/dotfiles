@@ -37,15 +37,16 @@ alias nv='NVIM_TUI_ENABLE_TRUE_COLOR=1 lvim'
 # http://www.freshblurbs.com/blog/2017/04/16/inspect-docker-volumes-on-mac.html
 # dm-disk ls -l /docker/var/lib/docker/volumes/
 alias dm-disk='docker run --rm -it -v /:/docker alpine:edge $@'
-alias rgjs="rg -g '*.js' -g '!**/node_modules/**/*'"
+alias rgjs="rg -g '*.js' -g '!*.min.js' -g '!**/node_modules/**/*'"
 alias flush-dns='sudo killall -HUP mDNSResponder;sudo killall mDNSResponderHelper;sudo dscacheutil -flushcache'
 alias git-pull-all="git pull && git submodule sync && git submodule foreach --recursive 'git fetch --tags' && git submodule update --init --recursive;"
 alias gpa='git-pull-all'
 alias gp='git push'
+alias dgs="ls -l | grep '^d' | awk '{print \$9}' | xargs -I % -n 1 -P 8 bash -c 'cd %; git status --short 2>/dev/null | sed "'"s/.*/% &/"'"; cd ..;'"
 alias rgphp="rg -tphp -g '!**/*/vendor' -g '!**/*/lib' -g '!lib/*' -g '!tests/*'"
 alias typora="open -a typora"
 alias nn="nnn -dHS"
-alias pip="/usr/local/bin/pip3"
+alias pip=$(which pip3)
 alias awsls="aws --endpoint ${LOCALSTACK_ENDPOINT}"
 
 # Docker
