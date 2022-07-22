@@ -14,12 +14,11 @@
 [core]
   editor = "lvim"
 	excludesfile = ~/.gitignore
- # pager = delta --plus-color="#012800" --minus-color="#340001" --theme='Monokai Extended'
- ; pager = delta --theme='Monokai Extended'
-  pager = delta --light --theme='GitHub'
+  ; pager = delta --light --syntax-theme='GitHub'
+  pager = delta --syntax-theme='Monokai Extended'
 [interactive]
-  diffFilter = delta --light --theme='GitHub' --color-only
-  ; diffFilter = delta --theme='Monokai Extended' --color-only
+  ; diffFilter = delta --light --syntax-theme='GitHub' --color-only
+  diffFilter = delta --syntax-theme='Monokai Extended' --color-only
 	singleKey = yes
 [difftool]
 	prompt = false
