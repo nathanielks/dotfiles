@@ -11,8 +11,11 @@ arch="$(arch)"
 if [[ "$OS_TYPE" == "linux-gnu"* ]]; then
   eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 elif [[ $OSTYPE == darwin* && "$arch" == "arm64" ]]; then
-  # create standard location for 1Password SSH Agent
-  mkdir -p ~/.1password && ln -s ~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock ~/.1password/agent.sock
+
+  if [[ ! -L ~/.1password/agent.sock ]]; then
+    # create standard location for 1Password SSH Agent
+    mkdir -p ~/.1password && ln -s ~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock ~/.1password/agent.sock
+  fi
 
   if [[ "$arch" == "arm64" ]]; then
     eval "$(/opt/homebrew/bin/brew shellenv)"
@@ -36,7 +39,7 @@ eval "$(starship init zsh)"
 for file ($DOTFILES/zsh/config/*.zsh) source $file
 
 # iTerm2 Shell Integration
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+# test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 # AutoCD
 setopt auto_cd
