@@ -48,7 +48,7 @@ lvim.builtin.treesitter.ensure_installed = {
   "vue",
   "yaml" }
 lvim.builtin.treesitter.highlight.enabled = true
-lvim.builtin.nvimtree.setup.filters.dotfiles = true
+lvim.builtin.nvimtree.setup.filters.dotfiles = false
 lvim.builtin.telescope.path_display = { "shorten" }
 lvim.builtin.project.manual_mode = true
 
