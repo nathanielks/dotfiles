@@ -102,3 +102,19 @@ function dsh () {
 function json () {
   echo $1 | jq '.'
 }
+
+function kssh () {
+  local ip="$1"
+  KEY_FLAG=
+  SSH_KEY="${SSH_KEY:-}"
+  if [[ -n "$SSH_KEY" ]]; then
+    KEY_FLAG="-i $SSH_KEY"
+    if [[ -f  "$SSH_KEY" ]]; then
+      echo 'key exists, wtf'
+    else
+      echo 'key does not exist, wtf'
+    fi
+  fi
+  
+  kitty +kitten ssh -vv $KEY_FLAG ec2-user@$ip
+}
