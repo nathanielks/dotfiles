@@ -50,6 +50,7 @@ alias pip=$(which pip3)
 alias awsls="aws --endpoint ${LOCALSTACK_ENDPOINT}"
 
 # Docker
+alias docker-kill-all='docker kill $(docker ps -a -q)'
 alias docker-stop-all='docker stop $(docker ps -a -q)'
 alias docker-remove-all='docker rm $(docker ps -a -q)'
 alias docker-rmi-all='docker rmi $(docker images -a -q)'
