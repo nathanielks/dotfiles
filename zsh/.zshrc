@@ -10,7 +10,7 @@ fi
 arch="$(arch)"
 if [[ "$OS_TYPE" == "linux-gnu"* ]]; then
   eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-elif [[ $OSTYPE == darwin* && "$arch" == "arm64" ]]; then
+elif [[ $OSTYPE == darwin* ]]; then
 
   if [[ ! -L ~/.1password/agent.sock ]]; then
     # create standard location for 1Password SSH Agent
@@ -32,11 +32,13 @@ eval "$(pyenv init -)"
 eval "$(direnv hook zsh)"
 eval "$(zoxide init zsh)"
 eval "$(starship init zsh)"
+export FZF_BASE=/opt/homebrew/bin
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # Aliases and Functions
 # source every *.zsh file in the repo
 for file ($DOTFILES/zsh/config/*.zsh) source $file
+for file ($WORKDOTS/zsh/*.zsh) source $file
 
 # iTerm2 Shell Integration
 # test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
@@ -65,3 +67,5 @@ unset __conda_setup
 
 # re-enable if you want to profile startup time
 # zprof
+source /Users/aang/.config/op/plugins.sh
+

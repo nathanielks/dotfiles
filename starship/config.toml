@@ -27,13 +27,13 @@ format = """\
   $nix_shell\
   $conda\
   $memory_usage\
-  $env_var\
   $crystal\
   $git_branch\
   $git_commit\
   $git_state\
   $git_status\
   ${custom.time_since_commit}\
+  $env_var\
   $hg_branch\
   $cmd_duration\
   $line_break\
@@ -108,3 +108,8 @@ command = "arch"
 when = """ echo 0 """
 format = "[on $symbol$output ]($style)"
 symbol = " "
+
+[env_var]
+variable = 'AWS_PROFILE'
+style = "bold yellow"
+format = " [$env_value]($style) "

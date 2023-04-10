@@ -8,6 +8,7 @@ alias c="composer"
 alias cu="composer update && ga . && gc -m 'updated composer'"
 alias dc="docker-compose"
 alias el="exa -la --group-directories-first"
+alias gds="git delete-squashed"
 alias gff="git flow finish"
 alias gffs="git flow feature start"
 alias gfrs="git flow release start"
@@ -48,11 +49,16 @@ alias typora="open -a typora"
 alias nn="nnn -dHS"
 alias pip=$(which pip3)
 alias awsls="aws --endpoint ${LOCALSTACK_ENDPOINT}"
+alias nip="npm install --package-lock-only"
+alias nr="npm run"
 
 # Docker
 alias docker-kill-all='docker kill $(docker ps -a -q)'
 alias docker-stop-all='docker stop $(docker ps -a -q)'
 alias docker-remove-all='docker rm $(docker ps -a -q)'
+alias docker-cleanup='docker-stop-all; docker-remove-all; docker network prune --force'
 alias docker-rmi-all='docker rmi $(docker images -a -q)'
 alias runcircle='circleci config process .circleci/config.yml > /tmp/process.yml; circleci local execute -c /tmp/process.yml -e CIRCLE_PROJECT_REPONAME=${PWD##*/} --job '
 alias sum_numbers='paste -s -d+ | bc'
+alias find_servers='sudo nmap -sU -p 137,5353 --script nbstat,dns-service-discovery'
+

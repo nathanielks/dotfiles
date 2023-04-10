@@ -118,3 +118,13 @@ function kssh () {
   
   kitty +kitten ssh -vv $KEY_FLAG ec2-user@$ip
 }
+
+function md () {
+  local file="$1"
+  touch "$file"
+  typora "$file"
+}
+
+function dpio () {
+  docker run -it -v "$PWD:/workdir" -w /workdir petewall/platformio
+}

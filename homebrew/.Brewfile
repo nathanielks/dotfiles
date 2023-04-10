@@ -40,6 +40,14 @@ brew "starship"
 brew "direnv"
 brew "curl"
 brew "wget"
+brew "coreutils"
+brew "gnu-sed"
+brew "luarocks"
+brew "upterm"
+brew "rust"
+brew "watch"
+brew "zlib"
+brew 'openssl@3'
 
 # Modern Unix
 brew 'ripgrep' # Faster grep
@@ -68,11 +76,31 @@ cask 'qlstephen'
 cask 'betterzipql'
 
 # apps
-cask 'slack'
+cask '1password'
+cask '1password-cli'
+cask 'discord'
+cask 'firefox'
+cask 'google-chrome'
+cask 'keybase'
+cask 'kitty'
+cask 'meld'
+cask 'ngrok'
 cask 'obsidian'
+cask 'pocket-casts'
+cask 'signal'
+cask 'slack'
+cask 'spotify'
+cask 'steam'
+cask 'tableplus'
+cask 'zoom'
 
 # Mac apps
+cask 'alfred'
+cask 'bartender'
+cask 'emmetapp'
 cask 'istat-menus'
+cask 'paw'
+cask 'typora'
 
 # Command-not-found
 # this is used by prezto's command-not-found module:

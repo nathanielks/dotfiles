@@ -1,16 +1,33 @@
+[diff]
+  tool = meld
+[difftool]
+	prompt = false
+[difftool "meld"]
+  trustExitCode = true
+  cmd = meld --args "$LOCAL" "$REMOTE"
+[merge]
+  tool = meld
+  ; tool = opendiff
+[mergetool]
+	prompt = false
+[mergetool "meld"]
+  trustExitCode = true
+  cmd = meld --auto-merge "$LOCAL" "$BASE" "$REMOTE" --output="$MERGED"
+
 [filter "lfs"]
 	required = true
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 [user]
-	name = Nathaniel Schweinberg
+	name = Nathaniel
 	email = 314009+nathanielks@users.noreply.github.com
 	signingkey = FE0207A38BD54DC4
 	#signingkey = natanielks@gmail.com
 [push]
   default = simple
 	followTags = true
+	autoSetupRemote = true
 [core]
   editor = "lvim"
 	excludesfile = ~/.gitignore
@@ -20,25 +37,9 @@
   ; diffFilter = delta --light --syntax-theme='GitHub' --color-only
   diffFilter = delta --syntax-theme='Monokai Extended' --color-only
 	singleKey = yes
-[difftool]
-	prompt = false
-[mergetool]
-	prompt = false
 [commit]
 	gpgsign = true
   #gpgsign = true
-[merge]
-  tool = meld
-[mergetool "meld"]
-  # Choose one of these 2 lines (not both!) explained below.
-  cmd = meld "$LOCAL" "$MERGED" "$REMOTE" --output "$MERGED"
-  cmd = meld "$LOCAL" "$BASE" "$REMOTE" --output "$MERGED"
-[diff]
-    tool = meld
-[difftool]
-    prompt = false
-[difftool "meld"]
-    cmd = meld "$LOCAL" "$REMOTE"
 [status]
   showUntrackedFiles = all
   # Sometimes a newly-added folder, since it's only one line in git status, can slip under the radar.
@@ -53,6 +54,7 @@
   # https://git-scm.com/docs/git-reset#git-reset-emgitresetemltmodegtltcommitgt
 
   stash-all = stash save --include-untracked
+	delete-squashed = "!f() { local targetBranch=${1:-main} && git checkout -q $targetBranch && git branch --merged | grep -v \"\\*\" | xargs -n 1 git branch -d && git for-each-ref refs/heads/ \"--format=%(refname:short)\" | while read branch; do mergeBase=$(git merge-base $targetBranch $branch) && [[ $(git cherry $targetBranch $(git commit-tree $(git rev-parse $branch^{tree}) -p $mergeBase -m _)) == \"-\"* ]] && git branch -D $branch; done; }; f"
   # We wanna grab those pesky un-added files!
   # https://git-scm.com/docs/git-stash#
 ; [pull]
@@ -60,4 +62,4 @@
 [pull]
 	rebase = false
 [init]
-	defaultBranch = main
+  defaultBranch = main

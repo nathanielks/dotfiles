@@ -1,8 +1,9 @@
 # Prezto loads this via the environment module
 
 export DOTFILES=$HOME/.dotfiles
+export WORKDOTS=$HOME/.workdots
 
-export EDITOR="lvim"
+export EDITOR="vim"
 export NVM_DIR="$HOME/.nvm"
 export STARSHIP_CONFIG="$DOTFILES/starship/config.toml"
 export KITTY_CONFIG_DIRECTORY="$DOTFILES/kitty/.config/kitty"
@@ -34,8 +35,14 @@ export QMK_HOME=$HOME/Code/GitHub/nathanielks/qmk_firmware
 
 # PATH modifications
 ## System level
-PATH="/usr/local/bin:$PATH"
-PATH="/usr/local/sbin:$PATH"
+if [[ $OSTYPE == darwin* && "$arch" == "arm64" ]]; then
+  PATH="/opt/homebrew/bin:$PATH"
+  export FZF_BASE=/opt/homebrew/bin
+  PATH="$HOME/Library/Python/3.9/bin:$PATH"
+elif [[ $OSTYPE == darwin* && "$arch" == "i386" ]]; then
+  PATH="/usr/local/bin:$PATH"
+  PATH="/usr/local/sbin:$PATH"
+fi
 
 # User level
 PATH="$PYENV_ROOT/bin:$PATH" 
@@ -43,6 +50,7 @@ PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
 PATH="$GOBIN:$PATH"
 PATH="$HOME/.local/bin:$PATH"
+PATH="$HOME/.local/bin/platform-tools:$PATH"
 PATH=$DOTFILES/bin:$PATH
 
 # Project level
@@ -68,3 +76,4 @@ export AWS_PAGER=""
 . "$HOME/.cargo/env"
 
 export SSH_AUTH_SOCK="~/.1password/agent.sock"
+export GPG_TTY="$(tty)"
