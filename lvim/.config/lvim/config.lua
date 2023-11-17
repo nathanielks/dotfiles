@@ -1,8 +1,11 @@
 lvim.log.level = "warn"
 lvim.format_on_save = true
-lvim.colorscheme = "nightfox"
+-- lvim.colorscheme = "tokyonight"
+lvim.colorscheme = "tokyonight-storm"
+-- lvim.colorscheme = "tokyonight-day"
+-- lvim.colorscheme = "nightfox"
 -- vim.o.background = "light"
--- lvim.colorscheme = "inspired-github"
+-- lvim.colorscheme = "github_light"
 lvim.leader = "space"
 
 lvim.builtin.alpha.active = true
@@ -14,12 +17,12 @@ vim.opt.textwidth = 80
 vim.opt.formatoptions = {
   ["1"] = true,
   ["2"] = true, -- Use indent from 2nd line of a paragraph
-  q = true, -- continue comments with gq"
-  c = true, -- Auto-wrap comments using textwidth
-  r = true, -- Continue comments when pressing Enter
-  n = true, -- Recognize numbered lists
-  t = false, -- autowrap lines using text width value
-  j = true, -- remove a comment leader when joining lines.
+  q = true,     -- continue comments with gq"
+  c = true,     -- Auto-wrap comments using textwidth
+  r = true,     -- Continue comments when pressing Enter
+  n = true,     -- Recognize numbered lists
+  t = false,    -- autowrap lines using text width value
+  j = true,     -- remove a comment leader when joining lines.
   -- Only break if the line was not longer than 'textwidth' when the insert
   -- started and only at a white character that has been entered during the
   -- current insert command.
@@ -95,6 +98,39 @@ linters.setup {
 
 lvim.plugins = {
   { "lunarvim/colorschemes" },
+  {
+    "folke/tokyonight.nvim",
+    -- lazy = false,
+    -- priority = 1000,
+    -- opts = {},
+    -- config = function()
+    --   require("tokyonight").setup({
+    --     -- use the night style
+    --     -- style = "night",
+    --     style = "day",
+    --     -- Change the "hint" color to the "orange" color, and make the "error" color bright red
+    --     on_highlights = function(hl, colors)
+    --       hl.Cursor = {
+    --         bg = colors.bg_dark,
+    --         fg = "#e1e2e7"
+    --       }
+    --       hl.CursorColumn = {
+    --         bg = colors.bg_dark
+    --       }
+    --       hl.CursorIM = {
+    --         bg = "#3760bf",
+    --         fg = "#e1e2e7"
+    --       }
+    --       hl.CursorLine = {
+    --         bg = colors.bg_dark
+    --       }
+    --       hl.CursorLineNr = {
+    --         fg = "#68709a"
+    --       }
+    --     end
+    --   })
+    -- end
+  },
   { "EdenEast/nightfox.nvim" },
   { "mvpopuk/inspired-github.vim" },
   { "tpope/vim-surround" },
@@ -132,18 +168,88 @@ lvim.plugins = {
   { "tpope/vim-projectionist" },
   { "mklabs/split-term.vim" },
   { "folke/zen-mode.nvim" },
+  -- { "simrat39/symbols-outline.nvim" },
   {
-    "cormacrelf/dark-notify",
+    "stevearc/aerial.nvim",
     config = function()
-      require('dark_notify').run({
-        schemes = {
-          dark = "nightfox",
-          light = "inspired-github"
-        }
+      require('aerial').setup({
+        -- Options for the floating nav windows
+        nav = {
+          -- Jump to symbol in source window when the cursor moves
+          autojump = true,
+          -- Show a preview of the code in the right column, when there are no child symbols
+          preview = true,
+          -- Keymaps in the nav window
+          -- keymaps = {
+          --   ["<CR>"] = "actions.jump",
+          --   ["<2-LeftMouse>"] = "actions.jump",
+          --   ["<C-v>"] = "actions.jump_vsplit",
+          --   ["<C-s>"] = "actions.jump_split",
+          --   ["h"] = "actions.left",
+          --   ["l"] = "actions.right",
+          --   ["<C-c>"] = "actions.close",
+          -- },
+        },
       })
     end
   },
+  -- {
+  --   "cormacrelf/dark-notify",
+  --   config = function()
+  --     require('dark_notify').run({
+  --       schemes = {
+  --         dark = "tokyonight-storm",
+  --         light = "tokyonight-day"
+  --       }
+  --     })
+  --   end
+  -- },
+  -- { "mg979/vim-visual-multi", }
+  {
+    "folke/trouble.nvim",
+    cmd = "TroubleToggle",
+  },
+  -- {
+  --   "rmagatti/goto-preview",
+  --   config = function()
+  --     require('goto-preview').setup {
+  --       width = 120,              -- Width of the floating window
+  --       height = 25,              -- Height of the floating window
+  --       default_mappings = false, -- Bind default mappings
+  --       debug = false,            -- Print debug information
+  --       opacity = nil,            -- 0-100 opacity level of the floating window where 100 is fully transparent.
+  --       post_open_hook = nil      -- A function taking two arguments, a buffer and a window to be ran as a hook.
+  --       -- You can use "default_mappings = true" setup option
+  --       -- Or explicitly set keybindings
+  --       -- vim.cmd("nnoremap gpd <cmd>lua require('goto-preview').goto_preview_definition()<CR>")
+  --       -- vim.cmd("nnoremap gpi <cmd>lua require('goto-preview').goto_preview_implementation()<CR>")
+  --       -- vim.cmd("nnoremap gP <cmd>lua require('goto-preview').close_all_win()<CR>")
+  --     }
+  --   end
+  -- },
+  -- {
+  --   "Pocco81/auto-save.nvim",
+  --   config = function()
+  --     require("auto-save").setup()
+  --   end,
+  -- },
+  {
+    "ethanholz/nvim-lastplace",
+    event = "BufRead",
+    config = function()
+      require("nvim-lastplace").setup({
+        lastplace_ignore_buftype = { "quickfix", "nofile", "help" },
+        lastplace_ignore_filetype = {
+          "gitcommit", "gitrebase", "svn", "hgcommit",
+        },
+        lastplace_open_folds = true,
+      })
+    end,
+  },
 }
+
+-- Escape using jj instead of esc key
+lvim.keys.insert_mode["jj"] = "<Esc>"
 
 -- Cycle between tabs
 lvim.keys.normal_mode["<S-l>"] = ":BufferLineCycleNext<CR>"
@@ -170,10 +276,11 @@ lvim.builtin.which_key.mappings["A"] = {
 lvim.builtin.which_key.mappings["E"] = {
   name = "Eunuch",
   d = { ':Delete<cr>', 'Delete a buffer and the file on disk simultaneously.' },
-  m = { ':Move', 'Rename a buffer and the file on disk simultaneously.' },
-  r = { ':Rename', "Like :Move, but relative to the current file's containing directory." },
-  c = { ':Chmod', 'Change the permissions of the current file.' },
-  M = { ':Mkdir', 'Create a directory, defaulting to the parent of the current file.' },
+  D = { ':Delete!<cr>', 'Force delete a buffer and the file on disk simultaneously.' },
+  m = { ':Move ', 'Rename a buffer and the file on disk simultaneously.' },
+  r = { ':Rename ', "Like :Move, but relative to the current file's containing directory." },
+  c = { ':Chmod ', 'Change the permissions of the current file.' },
+  M = { ':Mkdir ', 'Create a directory, defaulting to the parent of the current file.' },
   w = { ':Wall<cr>', 'Write every open window. Handy for kicking off tools like guard.' },
   W = { ':SudoWrite<cr>', 'Write a privileged file with sudo.' },
   e = { ':SudoEdit<cr>', 'Edit a privileged file with sudo.' },
@@ -197,6 +304,22 @@ lvim.builtin.which_key.mappings["h"] = {
   l = { "<cmd>HopLine<cr>", "jump to any visible line in your buffer" },
 }
 lvim.builtin.which_key.mappings["H"] = { "<cmd>nohlsearch<CR>", "No Highlight" }
-lvim.builtin.which_key.mappings["l"]["T"] = { "<cmd>TroubleToggle<CR>", "Trouble Quickfix List" }
-lvim.builtin.which_key.mappings["l"]["o"] = { "<cmd>SymbolsOutline<CR>", "Symbols Outline" }
--- lvim.builtin.which_key.mappings["l"]["o"] = { "<cmd>AerialToggle!<CR>", "Symbols Outline"  }
+-- lvim.builtin.which_key.mappings["l"]["o"] = { "<cmd>SymbolsOutline<CR>", "Symbols Outline" }
+lvim.builtin.which_key.mappings["l"]["o"] = { "<cmd>AerialNavToggle<CR>", "Symbols Outline" }
+
+-- lvim.builtin.which_key.mappings["l"]["R"] = { "<cmd>lua require('goto-preview').goto_preview_implementation()<CR>", "references" }
+-- vim.cmd("nnoremap gpd <cmd>lua require('goto-preview').goto_preview_definition()<CR>")
+-- vim.cmd("nnoremap gpi <cmd>lua require('goto-preview').goto_preview_implementation()<CR>")
+-- vim.cmd("nnoremap gP <cmd>lua require('goto-preview').close_all_win()<CR>")
+
+
+lvim.builtin.which_key.mappings["l"]["R"] = { "<cmd>TroubleToggle lsp_references<cr>", "references" }
+lvim.builtin.which_key.mappings["l"]["t"] = {
+  name = "Diagnostics",
+  t = { "<cmd>TroubleToggle<cr>", "trouble" },
+  w = { "<cmd>TroubleToggle workspace_diagnostics<cr>", "workspace" },
+  d = { "<cmd>TroubleToggle document_diagnostics<cr>", "document" },
+  q = { "<cmd>TroubleToggle quickfix<cr>", "quickfix" },
+  l = { "<cmd>TroubleToggle loclist<cr>", "loclist" },
+  r = { "<cmd>TroubleToggle lsp_references<cr>", "references" },
+}
