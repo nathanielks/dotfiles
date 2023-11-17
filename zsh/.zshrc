@@ -1,8 +1,3 @@
-# Source Prezto.
-if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
-  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
-fi
-
 # re-enable if you want to profile startup time
 # zmodload zsh/zprof
 
@@ -20,9 +15,15 @@ elif [[ $OSTYPE == darwin* ]]; then
   if [[ "$arch" == "arm64" ]]; then
     eval "$(/opt/homebrew/bin/brew shellenv)"
     export PATH="/opt/homebrew/lib/ruby/gems/3.1.0/bin:/opt/homebrew/opt/ruby/bin:$PATH"
+    export FZF_BASE=/opt/homebrew/opt/fzf 
   elif [[ "$arch" == "i386" ]]; then
     eval "$(/usr/local/bin/brew shellenv)"
   fi
+fi
+
+# Source Prezto.
+if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
+  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
 [ -s "$NVM_DIR/zsh_completion" ] && \. "$NVM_DIR/zsh_completion"  # This loads nvm bash_completion
@@ -32,7 +33,9 @@ eval "$(pyenv init -)"
 eval "$(direnv hook zsh)"
 eval "$(zoxide init zsh)"
 eval "$(starship init zsh)"
-export FZF_BASE=/opt/homebrew/bin
+if type "limactl" > /dev/null; then
+  source <(limactl completion zsh)
+fi
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # Aliases and Functions
@@ -69,3 +72,9 @@ unset __conda_setup
 # zprof
 source /Users/aang/.config/op/plugins.sh
 
+
+### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
+export PATH="/Users/aang/.rd/bin:$PATH"
+### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
+
+source /Users/aang/Library/Application\ Support/org.dystroy.broot/launcher/bash/br

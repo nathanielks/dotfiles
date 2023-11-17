@@ -68,7 +68,7 @@ brew 'go'
 # Neovim
 # I prefer over Vim for the simple reason they accepted one of my patches ;)
 brew 'neovim'
-brew 'dark-notify'
+brew 'cormacrelf/tap/dark-notify'
 
 # Quicklook plugins
 tap 'homebrew/cask'

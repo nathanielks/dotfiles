@@ -1,18 +1,25 @@
 [diff]
-  tool = meld
+  ; tool = meld
+  tool = diffmerge
 [difftool]
 	prompt = false
 [difftool "meld"]
   trustExitCode = true
   cmd = meld --args "$LOCAL" "$REMOTE"
 [merge]
-  tool = meld
+  ; tool = meld
   ; tool = opendiff
+  ; tool = diffmerge
+  tool = nvimdiff
 [mergetool]
-	prompt = false
+	prompt = true
+	keepBackup = false
 [mergetool "meld"]
   trustExitCode = true
   cmd = meld --auto-merge "$LOCAL" "$BASE" "$REMOTE" --output="$MERGED"
+[mergetool "nvimdiff"]
+  trustExitCode = true
+  cmd = "lvim -d \"$LOCAL\" \"$MERGED\" \"$REMOTE\""
 
 [filter "lfs"]
 	required = true
@@ -63,3 +70,8 @@
 	rebase = false
 [init]
   defaultBranch = main
+[mergetool "diffmerge"]
+	cmd = /opt/homebrew/bin/diffmerge --merge --result=\"$MERGED\" \"$LOCAL\" \"$BASE\" \"$REMOTE\"
+	trustExitCode = true
+[difftool "diffmerge"]
+	cmd = /opt/homebrew/bin/diffmerge --nosplash \"$LOCAL\" \"$REMOTE\"

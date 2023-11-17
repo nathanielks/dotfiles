@@ -61,4 +61,4 @@ alias docker-rmi-all='docker rmi $(docker images -a -q)'
 alias runcircle='circleci config process .circleci/config.yml > /tmp/process.yml; circleci local execute -c /tmp/process.yml -e CIRCLE_PROJECT_REPONAME=${PWD##*/} --job '
 alias sum_numbers='paste -s -d+ | bc'
 alias find_servers='sudo nmap -sU -p 137,5353 --script nbstat,dns-service-discovery'
-
+alias darkMode="2>/dev/null defaults read -g AppleInterfaceStyle"
