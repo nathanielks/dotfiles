@@ -26,6 +26,7 @@ alias gd='g diff'
 alias gdt='g difftool'
 alias gco="git checkout"
 alias g="git"
+alias gg="lazygit"
 alias gupdate='gco master; gpa; g delete-merged-branches'
 alias tf='terraform'
 alias tfu='terraform force-unlock'

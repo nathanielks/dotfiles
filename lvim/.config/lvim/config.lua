@@ -82,7 +82,11 @@ formatters.setup {
   {
     command = "eslint_d",
     filetypes = { "vue", "javascript", "javascriptreact" }
-  }
+  },
+  {
+    command = "black",
+    filetypes = { "python" }
+  },
 }
 
 
@@ -92,7 +96,11 @@ linters.setup {
   {
     command = "eslint_d",
     filetypes = { "vue", "javascript", "javascriptreact" }
-  }
+  },
+  {
+    command = "flake8",
+    filetypes = { "python" }
+  },
 }
 
 
@@ -193,17 +201,17 @@ lvim.plugins = {
       })
     end
   },
-  -- {
-  --   "cormacrelf/dark-notify",
-  --   config = function()
-  --     require('dark_notify').run({
-  --       schemes = {
-  --         dark = "tokyonight-storm",
-  --         light = "tokyonight-day"
-  --       }
-  --     })
-  --   end
-  -- },
+  {
+    "cormacrelf/dark-notify",
+    config = function()
+      require('dark_notify').run({
+        schemes = {
+          dark = "tokyonight-storm",
+          light = "tokyonight-day"
+        }
+      })
+    end
+  },
   -- { "mg979/vim-visual-multi", }
   {
     "folke/trouble.nvim",
