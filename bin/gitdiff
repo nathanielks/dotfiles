@@ -1,0 +1,7 @@
+#!/usr/bin/env zsh
+
+if [[ ! ( $(2>/dev/null defaults read -g AppleInterfaceStyle) =~ 'Dark' ) ]]; then
+  delta --light --syntax-theme='GitHub' $@
+else
+  delta --syntax-theme='Monokai Extended' $@
+fi

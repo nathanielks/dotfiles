@@ -38,11 +38,9 @@
 [core]
   editor = "lvim"
 	excludesfile = ~/.gitignore
-  ; pager = delta --light --syntax-theme='GitHub'
-  pager = delta --syntax-theme='Monokai Extended'
+  pager = ~/.dotfiles/bin/gitdiff
 [interactive]
-  ; diffFilter = delta --light --syntax-theme='GitHub' --color-only
-  diffFilter = delta --syntax-theme='Monokai Extended' --color-only
+  diffFilter = ~/.dotfiles/bin/gitdiff --color-only
 	singleKey = yes
 [commit]
 	gpgsign = true
