@@ -331,3 +331,4 @@ lvim.builtin.which_key.mappings["l"]["t"] = {
   l = { "<cmd>TroubleToggle loclist<cr>", "loclist" },
   r = { "<cmd>TroubleToggle lsp_references<cr>", "references" },
 }
+lvim.builtin.which_key.mappings["Q"] = { ":qa!<CR>", "Quit all" }
