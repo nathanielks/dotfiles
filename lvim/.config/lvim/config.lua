@@ -1,9 +1,10 @@
 lvim.log.level = "warn"
-lvim.format_on_save = true
+lvim.format_on_save = false -- set to true on better machine
 -- lvim.colorscheme = "tokyonight"
-lvim.colorscheme = "tokyonight-storm"
+-- lvim.colorscheme = "tokyonight-storm"
 -- lvim.colorscheme = "tokyonight-day"
 -- lvim.colorscheme = "nightfox"
+lvim.colorscheme = "dawnfox"
 -- vim.o.background = "light"
 -- lvim.colorscheme = "github_light"
 lvim.leader = "space"
@@ -76,11 +77,11 @@ lvim.builtin.project.manual_mode = true
 local formatters = require "lvim.lsp.null-ls.formatters"
 formatters.setup {
   {
-    command = "prettier_d_slim",
+    command = "prettier",
     filetypes = { "json" }
   },
   {
-    command = "eslint_d",
+    command = "eslint",
     filetypes = { "vue", "javascript", "javascriptreact" }
   },
   {
@@ -94,7 +95,7 @@ formatters.setup {
 local linters = require "lvim.lsp.null-ls.linters"
 linters.setup {
   {
-    command = "eslint_d",
+    command = "eslint",
     filetypes = { "vue", "javascript", "javascriptreact" }
   },
   {
@@ -207,7 +208,7 @@ lvim.plugins = {
       require('dark_notify').run({
         schemes = {
           dark = "tokyonight-storm",
-          light = "tokyonight-day"
+          light = "dawnfox"
         }
       })
     end
