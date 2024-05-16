@@ -12,6 +12,7 @@ elif [[ $OSTYPE == darwin* ]]; then
     mkdir -p ~/.1password && ln -s ~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock ~/.1password/agent.sock
   fi
 
+  source /Users/aang/Library/Application\ Support/org.dystroy.broot/launcher/bash/br
   if [[ "$arch" == "arm64" ]]; then
     eval "$(/opt/homebrew/bin/brew shellenv)"
     export PATH="/opt/homebrew/lib/ruby/gems/3.1.0/bin:/opt/homebrew/opt/ruby/bin:$PATH"
@@ -55,11 +56,11 @@ cdpath=($GOPATH)
 
 # re-enable if you want to profile startup time
 # zprof
-source /Users/aang/.config/op/plugins.sh
+source "$HOME/.config/op/plugins.sh"
 
 
 ### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
 export PATH="/Users/aang/.rd/bin:$PATH"
 ### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
 
-source /Users/aang/Library/Application\ Support/org.dystroy.broot/launcher/bash/br
+
