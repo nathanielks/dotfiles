@@ -52,6 +52,8 @@ alias pip=$(which pip3)
 alias awsls="aws --endpoint ${LOCALSTACK_ENDPOINT}"
 alias nip="npm install --package-lock-only"
 alias nr="npm run"
+alias nrw="npm run watch"
+alias nrt="npm run test"
 
 # Docker
 alias docker-kill-all='docker kill $(docker ps -a -q)'
