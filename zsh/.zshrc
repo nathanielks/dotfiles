@@ -29,8 +29,8 @@ fi
 
 [ -s "$NVM_DIR/zsh_completion" ] && \. "$NVM_DIR/zsh_completion"  # This loads nvm bash_completion
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-eval "$(pyenv init --path)" 
-eval "$(pyenv init -)"
+# eval "$(pyenv init --path)" 
+# eval "$(pyenv init -)"
 eval "$(direnv hook zsh)"
 eval "$(zoxide init zsh)"
 eval "$(starship init zsh)"

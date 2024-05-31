@@ -6,7 +6,7 @@
 export DOTFILES=$HOME/.dotfiles
 export WORKDOTS=$HOME/.workdots
 
-export EDITOR="vim"
+export EDITOR="lvim"
 export NVM_DIR="$HOME/.nvm"
 export STARSHIP_CONFIG="$DOTFILES/starship/config.toml"
 export KITTY_CONFIG_DIRECTORY="$DOTFILES/kitty/.config/kitty"
