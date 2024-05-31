@@ -174,7 +174,6 @@ lvim.plugins = {
   },
 
   { "Raimondi/delimitMate" },
-  { "tpope/vim-projectionist" },
   { "mklabs/split-term.vim" },
   { "folke/zen-mode.nvim" },
   -- { "simrat39/symbols-outline.nvim" },
@@ -255,7 +254,27 @@ lvim.plugins = {
       })
     end,
   },
+  {
+    "tpope/vim-projectionist",
+    config = function()
+      vim.g.projectionist_heuristics = {
+        ["package.json"] = {
+          ["lib/*.js"] = {
+            alternate = "tests/{}.unit.test.js",
+          },
+          ["tests/*.unit.test.js"] = {
+            alternate = "lib/{}.js",
+          },
+        },
+      }
+    end,
+  },
 }
+
+lvim.builtin.telescope.on_config_done = function(telescope)
+  pcall(telescope.load_extension, "telescope-alternate")
+  -- any other extensions loading
+end
 
 -- Escape using jj instead of esc key
 lvim.keys.insert_mode["jj"] = "<Esc>"
@@ -332,4 +351,11 @@ lvim.builtin.which_key.mappings["l"]["t"] = {
   l = { "<cmd>TroubleToggle loclist<cr>", "loclist" },
   r = { "<cmd>TroubleToggle lsp_references<cr>", "references" },
 }
+lvim.builtin.which_key.mappings["l"]["f"] = {
+  function()
+    require("lvim.lsp.utils").format { timeout_ms = 5000 }
+  end,
+  "Format",
+}
+
 lvim.builtin.which_key.mappings["Q"] = { ":qa!<CR>", "Quit all" }
