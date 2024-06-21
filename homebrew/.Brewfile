@@ -53,7 +53,7 @@ brew 'openssl@3'
 brew 'ripgrep' # Faster grep
 brew 'zoxide' # Fast directory switcher
 brew 'broot' # Fast directory explorer
-brew "exa" # better ls
+brew "eza" # better ls
 brew "fd" # better find
 brew "bat" # better cat
 brew "fzf"
