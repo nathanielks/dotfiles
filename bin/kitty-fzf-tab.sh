@@ -1,7 +1,10 @@
 #!/usr/bin/env zsh
 
+export PATH="/opt/homebrew/bin:$PATH"
+
 jq=$(which jq)
 fzf=$(which fzf)
+
 all_tabs="$(
     kitty @ ls | $jq -r '
         .[]
