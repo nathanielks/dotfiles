@@ -44,3 +44,5 @@ export AWS_PAGER=""
 
 export SSH_AUTH_SOCK="~/.1password/agent.sock"
 export GPG_TTY="$(tty)"
+
+alias assume=". assume"

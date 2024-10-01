@@ -1,10 +1,10 @@
 lvim.log.level = "warn"
 lvim.format_on_save = false -- set to true on better machine
 -- lvim.colorscheme = "tokyonight"
--- lvim.colorscheme = "tokyonight-storm"
+lvim.colorscheme = "tokyonight-storm"
 -- lvim.colorscheme = "tokyonight-day"
 -- lvim.colorscheme = "nightfox"
-lvim.colorscheme = "dawnfox"
+-- lvim.colorscheme = "dawnfox"
 -- vim.o.background = "light"
 -- lvim.colorscheme = "github_light"
 lvim.leader = "space"
@@ -215,7 +215,7 @@ lvim.plugins = {
   -- { "mg979/vim-visual-multi", }
   {
     "folke/trouble.nvim",
-    cmd = "TroubleToggle",
+    opts = {}
   },
   -- {
   --   "rmagatti/goto-preview",
@@ -331,6 +331,8 @@ lvim.builtin.which_key.mappings["h"] = {
   t = { "<cmd>HopChar2<cr>", "type a bigram (two keys) and hop to any occurrence of that bigram in the document" },
   l = { "<cmd>HopLine<cr>", "jump to any visible line in your buffer" },
 }
+-- lvim.lsp.buffer_mappings.normal_mode['h'] = { vim.lsp.buf.hover, "Show documentation" }
+lvim.builtin.which_key.mappings['h'] = { vim.lsp.buf.hover, "Show documentation" }
 lvim.builtin.which_key.mappings["H"] = { "<cmd>nohlsearch<CR>", "No Highlight" }
 -- lvim.builtin.which_key.mappings["l"]["o"] = { "<cmd>SymbolsOutline<CR>", "Symbols Outline" }
 lvim.builtin.which_key.mappings["l"]["o"] = { "<cmd>AerialNavToggle<CR>", "Symbols Outline" }
@@ -341,15 +343,14 @@ lvim.builtin.which_key.mappings["l"]["o"] = { "<cmd>AerialNavToggle<CR>", "Symbo
 -- vim.cmd("nnoremap gP <cmd>lua require('goto-preview').close_all_win()<CR>")
 
 
-lvim.builtin.which_key.mappings["l"]["R"] = { "<cmd>TroubleToggle lsp_references<cr>", "references" }
+-- lvim.builtin.which_key.mappings["l"]["R"] = { "<cmd>Trouble lsp_references<cr>", "references" }
 lvim.builtin.which_key.mappings["l"]["t"] = {
   name = "Diagnostics",
-  t = { "<cmd>TroubleToggle<cr>", "trouble" },
-  w = { "<cmd>TroubleToggle workspace_diagnostics<cr>", "workspace" },
-  d = { "<cmd>TroubleToggle document_diagnostics<cr>", "document" },
-  q = { "<cmd>TroubleToggle quickfix<cr>", "quickfix" },
-  l = { "<cmd>TroubleToggle loclist<cr>", "loclist" },
-  r = { "<cmd>TroubleToggle lsp_references<cr>", "references" },
+  t = { "<cmd>Trouble<cr>", "trouble" },
+  w = { "<cmd>Trouble diagnostics<cr>", "diagnostics" },
+  q = { "<cmd>Trouble quickfix<cr>", "quickfix" },
+  l = { "<cmd>Trouble loclist<cr>", "loclist" },
+  r = { "<cmd>Trouble lsp_references<cr>", "references" },
 }
 lvim.builtin.which_key.mappings["l"]["f"] = {
   function()
