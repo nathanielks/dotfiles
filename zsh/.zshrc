@@ -12,7 +12,7 @@ elif [[ $OSTYPE == darwin* ]]; then
     mkdir -p ~/.1password && ln -s ~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock ~/.1password/agent.sock
   fi
 
-  source /Users/aang/Library/Application\ Support/org.dystroy.broot/launcher/bash/br
+source "$HOME/.config/broot/launcher/bash/br"
   if [[ "$arch" == "arm64" ]]; then
     eval "$(/opt/homebrew/bin/brew shellenv)"
     export PATH="/opt/homebrew/lib/ruby/gems/3.1.0/bin:/opt/homebrew/opt/ruby/bin:$PATH"
@@ -34,6 +34,9 @@ fi
 eval "$(direnv hook zsh)"
 eval "$(zoxide init zsh)"
 eval "$(starship init zsh)"
+if type "kubectl" > /dev/null; then
+  eval "$(kubectl completion zsh)"
+fi
 if type "limactl" > /dev/null; then
   source <(limactl completion zsh)
 fi
@@ -63,4 +66,8 @@ source "$HOME/.config/op/plugins.sh"
 export PATH="/Users/aang/.rd/bin:$PATH"
 ### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
 
+
+unsetopt correct
+unsetopt correctall
+DISABLE_CORRECTION="true"
 
