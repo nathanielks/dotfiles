@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
-duti -s com.vscodium public.json all
-duti -s com.vscodium public.plain-text all
-duti -s com.vscodium public.python-script all
-duti -s com.vscodium public.shell-script all
-duti -s com.vscodium public.source-code all
-duti -s com.vscodium public.text all
-duti -s com.vscodium public.unix-executable all
+duti -s com.microsoft.vscode public.json all
+duti -s com.microsoft.vscode public.plain-text all
+duti -s com.microsoft.vscode public.python-script all
+duti -s com.microsoft.vscode public.shell-script all
+duti -s com.microsoft.vscode public.source-code all
+duti -s com.microsoft.vscode public.text all
+duti -s com.microsoft.vscode public.unix-executable all
 # duti -s com.vscodium .md all
