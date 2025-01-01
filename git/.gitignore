@@ -13,6 +13,7 @@ Session.vim
 tags
 .envrc
 phpunit
+.nvmrc
 
 # PHPStorm
 # User-specific stuff:
