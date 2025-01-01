@@ -17,90 +17,10 @@
 # Tap a few required taps
 tap "homebrew/bundle"
 tap "homebrew/core"
-
-# Install all the things:
-brew 'zsh'
-brew 'ssh-copy-id'
-brew 'git'
-brew 'git-extras'
-brew 'gibo' # quickly access Github's git ignore templates
-brew 'less'
-brew 'lesspipe' # pre-processes various file formats so they can be paged via Less
-brew 'stow' # we'll use this later to manage dotfiles
-brew 'htop'
-brew 'iftop'
-brew 'ncdu' # ncurses-based directory/file size viewer
-brew "gcc"
-brew "gh"
-brew "git-delta" # better git diffs
-brew "jq"
-brew "lazygit"
-brew "pyenv"
-brew "starship"
-brew "direnv"
-brew "curl"
-brew "wget"
-brew "coreutils"
-brew "gnu-sed"
-brew "luarocks"
-brew "upterm"
-brew "rust"
-brew "watch"
-brew "zlib"
-brew 'openssl@3'
-
-# Modern Unix
-brew 'ripgrep' # Faster grep
-brew 'zoxide' # Fast directory switcher
-brew 'broot' # Fast directory explorer
-brew "eza" # better ls
-brew "fd" # better find
-brew "bat" # better cat
-brew "fzf"
-
-
-# Databases
-brew 'sqlite'
-
-# Go
-brew 'go'
-
-# Neovim
-# I prefer over Vim for the simple reason they accepted one of my patches ;)
-brew 'neovim'
-brew 'cormacrelf/tap/dark-notify'
-
-# Quicklook plugins
-tap 'homebrew/cask'
-cask 'qlstephen'
-cask 'betterzipql'
-
-# apps
-cask '1password'
-cask '1password-cli'
-cask 'discord'
-cask 'firefox'
-cask 'google-chrome'
-cask 'keybase'
-cask 'kitty'
-cask 'meld'
-cask 'ngrok'
-cask 'obsidian'
-cask 'pocket-casts'
-cask 'signal'
-cask 'slack'
-cask 'spotify'
-cask 'steam'
-cask 'tableplus'
-cask 'zoom'
-
-# Mac apps
-cask 'alfred'
-cask 'bartender'
-cask 'emmetapp'
-cask 'istat-menus'
-cask 'paw'
-cask 'typora'
+tap "common-fate/granted"
+tap "cormacrelf/tap"
+tap "homebrew/bundle"
+tap "homebrew/services"
 
 # Command-not-found
 # this is used by prezto's command-not-found module:
@@ -108,5 +28,119 @@ cask 'typora'
 # https://github.com/Homebrew/homebrew-command-not-found#install
 tap 'homebrew/command-not-found'
 
-# Fonts
-tap 'homebrew/cask-fonts'
+# Install all the things:
+brew "act"
+brew "openssl@3"
+brew "aws-sam-cli"
+brew "awscli"
+brew "libgit2"
+brew "bat" # better cat
+brew "boost"
+brew 'broot' # Fast directory explorer
+brew "cdk"
+brew "cfn-lint"
+brew "coreutils"
+brew "curl"
+brew "direnv"
+brew "duti"
+brew "folly"
+brew "fizz"
+brew "wangle"
+brew "fbthrift"
+brew "fb303"
+brew "edencommon"
+brew "eza" # better ls
+brew "fd" # better find
+brew "fzf"
+brew "gcc"
+brew "gh"
+brew 'gibo' # quickly access Github's git ignore templates
+brew "git"
+brew "git-delta" # better git diffs
+brew "git-extras"
+brew "gnu-sed"
+brew "go"
+brew "helm"
+brew "htop"
+brew "hyperfine"
+brew "iftop"
+brew "jq"
+brew "k6"
+brew "kubectx"
+brew "lazygit"
+brew "less"
+brew 'lesspipe' # pre-processes various file formats so they can be paged via Less
+brew "luarocks"
+brew "minikube"
+brew "mvfst"
+brew 'ncdu' # ncurses-based directory/file size viewer
+brew "neovim"
+brew "parallel"
+brew "pyenv"
+brew "qemu"
+brew "rain"
+brew 'ripgrep' # Faster grep
+brew "socket_vmnet"
+brew "ssh-copy-id"
+brew "starship"
+brew 'stow' # we'll use this later to manage dotfiles
+brew "telnet"
+brew "tree"
+brew "watch"
+brew "watchman"
+brew "wget"
+brew "yq"
+brew "zlib"
+brew 'zoxide' # Fast directory switcher
+brew "zsh"
+brew "common-fate/granted/granted"
+brew "cormacrelf/tap/dark-notify"
+cask "1password-cli"
+cask "alfred"
+cask "bartender"
+cask "claude"
+cask "discord"
+cask "emmetapp"
+cask "firefox"
+cask "font-sauce-code-pro-nerd-font"
+cask "ghostty"
+cask "google-chrome"
+cask "istat-menus"
+cask "keybase"
+cask "kitty"
+cask "meld"
+cask "monitorcontrol"
+cask "ngrok"
+cask "obsidian"
+cask "ollama"
+cask "pocket-casts"
+cask "rapidapi"
+cask "signal"
+cask "slack"
+cask "spotify"
+cask "steam"
+cask "tableplus"
+cask "typora"
+cask "visual-studio-code"
+cask "zoom"
+vscode "dansarich.tokyo-right"
+vscode "dsznajder.es7-react-js-snippets"
+vscode "eamodio.gitlens"
+vscode "esbenp.prettier-vscode"
+vscode "golang.go"
+vscode "ms-python.debugpy"
+vscode "ms-python.python"
+vscode "ms-python.vscode-pylance"
+vscode "ms-vscode-remote.remote-containers"
+vscode "ms-vscode-remote.remote-ssh"
+vscode "ms-vscode-remote.remote-ssh-edit"
+vscode "ms-vscode-remote.remote-wsl"
+vscode "ms-vscode-remote.vscode-remote-extensionpack"
+vscode "ms-vscode.cpptools"
+vscode "ms-vscode.remote-explorer"
+vscode "ms-vscode.remote-server"
+vscode "plorefice.devicetree"
+vscode "twxs.cmake"
+vscode "undefined_publisher.@noop-inc/vscode-snippets"
+vscode "unifiedjs.vscode-mdx"
+vscode "vscodevim.vim"
