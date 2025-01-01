@@ -201,17 +201,17 @@ lvim.plugins = {
       })
     end
   },
-  {
-    "cormacrelf/dark-notify",
-    config = function()
-      require('dark_notify').run({
-        schemes = {
-          dark = "tokyonight-storm",
-          light = "dawnfox"
-        }
-      })
-    end
-  },
+  -- {
+  --   "cormacrelf/dark-notify",
+  --   config = function()
+  --     require('dark_notify').run({
+  --       schemes = {
+  --         dark = "tokyonight-storm",
+  --         light = "dawnfox"
+  --       }
+  --     })
+  --   end
+  -- },
   -- { "mg979/vim-visual-multi", }
   {
     "folke/trouble.nvim",
@@ -267,6 +267,46 @@ lvim.plugins = {
           },
         },
       }
+    end,
+  },
+  {
+    'abecodes/tabout.nvim',
+    lazy = false,
+    config = function()
+      require('tabout').setup {
+        tabkey = '<Tab>', -- key to trigger tabout, set to an empty string to disable
+        backwards_tabkey = '<S-Tab>', -- key to trigger backwards tabout, set to an empty string to disable
+        act_as_tab = true, -- shift content if tab out is not possible
+        act_as_shift_tab = false, -- reverse shift content if tab out is not possible (if your keyboard/terminal supports <S-Tab>)
+        default_tab = '<C-t>', -- shift default action (only at the beginning of a line, otherwise <TAB> is used)
+        default_shift_tab = '<C-d>', -- reverse shift default action,
+        enable_backwards = true, -- well ...
+        completion = true, -- if the tabkey is used in a completion pum
+        tabouts = {
+          { open = "'", close = "'" },
+          { open = '"', close = '"' },
+          { open = '`', close = '`' },
+          { open = '(', close = ')' },
+          { open = '[', close = ']' },
+          { open = '{', close = '}' }
+        },
+        ignore_beginning = true, --[[ if the cursor is at the beginning of a filled element it will rather tab out than shift the content ]]
+        exclude = {} -- tabout will ignore these filetypes
+      }
+    end,
+    dependencies = { -- These are optional
+      "nvim-treesitter/nvim-treesitter",
+      "L3MON4D3/LuaSnip",
+      "hrsh7th/nvim-cmp"
+    },
+    event = 'InsertCharPre', -- Set the event to 'InsertCharPre' for better compatibility
+    priority = 1000,
+  },
+  {
+    "L3MON4D3/LuaSnip",
+    keys = function()
+      -- Disable default tab keybinding in LuaSnip
+      return {}
     end,
   },
 }
@@ -360,3 +400,7 @@ lvim.builtin.which_key.mappings["l"]["f"] = {
 }
 
 lvim.builtin.which_key.mappings["Q"] = { ":qa!<CR>", "Quit all" }
+
+-- Snippets
+require("luasnip/loaders/from_vscode").load { paths = { "~/Code/Work/repos/vscode-snippets" } }
+require("luasnip/loaders/from_vscode").load { paths = { "~/Code/snippets/vscode-javascript-snippet" } }
