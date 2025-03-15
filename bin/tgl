@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
-if [[ ! ( $(2>/dev/null defaults read -g AppleInterfaceStyle) =~ 'Dark' ) ]]; then
-  kitty @ --to=unix:/tmp/kitty set-colors --all --configured ~/.config/kitty/colors/nightfox/dawnfox.conf
-else
+# if [[ ! ( $(2>/dev/null defaults read -g AppleInterfaceStyle) =~ 'Dark' ) ]]; then
+#   kitty @ --to=unix:/tmp/kitty set-colors --all --configured ~/.config/kitty/colors/nightfox/dawnfox.conf
+# else
   kitty @ --to=unix:/tmp/kitty set-colors --all --configured ~/.config/kitty/colors/tokyonight_storm.conf
-fi
+# fi

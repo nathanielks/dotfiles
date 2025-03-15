@@ -2,6 +2,7 @@ alias reload!="source ~/.zshrc"
 alias a='php artisan'
 alias o='open . && fg';
 alias y='yarn'
+alias cat='bat --paging=never'
 alias tkill='tmux kill-session -t'
 alias vdu='vagrant destroy -f && vagrant up'
 alias c="composer"

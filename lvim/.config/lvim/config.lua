@@ -158,6 +158,10 @@ lvim.plugins = {
           QSTN = {
             icon = "",
             color = "warning"
+          },
+          ANSR = {
+            icon = "",
+            color = "hint"
           }
         }
       }
@@ -400,6 +404,7 @@ lvim.builtin.which_key.mappings["l"]["f"] = {
 }
 
 lvim.builtin.which_key.mappings["Q"] = { ":qa!<CR>", "Quit all" }
+lvim.builtin.which_key.mappings["s"]["R"] = { ":%s/", "Search/replace" }
 
 -- Snippets
 require("luasnip/loaders/from_vscode").load { paths = { "~/Code/Work/repos/vscode-snippets" } }

@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+jq -r '.buckets | map(select(.paused == false)) | .[] | [ .name, .target_amount, .next_contribution ] | @csv'
