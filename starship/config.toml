@@ -44,8 +44,8 @@ format = """\
   """
 
 [character]
-success_symbol ="[](bold green)"
-error_symbol ="[](bold red)"
+success_symbol ="[](bold green)"
+error_symbol ="[](bold red)"
 
 [directory]
 truncate_to_repo = false
@@ -106,8 +106,8 @@ format = "[$symbol$output ago ]($style)"
 [custom.arch]
 command = "arch"
 when = """ echo 0 """
-format = "[on $symbol$output ]($style)"
-symbol = " "
+format = "[on $symbol $output ]($style)"
+symbol = ""
 
 [env_var]
 variable = 'AWS_PROFILE'
