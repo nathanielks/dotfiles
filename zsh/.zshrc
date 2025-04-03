@@ -19,6 +19,7 @@ source "$HOME/.config/broot/launcher/bash/br"
     export FZF_BASE=/opt/homebrew/opt/fzf 
   elif [[ "$arch" == "i386" ]]; then
     eval "$(/usr/local/bin/brew shellenv)"
+    export FZF_BASE=/usr/local/bin/fzf 
   fi
 fi
 
@@ -45,7 +46,7 @@ fi
 # Aliases and Functions
 # source every *.zsh file in the repo
 for file ($DOTFILES/zsh/config/*.zsh) source $file
-for file ($WORKDOTS/zsh/*.zsh) source $file
+# for file ($WORKDOTS/zsh/*.zsh) source $file
 
 # iTerm2 Shell Integration
 # test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
@@ -71,3 +72,5 @@ unsetopt correct
 unsetopt correctall
 DISABLE_CORRECTION="true"
 
+
+source /Users/aang/.config/broot/launcher/bash/br

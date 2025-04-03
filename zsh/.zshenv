@@ -28,8 +28,10 @@ if type rg &> /dev/null; then
 fi
 
 # ZMK
-export ZEPHYR_TOOLCHAIN_VARIANT="gnuarmemb"
-export GNUARMEMB_TOOLCHAIN_PATH="$HOME/Code/zmk/gcc-arm"
+if [[ $OSTYPE == darwin* && "$arch" == "arm64" ]]; then
+  export ZEPHYR_TOOLCHAIN_VARIANT="gnuarmemb"
+  export GNUARMEMB_TOOLCHAIN_PATH="$HOME/Code/zmk/gcc-arm"
+fi
 export ZMK_FIRMWARE_DIR="$HOME/Code/zmk/firmware"
 export ZMK_CONFIG_DIR="$HOME/Code/zmk/zmk-config/config"
 
